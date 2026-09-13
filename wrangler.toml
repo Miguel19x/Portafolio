@@ -1,0 +1,13 @@
+name = "portfolio-contact-api"
+main = "worker/index.js"
+compatibility_date = "2024-09-01"
+
+[vars]
+DESTINATION_EMAIL = "miguelaranguren19x@outlook.com"
+# Dominios autorizados adicionales separados por coma (ej. midominio.com,localhost:5173)
+ALLOWED_ORIGINS = "localhost:5173,localhost:4173,127.0.0.1"
+
+# Configuración de Secretos (Variables privadas no registradas en Git):
+# Ejecuta los siguientes comandos para registrar tus claves seguras en Cloudflare:
+# 1. npx wrangler secret put RESEND_API_KEY
+# 2. npx wrangler secret put TURNSTILE_SECRET_KEY
