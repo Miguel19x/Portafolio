@@ -968,6 +968,7 @@ code, pre, .mono-font {
   display: flex;
   align-items: center;
   gap: 1rem;
+  flex-wrap: wrap;
 }
 
 .repo-btn {
@@ -1175,6 +1176,13 @@ code, pre, .mono-font {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
+}
+
+.project-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
 }
 
 .tech-badge {
@@ -2091,6 +2099,11 @@ code, pre, .mono-font {
 
   .tech-badges-list {
     width: 100%;
+  }
+
+  .project-footer-links {
+    width: 100%;
+    gap: 0.85rem;
   }
 }
 
