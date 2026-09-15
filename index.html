@@ -49,8 +49,6 @@
   <!-- Hoja de Estilos -->
   <link rel="stylesheet" href="./src/style.css">
 
-  <!-- Cloudflare Turnstile Anti-Bot API -->
-  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
   <!-- Script para prevenir parpadeo de tema (FOUC) y preconfigurar idioma -->
   <script>
@@ -1390,12 +1388,15 @@
             <p class="contact-form-subtitle" data-i18n="contact.formSubtitle">Envíame una consulta directamente a mi
               bandeja de entrada.</p>
 
-            <form id="contact-form" class="contact-form" action="%VITE_CONTACT_API_URL%" method="POST" novalidate>
-              <!-- Campo Honeypot Anti-Spam (Invisible para humanos, atractivo para bots) -->
-              <div class="hp-field-wrap" aria-hidden="true">
-                <label for="contact-hp-company">Empresa o Sitio Web (no llenar)</label>
-                <input type="text" id="contact-hp-company" name="hp_company_website" tabindex="-1" autocomplete="off">
-              </div>
+            <form id="contact-form" name="contact" class="contact-form" action="/" method="POST" data-netlify="true" netlify netlify-honeypot="bot-field">
+              <!-- Requerido por Netlify Forms -->
+              <input type="hidden" name="form-name" value="contact" />
+
+              <!-- Campo Honeypot Anti-Spam para Netlify -->
+              <p class="hp-field-wrap" style="display:none;" aria-hidden="true">
+                <label for="contact-bot-field">No llenar este campo si eres humano</label>
+                <input type="text" id="contact-bot-field" name="bot-field" tabindex="-1" autocomplete="off">
+              </p>
 
               <div class="form-group">
                 <label for="contact-name" class="form-label" data-i18n="contact.nameLabel">Nombre o Empresa</label>
@@ -1415,12 +1416,6 @@
                 <textarea id="contact-message" name="message" class="form-textarea" rows="4" required
                   placeholder="¿En qué proyecto, producto o rol te gustaría que colaboremos?"
                   data-i18n-placeholder="contact.messagePlaceholder"></textarea>
-              </div>
-
-              <!-- Widget Cloudflare Turnstile -->
-              <div class="turnstile-wrapper">
-                <div id="cf-turnstile" class="cf-turnstile" data-sitekey="%VITE_TURNSTILE_SITE_KEY%" data-theme="dark"
-                  data-size="flexible"></div>
               </div>
 
               <button type="submit" id="contact-submit-btn" class="btn-primary form-submit-btn">

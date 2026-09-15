@@ -33,17 +33,6 @@ function initPortfolio() {
   };
   const EMAIL_ADDRESS = getObfuscatedEmail();
 
-  // Asegurar que el widget de Turnstile tenga la sitekey correcta desde el entorno
-  const turnstileWidget = document.getElementById('cf-turnstile');
-  if (turnstileWidget) {
-    const envKey = import.meta.env?.VITE_TURNSTILE_SITE_KEY;
-    const currentKey = turnstileWidget.getAttribute('data-sitekey');
-    if (envKey && (!currentKey || currentKey.startsWith('%VITE_'))) {
-      turnstileWidget.setAttribute('data-sitekey', envKey);
-    } else if (!currentKey || currentKey.startsWith('%VITE_')) {
-      turnstileWidget.setAttribute('data-sitekey', '1x00000000000000000000AA');
-    }
-  }
   let toastTimer = null;
 
   // =========================================================================
@@ -327,10 +316,10 @@ function initPortfolio() {
       const nameInput = document.getElementById('contact-name');
       const emailInput = document.getElementById('contact-email');
       const messageInput = document.getElementById('contact-message');
-      const hpInput = document.getElementById('contact-hp-company');
+      const botFieldInput = document.getElementById('contact-bot-field');
 
-      // 1. Protección Honeypot: si un bot llena este campo invisible, descartar silenciosamente
-      if (hpInput && hpInput.value.trim() !== '') {
+      // 1. Protección Honeypot: si un bot llena este campo invisible, simular éxito y descartar silenciosamente
+      if (botFieldInput && botFieldInput.value.trim() !== '') {
         submitBtn.disabled = true;
         formStatus.className = 'form-status info';
         formStatus.textContent = t.contact.statusProcessing;
@@ -360,9 +349,6 @@ function initPortfolio() {
         return;
       }
 
-      // Obtener token de Cloudflare Turnstile si está presente
-      const turnstileToken = contactForm.querySelector('[name="cf-turnstile-response"]')?.value || '';
-
       // Estado enviando
       submitBtn.disabled = true;
       submitBtn.innerHTML = `
@@ -372,41 +358,37 @@ function initPortfolio() {
       formStatus.className = 'form-status info';
       formStatus.textContent = t.contact.statusProcessing;
 
-      const contactApiUrl = (import.meta.env && import.meta.env.VITE_CONTACT_API_URL) || '/api/contact';
       try {
-        const response = await fetch(contactApiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            message: message,
-            hp_company_website: hpInput ? hpInput.value : '',
-            'cf-turnstile-response': turnstileToken
-          })
-        });
+        const formData = new FormData(contactForm);
+        formData.set('form-name', 'contact');
 
-        let result = {};
-        try {
-          result = await response.json();
-        } catch (_) {}
+        const isLocalhost = Boolean(
+          window.location.hostname === 'localhost' ||
+          window.location.hostname === '127.0.0.1' ||
+          window.location.hostname.endsWith('.local')
+        );
 
-        if (response.ok && (result.success === true || result.success === 'true')) {
-          formStatus.className = 'form-status success';
-          formStatus.textContent = t.contact.statusSuccess;
-          contactForm.reset();
-          if (window.turnstile) {
-            try { window.turnstile.reset(); } catch (_) {}
-          }
+        if (isLocalhost) {
+          // En desarrollo local (sin CDN de Netlify), simular éxito
+          await new Promise((resolve) => setTimeout(resolve, 800));
         } else {
-          const errMsg = result.error || result.message || 'Error en el procesamiento del mensaje.';
-          throw new Error(errMsg);
+          // Envío nativo a Netlify Forms mediante POST URL-encoded
+          const response = await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData).toString()
+          });
+
+          if (!response.ok) {
+            throw new Error(`Error en servidor Netlify (${response.status})`);
+          }
         }
+
+        formStatus.className = 'form-status success';
+        formStatus.textContent = t.contact.statusSuccess;
+        contactForm.reset();
       } catch (err) {
-        // Fallback garantizado sin pérdida de datos
+        // Fallback garantizado sin pérdida de datos (Mailto)
         const mailtoSubject = encodeURIComponent(`Contacto Portafolio - ${name}`);
         const mailtoBody = encodeURIComponent(`${message}\n\nDe: ${name} (${email})`);
         const mailtoUrl = `mailto:${EMAIL_ADDRESS}?subject=${mailtoSubject}&body=${mailtoBody}`;
@@ -418,9 +400,6 @@ function initPortfolio() {
             ${t.contact.statusMailtoLink}
           </a>
         `;
-        if (window.turnstile) {
-          try { window.turnstile.reset(); } catch (_) {}
-        }
       } finally {
         submitBtn.disabled = false;
         submitBtn.innerHTML = `
