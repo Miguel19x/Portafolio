@@ -1,0 +1,121 @@
+/* ==========================================================================
+   SOBRE MÍ / FILOSOFÍA DE INGENIERÍA
+   ========================================================================== */
+#sobre-mi {
+  padding-block: clamp(1.25rem, 2.2vh, 2rem);
+}
+
+#sobre-mi .section-header {
+  margin-bottom: clamp(0.75rem, 1.4vh, 1.25rem);
+}
+
+#sobre-mi .section-title {
+  font-size: clamp(1.45rem, 2.2vw, 2rem);
+  margin-bottom: clamp(0.2rem, 0.5vh, 0.4rem);
+}
+
+#sobre-mi .section-subtitle {
+  font-size: clamp(0.85rem, 0.9vw, 0.95rem);
+  line-height: 1.5;
+  max-width: 720px;
+}
+
+.about-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: clamp(1.15rem, 1.8vh, 1.65rem) clamp(1.25rem, 2vw, 2rem);
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(1.25rem, 2vw, 2.25rem);
+  align-items: center; /* Centrado vertical del texto para equilibrar el espacio */
+}
+
+.about-text {
+  font-size: clamp(0.85rem, 0.88vw, 0.935rem);
+  line-height: 1.58;
+  color: var(--text-secondary);
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  text-wrap: pretty;
+}
+
+.about-text p {
+  margin-bottom: clamp(0.4rem, 0.75vh, 0.65rem);
+}
+
+.about-text p:last-child {
+  margin-bottom: 0;
+}
+
+.about-text strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.about-pillars {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.45rem, 0.8vh, 0.65rem);
+}
+
+.pillar-item {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  padding: clamp(0.55rem, 0.95vh, 0.8rem) clamp(0.85rem, 1.1vw, 1.15rem);
+  border-radius: var(--radius-md);
+  transition: border-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.pillar-item:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-2px);
+}
+
+.pillar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.2rem;
+}
+
+.pillar-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-subtle);
+  color: var(--accent-primary);
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+
+.pillar-title {
+  font-family: var(--font-heading);
+  font-size: clamp(0.85rem, 0.9vw, 0.925rem);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0;
+  line-height: 1.25;
+}
+
+.pillar-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.42;
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  text-wrap: pretty;
+}

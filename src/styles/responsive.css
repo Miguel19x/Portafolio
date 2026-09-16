@@ -1,0 +1,1301 @@
+/* ==========================================================================
+   MEDIA QUERIES / RESPONSIVE (Mobile First & Adaptive Breakpoints)
+   ========================================================================== */
+
+/* TABLETS Y PANTALLAS MEDIANAS (<= 1024px) */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .case-study-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+  }
+
+  .timeline-metrics-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+}
+
+/* MENÚ HAMBURGUESA Y NAVEGACIÓN COMPACTA (<= 960px) */
+@media (max-width: 960px) {
+  .site-header nav {
+    display: contents;
+  }
+
+  .nav-container {
+    gap: 0.75rem;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  /* Menú Móvil desplegable con soporte para scroll seguro */
+  .nav-links.mobile-open {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: var(--header-height);
+    left: 0;
+    right: 0;
+    max-height: calc(100vh - var(--header-height));
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border-subtle);
+    padding: 1.75rem 1.5rem;
+    gap: 1.25rem;
+    box-shadow: var(--shadow-lg);
+    z-index: 999;
+  }
+
+  .mobile-only-cta {
+    display: block;
+  }
+}
+
+/* DIAGRAMAS CONECTADOS Y CONTACTO VERTICAL (<= 860px) */
+@media (max-width: 860px) {
+  .arch-diagram-box {
+    padding: 1.25rem 1rem;
+  }
+
+  .diagram-flow {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .flow-arrow {
+    justify-content: center;
+    transform: rotate(90deg) translateY(16px);
+    padding-block: 0.15rem;
+  }
+
+  .diagram-flow.is-revealed .flow-arrow {
+    transform: rotate(90deg) translateY(0);
+  }
+
+  /* Desactivar arrastre en móvil para permitir scroll vertical nativo y fluido */
+  .spec-header {
+    cursor: default;
+    touch-action: auto;
+  }
+
+  .spec-drag-grip {
+    display: none;
+  }
+
+  .spec-card {
+    transform: none !important;
+  }
+
+  /* En móvil, las tarjetas de contacto se apilan arriba del formulario de forma limpia */
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .contact-info-col {
+    height: auto;
+  }
+
+  .contact-card:last-child {
+    flex: 0 0 auto;
+  }
+
+  .contact-form-card {
+    padding: 1.75rem 1.25rem;
+  }
+}
+
+/* DISPOSITIVOS MÓVILES GRANDES Y TABLETS VERTICALES (<= 768px) */
+@media (max-width: 768px) {
+  :root {
+    --header-height: 64px;
+  }
+
+  .site-header {
+    height: 64px;
+  }
+
+  .nav-container {
+    gap: 0.5rem;
+  }
+
+  .brand-link {
+    font-size: 0.975rem;
+    gap: 0.5rem;
+  }
+
+  .brand-avatar {
+    width: 30px;
+    height: 30px;
+    font-size: 0.825rem;
+  }
+
+  .nav-actions {
+    gap: 0.4rem;
+  }
+
+  .theme-toggle-btn,
+  .mobile-menu-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .lang-toggle-btn {
+    height: 36px;
+    padding: 0 0.5rem;
+    font-size: 0.775rem;
+    gap: 0.35rem;
+  }
+
+  .section {
+    padding-block: 3.25rem;
+  }
+
+  #skills {
+    padding-bottom: 1.5rem;
+  }
+
+  #experiencia {
+    padding-top: 1.5rem;
+  }
+
+  .hero-section {
+    padding-top: 1.75rem;
+    padding-bottom: 3.25rem;
+  }
+
+  .hero-name {
+    font-size: clamp(2rem, 5.5vw, 2.75rem);
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .hero-ctas .btn-primary,
+  .hero-ctas .btn-secondary {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+  }
+
+  .about-card {
+    padding: 1.75rem 1.5rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .experience-card {
+    padding: 1.75rem 1.5rem;
+    border-radius: var(--radius-lg);
+  }
+
+  .case-study-card {
+    border-radius: var(--radius-lg);
+  }
+
+  .case-study-topbar {
+    padding: 0.85rem 1.25rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .case-study-badge {
+    font-size: 0.72rem;
+    max-width: calc(100% - 0.5rem);
+    white-space: normal;      /* Allow wrapping on mobile */
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  .case-study-body {
+    padding: 1.35rem 1.25rem;
+  }
+
+  /* Carousel slides fill most of the viewport on mobile with proper container */
+  .carousel-slide {
+    flex: 0 0 calc(92% - 0.5rem);
+    max-width: calc(92% - 0.5rem);
+    min-width: 0;
+  }
+
+  .carousel-track {
+    gap: 0.85rem;
+  }
+
+  /* Nav arrows moved to be under the card body instead of floating over content */
+  .carousel-nav-btn {
+    width: 40px;
+    height: 40px;
+    top: auto;
+    bottom: calc(2.5rem + 0.5rem); /* Above the dots controls */
+  }
+
+  .carousel-nav-prev {
+    left: 0;
+    transform: none;
+  }
+
+  .carousel-nav-next {
+    right: 0;
+    transform: none;
+  }
+
+  .carousel-nav-btn:hover:not(:disabled) {
+    transform: scale(1.1);
+  }
+
+  /* Ensure showcase grid is always single column on mobile */
+  .case-study-showcase {
+    grid-template-columns: 1fr !important;
+    width: 100%;
+  }
+
+  .preview-window-media,
+  .case-study-preview-img {
+    max-height: 220px;
+  }
+
+  .lightbox-modal {
+    padding: 0.65rem;
+  }
+
+  .lightbox-dialog {
+    max-height: 94vh;
+  }
+
+  .lightbox-media-wrap {
+    max-height: calc(94vh - 48px);
+    padding: 0.4rem;
+  }
+
+  .footer-content {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+}
+
+/* SMARTPHONES Y PANTALLAS ESTRECHAS (<= 640px) */
+@media (max-width: 640px) {
+  .container {
+    padding-inline: 1.15rem;
+  }
+
+  .nav-container {
+    padding-inline: 0.85rem;
+  }
+
+  .case-study-action-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .case-study-action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .case-study-toggle-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .brand-title-sub {
+    display: none;
+  }
+
+  .nav-cta-btn {
+    display: none;
+  }
+
+  .brand-link {
+    font-size: 0.925rem;
+    gap: 0.45rem;
+  }
+
+  .brand-avatar {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8rem;
+  }
+
+  .nav-actions {
+    gap: 0.35rem;
+  }
+
+  .theme-toggle-btn,
+  .mobile-menu-btn {
+    width: 34px;
+    height: 34px;
+  }
+
+  .lang-toggle-btn {
+    height: 34px;
+    padding: 0 0.45rem;
+    font-size: 0.75rem;
+    gap: 0.3rem;
+  }
+
+  .section-title {
+    font-size: clamp(1.6rem, 5.5vw, 2.1rem);
+  }
+
+  .case-study-title {
+    font-size: 1.4rem;
+  }
+
+  /* Evitar ríos de espacio en justificación en pantallas móviles angostas */
+  .section-subtitle,
+  .hero-bio,
+  .about-text,
+  .pillar-desc,
+  .case-study-summary,
+  .case-block-text,
+  .timeline-desc,
+  .spec-line p {
+    text-align: left;
+    text-justify: auto;
+    hyphens: none;
+    -webkit-hyphens: none;
+  }
+
+  .spec-meta-grid {
+    grid-template-columns: 1fr;
+    gap: 0.65rem;
+  }
+
+  .case-study-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.85rem 1rem;
+  }
+
+  .case-study-badge {
+    font-size: 0.7rem;
+    max-width: 100%;
+    padding: 0.2rem 0.6rem;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  .case-study-links {
+    width: 100%;
+  }
+
+  .repo-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .project-tech-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.85rem;
+  }
+
+  .tech-badges-list {
+    width: 100%;
+  }
+
+  .project-footer-links {
+    width: 100%;
+    gap: 0.85rem;
+  }
+}
+
+/* TELÉFONOS COMPACTOS (<= 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding-inline: 1rem;
+  }
+
+  .nav-container {
+    padding-inline: 0.65rem;
+    gap: 0.35rem;
+  }
+
+  .brand-link {
+    font-size: 0.875rem;
+    gap: 0.4rem;
+  }
+
+  .brand-avatar {
+    width: 26px;
+    height: 26px;
+    font-size: 0.75rem;
+  }
+
+  .nav-actions {
+    gap: 0.25rem;
+  }
+
+  .theme-toggle-btn,
+  .mobile-menu-btn {
+    width: 32px;
+    height: 32px;
+  }
+
+  .mobile-menu-btn svg,
+  .theme-toggle-btn svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .lang-toggle-btn {
+    height: 32px;
+    padding: 0 0.35rem;
+    font-size: 0.72rem;
+    gap: 0.25rem;
+  }
+
+  .lang-toggle-btn svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .hero-name {
+    font-size: clamp(1.75rem, 7.5vw, 2.25rem);
+    word-break: break-word;
+  }
+
+  .hero-tagline {
+    font-size: 1.1rem;
+  }
+
+  .hero-status-pill {
+    font-size: 0.725rem;
+    padding: 0.3rem 0.7rem;
+  }
+
+  .hero-socials {
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+  }
+
+  .about-card {
+    padding: 1.35rem 1rem;
+  }
+
+  .pillar-item {
+    padding: 1.1rem 1rem;
+  }
+
+  .case-study-topbar {
+    padding: 0.75rem 0.85rem;
+    gap: 0.5rem;
+  }
+
+  .case-study-badge {
+    font-size: 0.68rem;
+    padding: 0.2rem 0.55rem;
+    white-space: normal;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  .case-study-body {
+    padding: 1.15rem 0.85rem;
+  }
+
+  .case-study-action-row {
+    gap: 0.55rem;
+  }
+
+  .case-study-action-btn {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .case-study-title {
+    font-size: 1.2rem;
+  }
+
+  .flow-step {
+    padding: 0.65rem 0.5rem;
+  }
+
+  .skill-category-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .experience-card {
+    padding: 1.35rem 1rem;
+  }
+
+  .timeline {
+    padding-left: 1.35rem;
+  }
+
+  .timeline::before {
+    left: 4px;
+  }
+
+  .timeline-dot {
+    left: -1.35rem;
+    width: 12px;
+    height: 12px;
+    top: 0.35rem;
+  }
+
+  .timeline-role-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .timeline-role {
+    font-size: 1.1rem;
+  }
+
+  .metric-box {
+    padding: 0.95rem;
+  }
+
+  .contact-card {
+    padding: 1.35rem 1rem;
+  }
+
+  .contact-card-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .btn-copy-action,
+  .btn-mailto-action {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .contact-social-item {
+    padding: 0.75rem 0.95rem;
+    font-size: 0.8rem;
+  }
+
+  .contact-form-card {
+    padding: 1.35rem 1rem;
+  }
+
+  .form-input,
+  .form-textarea {
+    font-size: 16px; /* Previene auto-zoom forzado en navegadores móviles (iOS Safari) */
+    padding: 0.75rem 0.85rem;
+  }
+
+  .turnstile-wrapper {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+
+  .toast {
+    left: 1rem;
+    right: 1rem;
+    bottom: 1rem;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.75rem;
+  }
+}
+
+/* TELÉFONOS EXTRA PEQUEÑOS Y PANTALLAS ULTRA ESTRECHAS (<= 360px) */
+@media (max-width: 360px) {
+  .container {
+    padding-inline: 0.75rem;
+  }
+
+  .nav-container {
+    padding-inline: 0.45rem;
+    gap: 0.25rem;
+  }
+
+  .brand-link {
+    font-size: 0.8rem;
+    gap: 0.35rem;
+  }
+
+  .brand-avatar {
+    width: 24px;
+    height: 24px;
+    font-size: 0.7rem;
+  }
+
+  .nav-actions {
+    gap: 0.2rem;
+  }
+
+  .theme-toggle-btn,
+  .mobile-menu-btn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .mobile-menu-btn svg,
+  .theme-toggle-btn svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .lang-toggle-btn {
+    height: 30px;
+    padding: 0 0.3rem;
+    font-size: 0.68rem;
+  }
+
+  .hero-name {
+    font-size: 1.65rem;
+  }
+
+  .hero-tagline {
+    font-size: 1rem;
+  }
+
+  .about-card,
+  .experience-card,
+  .contact-card,
+  .contact-form-card,
+  .case-study-body {
+    padding: 1.1rem 0.75rem;
+  }
+
+  .metric-num {
+    font-size: 1.35rem;
+  }
+
+  .turnstile-wrapper {
+    transform: scale(0.92);
+    transform-origin: center center;
+  }
+}
+
+/* ==========================================================================
+   OPTIMIZACIÓN DE RESPONSIVIDAD VERTICAL (Laptops <= 800px de altura, ej. 1366x768)
+   ========================================================================== */
+@media (max-height: 800px) {
+  :root {
+    --header-height: 64px;
+  }
+
+  .section {
+    padding-block: 2.25rem;
+  }
+
+  .section-header {
+    margin-bottom: 1.5rem;
+  }
+
+  /* 1. Hero: Espaciado natural y con aire, permitiendo un scroll mínimo de ~30-50px */
+  .hero-section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .hero-grid {
+    gap: 2.5rem;
+  }
+
+  .hero-name {
+    font-size: 2.65rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .hero-tagline {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .hero-bio {
+    font-size: 1rem;
+    line-height: 1.74;
+    margin-bottom: 1.4rem;
+  }
+
+  .hero-ctas {
+    margin-bottom: 1.4rem;
+    gap: 0.85rem;
+  }
+
+  .spec-content {
+    padding: 1rem 1.15rem;
+    font-size: 0.8rem;
+  }
+
+  .spec-line {
+    margin-bottom: 0.6rem;
+  }
+
+  /* 2. Enfoque Técnico: Espacioso, legible y equilibrado */
+  .about-card {
+    padding: 2.25rem 2.5rem;
+  }
+
+  .about-grid {
+    gap: 2.5rem;
+  }
+
+  .about-text {
+    font-size: 1rem;
+    line-height: 1.76;
+  }
+
+  .about-text p {
+    margin-bottom: 1rem;
+  }
+
+  .pillar-item {
+    padding: 1.05rem 1.25rem;
+  }
+
+  .about-pillars {
+    gap: 1rem;
+  }
+
+  .pillar-desc {
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+
+  /* 3. Sección Proyectos: recorte real de altura en varios puntos a la vez,
+     no solo el screenshot, para que quepa en un único scroll adicional limpio */
+
+  /* Encabezado de la sección "Trabajo Real..." más compacto SOLO aquí,
+     porque se repite visualmente antes de cada vista del carrusel */
+  #proyectos .section-header {
+    margin-bottom: 1rem;
+  }
+
+  #proyectos .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 0.3rem;
+  }
+
+  #proyectos .section-subtitle {
+    font-size: 0.8rem;
+    line-height: 1.4;
+  }
+
+  .projects-carousel-wrapper {
+    margin-bottom: 0.75rem;
+  }
+
+  .case-study-topbar {
+    padding: 0.5rem 1.5rem;
+  }
+
+  .case-study-body {
+    padding: 1rem 1.5rem;
+  }
+
+  .case-study-header {
+    margin-bottom: 0.6rem;
+  }
+
+  .case-study-title {
+    font-size: 1.35rem;
+    margin-bottom: 0.25rem;
+  }
+
+  /* El resumen técnico se limita a 2 líneas: la frase de impacto ya
+     comunica el valor en lenguaje simple, así que aquí no hace falta más */
+  .case-study-summary {
+    font-size: 0.875rem;
+    line-height: 1.45;
+    margin-bottom: 0.5rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .case-study-impact-highlight {
+    padding: 0.5rem 0.85rem;
+    margin-top: 0.3rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .case-study-impact-text {
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .case-study-action-row {
+    margin-bottom: 0.6rem;
+    gap: 0.6rem;
+  }
+
+  .case-study-action-btn {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.8rem;
+  }
+
+  .case-study-preview-wrapper {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Altura del screenshot reducida aún más para pantallas <= 800px */
+  .preview-window-media,
+  .case-study-preview-img {
+    max-height: clamp(135px, 19vh, 250px);
+    max-height: clamp(135px, 19dvh, 250px);
+  }
+
+  .preview-window-bar {
+    padding: 0.4rem 0.85rem;
+  }
+
+  .case-study-toggle-wrap {
+    margin-top: 0.25rem;
+    margin-bottom: 0.15rem;
+  }
+
+  .case-study-toggle-btn {
+    padding: 0.4rem 1.05rem;
+    font-size: 0.8rem;
+  }
+
+  .carousel-controls-bottom {
+    margin-top: 0.75rem;
+  }
+
+  /* 4. Habilidades: Espaciado equilibrado para pantallas medianas */
+  #skills,
+  #habilidades {
+    padding-block: 1.85rem;
+  }
+
+  .skill-category-card {
+    padding: 1.35rem 1.5rem;
+  }
+
+  .skill-cat-header {
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .skill-items-list {
+    gap: 0.65rem;
+  }
+
+  /* 5. Contacto: Espaciado moderado para pantallas medianas */
+  #contacto {
+    padding-block: 1.85rem;
+  }
+
+  .contact-card {
+    padding: 1.35rem 1.6rem;
+  }
+
+  .contact-form-card {
+    padding: 1.65rem 1.85rem;
+  }
+
+  .contact-form {
+    gap: 0.95rem;
+  }
+}
+
+/* ==========================================================================
+   PANTALLAS DE ALTURA BAJA (~638px - 650px)
+   Ajustes MÍNIMOS y moderados para que todo quepa espacioso sin desbordar
+   ========================================================================== */
+@media (max-height: 650px) {
+  :root {
+    --header-height: 56px;
+  }
+
+  .section {
+    padding-block: 1.35rem;
+  }
+
+  /* 1. Hero: Ajuste suave de altura y paddings */
+  .hero-section {
+    min-height: calc(100vh - var(--header-height));
+    min-height: calc(100svh - var(--header-height));
+    padding-top: 1rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .hero-grid {
+    gap: 2rem;
+  }
+
+  .hero-name {
+    font-size: 2.2rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .hero-tagline {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-bio {
+    font-size: 0.925rem;
+    line-height: 1.55;
+    margin-bottom: 0.85rem;
+  }
+
+  .hero-ctas {
+    margin-bottom: 0.85rem;
+    gap: 0.75rem;
+  }
+
+  .spec-content {
+    padding: 0.85rem 1rem;
+  }
+
+  .spec-line {
+    margin-bottom: 0.45rem;
+  }
+
+  /* 2. Enfoque Técnico: Ajustes moderados para mantener amplitud sin forzar scroll */
+  #sobre-mi {
+    padding-block: 1.25rem;
+  }
+
+  #sobre-mi .section-header {
+    margin-bottom: 0.85rem;
+  }
+
+  #sobre-mi .section-title {
+    font-size: 1.4rem;
+    margin-bottom: 0.25rem;
+  }
+
+  #sobre-mi .section-subtitle {
+    font-size: 0.825rem;
+    line-height: 1.45;
+  }
+
+  .about-card {
+    padding: 1.35rem 1.85rem;
+  }
+
+  .about-grid {
+    gap: 1.85rem;
+  }
+
+  .about-text {
+    font-size: 0.875rem;
+    line-height: 1.62;
+  }
+
+  .about-text p {
+    margin-bottom: 0.55rem;
+  }
+
+  .pillar-item {
+    padding: 0.65rem 0.95rem;
+  }
+
+  .about-pillars {
+    gap: 0.6rem;
+  }
+
+  .pillar-header {
+    gap: 0.55rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .pillar-icon-wrap {
+    width: 26px;
+    height: 26px;
+  }
+
+  .pillar-title {
+    font-size: 0.875rem;
+  }
+
+  .pillar-desc {
+    font-size: 0.8rem;
+    line-height: 1.42;
+  }
+
+  /* 3. Proyectos & Case Studies */
+  #proyectos .section-header {
+    margin-bottom: 0.75rem;
+  }
+
+  #proyectos .section-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.2rem;
+  }
+
+  #proyectos .section-subtitle {
+    font-size: 0.775rem;
+  }
+
+  .case-study-topbar {
+    padding: 0.4rem 1.25rem;
+  }
+
+  .case-study-body {
+    padding: 0.85rem 1.25rem;
+  }
+
+  .preview-window-media,
+  .case-study-preview-img {
+    max-height: clamp(110px, 16vh, 190px);
+    max-height: clamp(110px, 16dvh, 190px);
+  }
+
+  /* 4. Habilidades: Ajustes moderados para ver las 3 columnas completas */
+  #skills,
+  #habilidades {
+    padding-block: 1rem;
+  }
+
+  #skills .section-header,
+  #habilidades .section-header {
+    margin-bottom: 0.75rem;
+  }
+
+  #skills .section-title,
+  #habilidades .section-title {
+    font-size: 1.4rem;
+    margin-bottom: 0.25rem;
+  }
+
+  #skills .section-subtitle,
+  #habilidades .section-subtitle {
+    font-size: 0.825rem;
+    line-height: 1.45;
+  }
+
+  .skills-grid {
+    gap: 1.15rem;
+  }
+
+  .skill-category-card {
+    padding: 1rem 1.25rem;
+  }
+
+  .skill-cat-header {
+    margin-bottom: 0.6rem;
+    padding-bottom: 0.45rem;
+    gap: 0.6rem;
+  }
+
+  .skill-cat-icon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .skill-cat-title {
+    font-size: 0.975rem;
+  }
+
+  .skill-items-list {
+    gap: 0.425rem;
+  }
+
+  .skill-name {
+    font-size: 0.875rem;
+  }
+
+  .skill-context {
+    font-size: 0.775rem;
+    line-height: 1.35;
+  }
+
+  /* 5. Trayectoria / Experiencia: Ajustes moderados para mantener amplitud */
+  #experiencia {
+    padding-block: 1.1rem;
+  }
+
+  #experiencia .section-header {
+    margin-bottom: 0.75rem;
+  }
+
+  #experiencia .section-title {
+    font-size: 1.35rem;
+    margin-bottom: 0.25rem;
+  }
+
+  #experiencia .section-subtitle {
+    font-size: 0.825rem;
+    line-height: 1.45;
+  }
+
+  .experience-card {
+    padding: 1.2rem 1.6rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin-bottom: 0.85rem;
+  }
+
+  .timeline-metrics-grid {
+    gap: 0.75rem;
+    margin-top: 0.85rem;
+  }
+
+  .metric-box {
+    padding: 0.6rem 0.85rem;
+  }
+
+  .metric-num {
+    font-size: 1.4rem;
+  }
+
+  .metric-label {
+    font-size: 0.75rem;
+  }
+
+  /* 6. Contacto: Ajustes moderados de padding y espaciado sin scroll extra */
+  #contacto {
+    padding-block: 1.15rem;
+  }
+
+  #contacto .section-header {
+    margin-bottom: 0.85rem;
+  }
+
+  #contacto .section-title {
+    font-size: 1.35rem;
+    margin-bottom: 0.25rem;
+  }
+
+  #contacto .section-subtitle {
+    font-size: 0.825rem;
+    line-height: 1.45;
+  }
+
+  .contact-grid {
+    gap: 1.25rem;
+  }
+
+  .contact-info-col {
+    gap: 0.75rem;
+  }
+
+  .contact-card {
+    padding: 1rem 1.35rem;
+  }
+
+  .contact-card-header {
+    margin-bottom: 0.65rem;
+    gap: 0.6rem;
+  }
+
+  .contact-card-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .contact-card-val {
+    font-size: 0.875rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .contact-card-hint {
+    font-size: 0.775rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .btn-copy-action,
+  .btn-mailto-action {
+    padding: 0.45rem 0.85rem;
+    font-size: 0.775rem;
+  }
+
+  .contact-social-links {
+    gap: 0.45rem;
+    margin-bottom: 0.65rem;
+  }
+
+  .contact-social-item {
+    padding: 0.55rem 0.85rem;
+    font-size: 0.8rem;
+  }
+
+  .contact-location-tag {
+    padding-top: 0.6rem;
+    font-size: 0.75rem;
+  }
+
+  .contact-form-card {
+    padding: 1.15rem 1.45rem;
+  }
+
+  .contact-form-title {
+    font-size: 1.15rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .contact-form-subtitle {
+    font-size: 0.8rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .contact-form {
+    gap: 0.65rem;
+  }
+
+  .form-label {
+    font-size: 0.75rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .form-input {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.825rem;
+  }
+
+  .form-textarea {
+    padding: 0.45rem 0.75rem;
+    font-size: 0.825rem;
+    min-height: 60px;
+    height: 65px;
+  }
+
+  .form-submit-btn {
+    padding: 0.55rem 1.1rem;
+    font-size: 0.85rem;
+  }
+
+  /* Flechas estáticas en viewport bajo */
+  .section-scroll-static {
+    margin-top: 0.65rem;
+    margin-bottom: 0.15rem;
+  }
+}

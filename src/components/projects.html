@@ -1,0 +1,68 @@
+<section class="section" id="proyectos">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="projects.tag">// 02. Proyectos & Case Studies</span>
+          <h2 class="section-title" data-i18n="projects.title">Trabajo Real y Decisiones de Arquitectura</h2>
+          <p class="section-subtitle" data-i18n="projects.subtitle">
+            Análisis detallado de problemas reales resueltos mediante código: qué necesidad existía, qué decisiones
+            técnicas se tomaron y cuál fue el impacto verificable.
+          </p>
+        </div>
+
+        <!-- Carrusel Horizontal de Case Studies -->
+        <div class="projects-carousel-wrapper" id="projects-carousel" role="region" aria-roledescription="carousel" aria-label="Proyectos y Case Studies">
+          <!-- Flechas de navegación (prev/next) visibles a ambos lados -->
+          <button type="button" class="carousel-nav-btn carousel-nav-prev" id="carousel-prev-btn" aria-label="Proyecto anterior" data-i18n-aria-label="projects.carouselPrev">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+          </button>
+          <button type="button" class="carousel-nav-btn carousel-nav-next" id="carousel-next-btn" aria-label="Siguiente proyecto" data-i18n-aria-label="projects.carouselNext">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </button>
+
+          <!-- Viewport del carrusel con soporte de teclado y touch -->
+          <div class="carousel-viewport" id="carousel-viewport" tabindex="0" aria-label="Diapositivas de proyectos (Use flechas izquierda y derecha para navegar)">
+            <div class="carousel-track" id="carousel-track">
+              <load src="src/components/projects/smn.html" />
+              <load src="src/components/projects/iris.html" />
+              <load src="src/components/projects/psicologia.html" />
+              <load src="src/components/projects/wrapped.html" />
+
+        </div>
+      </div>
+
+          <!-- Dots / Indicadores de Posición y Contador -->
+          <div class="carousel-controls-bottom">
+            <div class="carousel-dots" role="tablist" aria-label="Indicadores de diapositivas">
+              <button type="button" class="carousel-dot is-active" role="tab" aria-selected="true" aria-controls="project-smn" data-slide-index="0" aria-label="Ir al proyecto 1: SMN">
+                <span class="carousel-dot-inner"></span>
+              </button>
+              <button type="button" class="carousel-dot" role="tab" aria-selected="false" aria-controls="project-iris" data-slide-index="1" aria-label="Ir al proyecto 2: IrisClassifier">
+                <span class="carousel-dot-inner"></span>
+              </button>
+              <button type="button" class="carousel-dot" role="tab" aria-selected="false" aria-controls="project-psicologia" data-slide-index="2" aria-label="Ir al proyecto 3: Página de Psicología">
+                <span class="carousel-dot-inner"></span>
+              </button>
+              <button type="button" class="carousel-dot" role="tab" aria-selected="false" aria-controls="project-wrapped" data-slide-index="3" aria-label="Ir al proyecto 4: Spotify Wrapped">
+                <span class="carousel-dot-inner"></span>
+              </button>
+            </div>
+            <div class="carousel-counter" aria-hidden="true">
+              <span class="current-slide-num" id="carousel-current-num">01</span> / <span class="total-slides-num">04</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Flecha interactiva centrada hacia la siguiente sección: Habilidades -->
+        <div class="section-scroll-wrap section-scroll-static">
+          <button type="button" class="section-scroll-btn" data-scroll-to="#skills" aria-label="Desplazarse a Habilidades" data-i18n-aria-label="hero.scrollDown">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
