@@ -1,0 +1,762 @@
+/**
+ * DICCIONARIO DE INTERNACIONALIZACIÓN (i18n)
+ * Soporte bilingüe completo: Español (es) / Inglés (en)
+ */
+
+export const translations = {
+  es: {
+    meta: {
+      title: "Miguel Angel Aranguren Ramirez | Desarrollador Fullstack Remoto",
+      description: "Portafolio de Miguel Angel Aranguren Ramirez, Desarrollador Fullstack especializado en Python, TypeScript, SQL, React y arquitecturas serverless. Estudiante de Ing. de Sistemas (UNEXPO) basado en Caracas, disponible para roles remotos.",
+      ogTitle: "Miguel Angel Aranguren Ramirez | Desarrollador Fullstack Remoto",
+      ogDescription: "Desarrollador Fullstack enfocado en software donde los datos y la lógica importan: Python, TypeScript, React, SQL y Cloudflare Workers."
+    },
+    nav: {
+      skipToContent: "Saltar al contenido principal",
+      brandSub: "/ Fullstack",
+      about: "Sobre Mí",
+      projects: "Proyectos",
+      skills: "Habilidades",
+      experience: "Trayectoria",
+      contact: "Contacto",
+      cta: "Hablemos",
+      menuAria: "Abrir menú de navegación"
+    },
+    theme: {
+      toLight: "Cambiar a modo claro",
+      toDark: "Cambiar a modo oscuro",
+      title: "Alternar modo claro/oscuro"
+    },
+    langToggle: {
+      ariaLabel: "Switch to English",
+      title: "Cambiar idioma / Switch language",
+      buttonText: "EN"
+    },
+    hero: {
+      status: "Disponible para roles Fullstack Remotos",
+      name: "Miguel Angel Aranguren Ramirez",
+      tagline: "Desarrollo software robusto donde los datos y la lógica importan.",
+      bio: "<strong>Desarrollador Fullstack</strong> especializado en <strong>Python, TypeScript, JavaScript, SQL y React</strong>. Estudiante de 5to semestre de Ingeniería de Sistemas en la UNEXPO (Caracas, Venezuela). Construyo sistemas orientados a resolver inconsistencias de datos, automatización de flujos y arquitecturas serverless con alta disponibilidad.",
+      ctaProjects: "Ver Case Studies",
+      ctaCv: "Ver CV (PDF) ↗",
+      ctaContact: "Contactar",
+      direct: "Directo:",
+      scrollDown: "Desplazarse hacia abajo"
+    },
+    spec: {
+      title: "SYS_PROFILE // M_ARANGUREN",
+      roleLabel: "> ROL PRINCIPAL",
+      roleVal: "Desarrollador Fullstack (Python / TS / React / SQL)",
+      stackLabel: "> CORE STACK TÉCNICO",
+      focusLabel: "> ENFOQUE DE INGENIERÍA",
+      focusVal: "Procesamiento de datos heterogéneos, automatización de informes con rigor estadístico y APIs serverless de baja latencia.",
+      locationLabel: "> UBICACIÓN & ZONA",
+      locationVal: "Caracas, VE (UTC-4)",
+      educationLabel: "> FORMACIÓN",
+      educationVal: "Ing. Sistemas (UNEXPO)"
+    },
+    about: {
+      tag: "// 01. Enfoque Técnico",
+      title: "Ingeniería, Lógica y Reducción de Incertidumbre",
+      subtitle: "No programo interfaces vacías: diseño soluciones donde los datos son confiables, las reglas de negocio se auditan y los cálculos son reproducibles.",
+      p1: "Mi formación en <strong>Ingeniería de Sistemas en la UNEXPO</strong> (5to semestre) complementa mi desarrollo práctico: entiendo el software como un sistema matemático y de flujos de información donde la consistencia es innegociable.",
+      p2: "Cuando un cliente o proyecto enfrenta problemas complejos —como comparar miles de precios desalineados en PDFs y Excels dispares, o generar conclusiones estadísticas que deben cumplir estándares académicos internacionales como las <strong>normas APA</strong>—, mi prioridad es estructurar la lógica subyacente para eliminar el error humano por completo.",
+      p3: "Aporto una sólida base en <strong>Python, TypeScript y SQL</strong>, priorizando arquitecturas limpias, modulares y fáciles de mantener en entornos remotos y colaborativos.",
+      pillar1Title: "Rigor Matemático & Datos Confiables",
+      pillar1Desc: "Cada conclusión o métrica generada por el software mantiene trazabilidad directa con la evidencia cruda registrada.",
+      pillar2Title: "Arquitectura Serverless & Eficiencia",
+      pillar2Desc: "Uso de tecnologías de borde como Cloudflare Workers para procesar solicitudes con latencia mínima y cero sobrecoste de infraestructura.",
+      pillar3Title: "Validación Continua",
+      pillar3Desc: "Escribo tests unitarios y de integración para asegurar que las reglas comerciales se mantengan firmes ante cualquier cambio."
+    },
+    projects: {
+      tag: "// 02. Proyectos & Case Studies",
+      title: "Trabajo Real y Decisiones de Arquitectura",
+      subtitle: "Análisis detallado de problemas reales resueltos mediante código: qué necesidad existía, qué decisiones técnicas se tomaron y cuál fue el impacto verificable.",
+      repoBtn: "Ver Repositorio en GitHub",
+      demoBtn: "Ver Demo en Vivo",
+      techDetailsBtn: "Ver Captura y Detalles Técnicos ▾",
+      techDetailsHideBtn: "Ocultar Captura y Detalles Técnicos ▴",
+      tabSmn: "SMN",
+      tabIris: "IrisClassifier",
+      tabPsico: "Página de Psicología",
+      tabWrapped: "Spotify Wrapped",
+      zoomImageHint: "Clic para ampliar",
+      lightboxCloseAria: "Cerrar vista previa",
+      carouselPrev: "Proyecto anterior",
+      carouselNext: "Siguiente proyecto",
+      carouselSlideIndicator: "Ir al proyecto"
+    },
+    projectSmn: {
+      badge: "ASTRO · TYPESCRIPT · CLOUDFLARE WORKERS & ANÁLISIS ESTADÍSTICO",
+      title: "SMN — Sistema de Informes Estadísticos Automáticos",
+      summary: "Plataforma serverless de procesamiento estadístico construida con Astro, TypeScript y Cloudflare Workers que genera gráficos interactivos, muestreos dinámicos y redacción de conclusiones normadas bajo estándares APA con verificación algorítmica.",
+      impactPhrase: "Genera informes estadísticos automatizados con redacción formal APA y gráficos interactivos en segundos, eliminando horas de transcripción manual y errores de cálculo.",
+      probTitle: "Problema & Contexto",
+      probText: "La redacción manual de reportes estadísticos suele demandar horas de transcripción, genera incongruencias entre las tablas numéricas y los textos descriptivos, y presenta constantes faltas a las normativas de rigor formal (APA).",
+      solTitle: "Decisiones de Ingeniería",
+      solText: "Desarrollé la arquitectura utilizando <strong>Astro, TypeScript y Tailwind CSS</strong> para una interfaz modular y de alto rendimiento, respaldada por cómputo serverless en el borde con <strong>Cloudflare Workers</strong>. Implementé almacenamiento <strong>NoSQL</strong> para admitir esquemas variables de muestras, un motor sintáctico que traduce los coeficientes estadísticos en conclusiones formales bajo <strong>normas APA</strong> con estricta trazabilidad de evidencia y pruebas continuas con <strong>Vitest</strong>.",
+      impTitle: "Impacto Concreto",
+      impText: "Automatización instantánea del flujo completo: desde la ingesta de la muestra hasta el informe final listo para entrega. Cero discrepancias matemáticas y total estandarización formal del documento resultante.",
+      diagHeader: "Flujo de Arquitectura del Sistema (SMN)",
+      diagSub: "PIPELINE SERVERLESS · ASTRO + EDGE",
+      step1Num: "PASO 01",
+      step1Label: "Ingesta de Muestra",
+      step1Tech: "Dataset NoSQL",
+      step2Num: "PASO 02",
+      step2Label: "Cálculo & Muestreo",
+      step2Tech: "Cloudflare Workers (TS)",
+      step3Num: "PASO 03",
+      step3Label: "Renderizado Visual",
+      step3Tech: "Astro · Gráficos Estadísticos",
+      step4Num: "PASO 04",
+      step4Label: "Generador APA",
+      step4Tech: "Conclusiones con Trazabilidad",
+      badgeGraphic: "Generación Gráfica",
+      badgeStats: "Estadística Aplicada",
+      badgeApa: "Normativa APA",
+      badgeTests: "Vitest (Testing)"
+    },
+    projectIris: {
+      badge: "TYPESCRIPT · PYTHON · DOCKER · PIPELINE MULTI-VENDOR & PRICING",
+      title: "IrisClassifier (MegaAutopartes) — Plataforma Fullstack de Normalización y Cotización",
+      summary: "Sistema multiplataforma (web y móvil) fullstack (TypeScript & Python) que automatiza la extracción ETL, validación cruzada y cálculo dinámico de márgenes comerciales a partir de catálogos desestructurados en PDF y Excel.",
+      impactPhrase: "Normaliza listas de precios caóticas de proveedores en PDF y Excel a un catálogo unificado al instante, blindando los márgenes comerciales sin errores humanos.",
+      probTitle: "Problema & Contexto",
+      probText: "El cliente (MegaAutopartes) recibía listas de precios con formatos dispares y cambios frecuentes. Conciliar manualmente miles de piezas provocaba errores de cotización, desfase de precios en ventas y pérdidas por cotizaciones desactualizadas.",
+      solTitle: "Decisiones de Ingeniería",
+      solText: "Diseñé una arquitectura fullstack modular con frontend en <strong>TypeScript y React</strong> y backend en <strong>Python</strong>, contenedorizada mediante <strong>Docker y Docker Compose</strong>. Construí un pipeline ETL capaz de parsear tablas no homogéneas en PDF y Excel, unifiqué las referencias en un catálogo normalizado, desarrollé un <strong>motor dinámico de cálculo de márgenes comerciales</strong> y aseguré la confiabilidad mediante <strong>GitHub Actions (CI/CD)</strong> y una batería exhaustiva de <strong>tests unitarios e integrales en PyTest</strong>.",
+      impTitle: "Impacto Concreto",
+      impText: "Eliminación del 100% del proceso manual de validación cruzada entre distribuidores. Reducción del tiempo de generación de cotizaciones comerciales de horas a segundos, blindando el margen de ganancia de la empresa.",
+      diagHeader: "Pipeline de Normalización & Pricing (IrisClassifier)",
+      diagSub: "PIPELINE FULLSTACK · DOCKER + ETL",
+      step1Num: "FUENTES",
+      step1Label: "PDFs & Excel Heterogéneos",
+      step1Tech: "Múltiples Distribuidores",
+      step2Num: "PARSING",
+      step2Label: "Extracción & ETL",
+      step2Tech: "Python ETL Pipeline",
+      step3Num: "PRICING",
+      step3Label: "Reglas & Márgenes",
+      step3Tech: "Motor de Cotización (PyTest)",
+      step4Num: "DELIVERY",
+      step4Label: "Catálogo Unificado",
+      step4Tech: "TypeScript + React (Docker)",
+      badgeMobile: "Desarrollo Web & Móvil",
+      badgeParsing: "Data Parsing (PDF / Excel)",
+      badgeTests: "PyTest & Pruebas Unitarias",
+      badgeMargins: "Motor de Márgenes"
+    },
+    projectPsico: {
+      badge: "PROYECTO POR ENCARGO · LANDING PARA TESIS DE BACHILLERATO",
+      title: "Página de Psicología (Colegio Santiago de León)",
+      summary: "Landing page de concientización en salud mental adolescente, desarrollada por encargo para el proyecto de tesis de un grupo de estudiantes del Colegio Santiago de León de Caracas.",
+      impactPhrase: "Transformó una investigación académica en una experiencia web interactiva, moderna y accesible para orientar a adolescentes sobre salud mental.",
+      probTitle: "Problema & Contexto",
+      probText: "Un grupo de estudiantes tenía la investigación de su tesis de bachillerato sobre salud mental adolescente (estadísticas, contactos oficiales de ayuda psicológica) pero necesitaba un canal digital claro y accesible para presentarla a otros estudiantes del colegio.",
+      solTitle: "Decisiones de Ingeniería",
+      solText: "Diseñé y desarrollé la interfaz completa con <strong>React</strong> y una arquitectura de componentes modular (Navbar, Hero, Helps, Bells, Testimonials, Footer), maquetación responsiva con <strong>Tailwind CSS</strong>, y <strong>Vite</strong> como entorno de build para desarrollo rápido con HMR. El contenido temático y las estadísticas provienen de la investigación del grupo de estudiantes; mi aporte fue el diseño de interfaz, la arquitectura de información y el despliegue.",
+      impTitle: "Impacto Concreto",
+      impText: "Sitio publicado y en producción, entregado como recurso digital de apoyo al proyecto de tesis, centralizando en un solo lugar información que antes solo existía en el documento de la investigación.",
+      diagHeader: "Pipeline de Arquitectura & Despliegue (Psicología CSL)",
+      diagSub: "PIPELINE JAMSTACK · REACT + VITE + TAILWIND",
+      step1Num: "INVESTIGACIÓN",
+      step1Label: "Investigación & Datos",
+      step1Tech: "Tesis Estudiantil (Docs & Cifras)",
+      step2Num: "ARQUITECTURA",
+      step2Label: "Componentes Modulares",
+      step2Tech: "React (Navbar, Hero, Helps, Footer)",
+      step3Num: "BUILD",
+      step3Label: "Estilos & Optimización",
+      step3Tech: "Tailwind CSS + Vite HMR",
+      step4Num: "PRODUCCIÓN",
+      step4Label: "Despliegue Global",
+      step4Tech: "Netlify Edge Hosting",
+      badgeModular: "Arquitectura de Componentes",
+      badgeResponsive: "Diseño Responsivo",
+      badgeDeploy: "Despliegue en Producción"
+    },
+    projectWrapped: {
+      badge: "PROYECTO FREELANCE · EXPERIENCIA INTERACTIVA A MEDIDA",
+      title: "Spotify Wrapped 2024 — Experiencia Interactiva Personalizada",
+      summary: "Experiencia web interactiva estilo Spotify Wrapped, desarrollada como encargo personalizado para el cumpleaños de un cliente, con reproducción de audio en tiempo real y estadísticas musicales del año.",
+      impactPhrase: "Recrea la experiencia anual de Spotify con animaciones dinámicas, audio en tiempo real y estadísticas personalizadas directamente en el navegador.",
+      probTitle: "Problema & Contexto",
+      probText: "El cliente quería un regalo de cumpleaños digital que recreara la experiencia de Spotify Wrapped con sus propias canciones, artistas y estadísticas de escucha del año, en formato de historias interactivas navegables como stories de redes sociales.",
+      solTitle: "Decisiones de Ingeniería",
+      solText: "Construí la experiencia con <strong>Astro</strong> (arquitectura de islas para máximo rendimiento) combinado con <strong>React</strong> y <strong>TypeScript</strong> para el estado de la interacción entre diapositivas. Usé <strong>Framer Motion</strong> para las transiciones y micro-interacciones entre historias, y la integración oficial de <strong>Spotify</strong> (oEmbed/widget embebido) para la reproducción verificada de las pistas. Diseño responsive con <strong>Tailwind CSS</strong> optimizado para móvil (formato stories, 100dvh) con navegación táctil, por gestos y atajos de teclado.",
+      impTitle: "Impacto Concreto",
+      impText: "Experiencia entregada y desplegada como regalo digital personalizado, funcionando de punta a punta en móvil y escritorio, con reproducción de música integrada y una tarjeta de resumen final compartible.",
+      diagHeader: "Pipeline de Arquitectura & Reproducción (Spotify Wrapped)",
+      diagSub: "PIPELINE JAMSTACK · ASTRO + REACT + FRAMER MOTION",
+      step1Num: "DATOS",
+      step1Label: "Curaduría & Métricas",
+      step1Tech: "Datos de Escucha Anual (JSON)",
+      step2Num: "ARQUITECTURA",
+      step2Label: "Islas Interactivas",
+      step2Tech: "Astro + React (Estado de Stories)",
+      step3Num: "INTERACCIÓN",
+      step3Label: "Gestos & Animaciones",
+      step3Tech: "Framer Motion + Touch 100dvh",
+      step4Num: "AUDIO",
+      step4Label: "Reproducción & Entrega",
+      step4Tech: "Spotify oEmbed + Vercel Edge",
+      badgeIslands: "Arquitectura de Islas",
+      badgeGestures: "Navegación por Gestos & Atajos",
+      badgeAudio: "Reproducción en Tiempo Real",
+      badgeDeploy: "Despliegue en Producción"
+    },
+    projectTerroso: {
+      badge: "PROYECTO CONCEPTUAL · ASTRO · TAILWIND V4 · ACCESIBILIDAD WCAG 2.2 AA",
+      title: "Terroso Café & Restaurante — Landing Accesible y Escalable de Alto Rendimiento",
+      summary: "Landing page conceptual para una cafetería de especialidad ficticia en Altamira (Caracas), construida con Astro 5, Tailwind CSS v4 y TypeScript sin librerías de cliente. Incluye reservas por WhatsApp, horario en vivo, catálogo con pestañas accesibles y un sistema de escalado que se adapta desde móviles hasta monitores 4K y ultrawide.",
+      impactPhrase: "Diseñé y construí una landing de cafetería que carga al instante, se ve proporcionada en cualquier pantalla (del teléfono al monitor 4K) y se puede usar completa solo con teclado.",
+      probTitle: "Problema & Contexto",
+      probText: "Las landings de restaurantes suelen ser pesadas por exceso de librerías, se ven bien solo en un tamaño de pantalla (amontonadas en móvil o con enormes vacíos en monitores grandes) e ignoran la accesibilidad. Terroso es un caso de estudio conceptual, con un establecimiento ficticio, para resolver esos tres retos en un mismo producto.",
+      solTitle: "Decisiones de Ingeniería",
+      solText: "Elegí <strong>Astro 5 (SSG)</strong> para generar HTML estático sin JavaScript innecesario, con <strong>Tailwind CSS v4</strong> y un sistema de tokens de diseño (<code>@theme</code>). Toda la interactividad se resolvió con <strong>TypeScript y Vanilla JS</strong> usando Web APIs nativas (IntersectionObserver, requestAnimationFrame, history.pushState). Implementé un <strong>escalado proporcional de raíz con <code>clamp()</code></strong> para pantallas ≥1920px, sin deformaciones con <code>transform: scale()</code>, y verifiqué el layout en una matriz de viewports desde móvil compacto hasta 4K y ultrawide. En accesibilidad apliqué <strong>WCAG 2.2 AA</strong>: focus trap con <code>inert</code> en el menú móvil, pestañas WAI-ARIA con navegación por flechas y galería con pausa por foco. Añadí reservas por <strong>WhatsApp sin backend</strong> (URL codificada en cliente), horario en vivo con zona <code>America/Caracas</code>, datos estructurados <strong>Schema.org</strong> y optimización de imágenes a WebP con <code>astro:assets</code>.",
+      impTitle: "Impacto Concreto",
+      impText: "Sitio publicado en producción como pieza de portafolio, con navegación completa por teclado, layout verificado en móvil, tablet, laptop, Full HD, 2K, ultrawide y 4K, y una base de código modular en componentes Astro tipados.",
+      diagHeader: "Pipeline de Arquitectura & Escalado (Terroso)",
+      diagSub: "PIPELINE ESTÁTICO · ASTRO + TAILWIND V4 + TS",
+      step1Num: "DISEÑO",
+      step1Label: "Tokens & Identidad Visual",
+      step1Tech: "Tailwind v4 (@theme)",
+      step2Num: "ARQUITECTURA",
+      step2Label: "Componentes Estáticos",
+      step2Tech: "Astro 5 (SSG)",
+      step3Num: "INTERACCIÓN",
+      step3Label: "Accesibilidad & Animaciones",
+      step3Tech: "TypeScript + WAI-ARIA",
+      step4Num: "PRODUCCIÓN",
+      step4Label: "Escalado & Despliegue",
+      step4Tech: "clamp() root + Netlify",
+      badgeA11y: "Accesibilidad WCAG 2.2 AA",
+      badgeSeo: "SEO Técnico (Schema.org)",
+      badgeResponsive: "Diseño Responsivo (móvil a 4K)",
+      badgeWhatsapp: "Reservas vía WhatsApp",
+      badgeDeploy: "Despliegue en Producción"
+    },
+    skills: {
+      tag: "// 03. Competencias Técnicas",
+      title: "Habilidades Estructuradas por Entorno",
+      subtitle: "Agrupadas jerárquicamente con contexto de aplicación real en producción, evitando listas planas descontextualizadas.",
+      catFrontend: "Frontend & UI",
+      catBackend: "Backend & Datos",
+      catCloud: "Cloud & Operaciones",
+      // Frontend details
+      reactContext: "Interfaces dinámicas y componentes modulares con hooks",
+      tsContext: "Tipado estricto, interfaces seguras y contratos de datos",
+      jsContext: "Manipulación del DOM, programación asíncrona y modular",
+      htmlCssContext: "Semántica accesible (WCAG AA), Flexbox, Grid y Tokens",
+      astroContext: "Arquitectura de islas y generación de sitios estáticos rápidos",
+      // Backend details
+      pythonContext: "Extracción de datos, scripts de automatización y lógica de servidor",
+      sqlContext: "Consultas relacionales, normalización y consistencia transaccional",
+      mongoContext: "Esquemas dinámicos para datos desestructurados y colecciones",
+      restContext: "Diseño de endpoints eficientes, autenticación y manejo de errores",
+      javaContext: "Fundamentos de Programación Orientada a Objetos y patrones",
+      // Cloud details
+      cfContext: "Lógica serverless de ejecución global en el edge",
+      gitContext: "Control de versiones riguroso, branches y pull requests",
+      dockerContext: "Contenedores para consistencia en entornos de desarrollo",
+      testsContext: "Aseguramiento de reglas críticas y prevención de regresiones",
+      cicdContext: "Pipelines de integración continua y despliegues automáticos"
+    },
+    experience: {
+      tag: "// 04. Trayectoria Profesional",
+      title: "Credibilidad y Precisión Operativa",
+      subtitle: "Experiencia práctica previa que respalda mi meticulosidad, rigor numérico y capacidad de resolución bajo presión.",
+      role: "Analista de Soporte Técnico y Operaciones",
+      period: "2023 · Inversiones Caracas C.A.",
+      location: "Caracas, Venezuela",
+      desc: "Gestión directa de la infraestructura tecnológica, auditoría de activos físicos y control financiero operativo. Esta posición consolidó mi compromiso con la exactitud sin margen de error, la documentación sistemática y la continuidad operativa en entornos de ritmo exigente.",
+      metric1Desc: "Precisión en arqueos de caja y conciliaciones diarias sin discrepancias.",
+      metric2Desc: "Componentes técnicos auditados y catalogados con control de inventario.",
+      metric3Desc: "Equipos y estaciones configuradas en red local asegurando disponibilidad continua."
+    },
+    contact: {
+      tag: "// 05. Contacto",
+      title: "¿Buscando un Desarrollador Fullstack? Hablemos.",
+      subtitle: "Disponible para incorporarme de inmediato a equipos remotos. Escríbeme directamente o completa el formulario y te responderé en menos de 24 horas.",
+      emailLabel: "EMAIL DIRECTO",
+      emailHint: "Contacto directo para ofertas laborales y proyectos remotos.",
+      copyBtn: "Copiar Correo",
+      clientBtn: "Abrir cliente ↗",
+      cvLink: "Curriculum Vitae (PDF)",
+      socialLabel: "REDES & DISPONIBILIDAD",
+      locationTag: "Caracas, VE (UTC-4) · Remoto Internacional",
+      formTitle: "Enviar Mensaje",
+      formSubtitle: "Envíame una consulta directamente a mi bandeja de entrada.",
+      nameLabel: "Nombre o Empresa",
+      namePlaceholder: "Tu nombre o empresa",
+      emailInputLabel: "Correo Electrónico",
+      emailPlaceholder: "tu@correo.com",
+      messageLabel: "Mensaje",
+      messagePlaceholder: "¿En qué proyecto, producto o rol te gustaría que colaboremos?",
+      submitBtnText: "Enviar Mensaje",
+      sendingBtnText: "Enviando mensaje...",
+      statusEmpty: "Por favor completa todos los campos requeridos.",
+      statusInvalidEmail: "Por favor ingresa un correo electrónico válido.",
+      statusProcessing: "Procesando envío...",
+      statusSuccess: "✓ ¡Mensaje recibido! Te responderé a la brevedad.",
+      statusWarning: "No pudimos conectar con el servidor.",
+      statusMailtoLink: "Haz clic aquí para enviar tu mensaje directamente por correo ↗",
+      toastCopied: "✓ Correo copiado: "
+    },
+    footer: {
+      copyright: "© 2026 Miguel Angel Aranguren Ramirez · Desarrollador Fullstack Remoto",
+      buildStatus: "Build: Producción OK",
+      backToTop: "Subir ↑"
+    }
+  },
+
+  en: {
+    meta: {
+      title: "Miguel Angel Aranguren Ramirez | Remote Fullstack Developer",
+      description: "Portfolio of Miguel Angel Aranguren Ramirez, Fullstack Developer specializing in Python, TypeScript, SQL, React, and serverless architectures. Systems Engineering student at UNEXPO based in Caracas, available for remote roles.",
+      ogTitle: "Miguel Angel Aranguren Ramirez | Remote Fullstack Developer",
+      ogDescription: "Fullstack Developer focused on software where data and logic matter: Python, TypeScript, React, SQL, and Cloudflare Workers."
+    },
+    nav: {
+      skipToContent: "Skip to main content",
+      brandSub: "/ Fullstack",
+      about: "About Me",
+      projects: "Projects",
+      skills: "Skills",
+      experience: "Experience",
+      contact: "Contact",
+      cta: "Let's Talk",
+      menuAria: "Open navigation menu"
+    },
+    theme: {
+      toLight: "Switch to light mode",
+      toDark: "Switch to dark mode",
+      title: "Toggle light/dark mode"
+    },
+    langToggle: {
+      ariaLabel: "Cambiar a Español",
+      title: "Switch language / Cambiar idioma",
+      buttonText: "ES"
+    },
+    hero: {
+      status: "Available for Remote Fullstack Roles",
+      name: "Miguel Angel Aranguren Ramirez",
+      tagline: "I build robust software where data and logic matter.",
+      bio: "<strong>Fullstack Developer</strong> specializing in <strong>Python, TypeScript, JavaScript, SQL, and React</strong>. 5th-semester Systems Engineering student at UNEXPO (Caracas, Venezuela). I build systems focused on eliminating data inconsistencies, automating workflows, and delivering high-availability serverless architectures.",
+      ctaProjects: "View Case Studies",
+      ctaCv: "View Resume (PDF) ↗",
+      ctaContact: "Get in Touch",
+      direct: "Direct:",
+      scrollDown: "Scroll down"
+    },
+    spec: {
+      title: "SYS_PROFILE // M_ARANGUREN",
+      roleLabel: "> PRIMARY ROLE",
+      roleVal: "Fullstack Developer (Python / TS / React / SQL)",
+      stackLabel: "> CORE TECH STACK",
+      focusLabel: "> ENGINEERING FOCUS",
+      focusVal: "Heterogeneous data processing, automated reporting with statistical rigor, and low-latency serverless APIs.",
+      locationLabel: "> LOCATION & TIMEZONE",
+      locationVal: "Caracas, VE (UTC-4)",
+      educationLabel: "> EDUCATION",
+      educationVal: "Systems Engineering (UNEXPO)"
+    },
+    about: {
+      tag: "// 01. Technical Approach",
+      title: "Engineering, Logic, and Uncertainty Reduction",
+      subtitle: "I don't build empty interfaces: I architect solutions where data is trustworthy, business rules are auditable, and computations are reproducible.",
+      p1: "My training in <strong>Systems Engineering at UNEXPO</strong> (5th semester) grounds my software practice: I view software as a mathematical system and information flow where consistency is non-negotiable.",
+      p2: "When a client or project faces complex problems — such as reconciling thousands of mismatched prices across disparate PDFs and Excel sheets, or generating statistical conclusions that must adhere to strict international academic standards like <strong>APA guidelines</strong> —, my priority is structuring the underlying logic to eliminate human error entirely.",
+      p3: "I bring a solid foundation in <strong>Python, TypeScript, and SQL</strong>, prioritizing clean, modular architectures that are easy to maintain in remote, collaborative environments.",
+      pillar1Title: "Mathematical Rigor & Reliable Data",
+      pillar1Desc: "Every conclusion or metric produced by the software maintains direct traceability back to recorded raw evidence.",
+      pillar2Title: "Serverless Architecture & Efficiency",
+      pillar2Desc: "Leveraging edge computing like Cloudflare Workers to handle requests with minimal latency and zero infrastructure overhead.",
+      pillar3Title: "Continuous Validation",
+      pillar3Desc: "I write unit and integration tests to ensure business rules remain solid through every change."
+    },
+    projects: {
+      tag: "// 02. Projects & Case Studies",
+      title: "Real Work and Architecture Decisions",
+      subtitle: "In-depth analysis of real-world problems solved through code: the core challenge, the technical decisions taken, and the verifiable business impact.",
+      repoBtn: "View Repository on GitHub",
+      demoBtn: "View Live Demo",
+      techDetailsBtn: "View Preview & Technical Details ▾",
+      techDetailsHideBtn: "Hide Preview & Technical Details ▴",
+      tabSmn: "SMN",
+      tabIris: "IrisClassifier",
+      tabPsico: "Psychology Website",
+      tabWrapped: "Spotify Wrapped",
+      zoomImageHint: "Click to zoom",
+      lightboxCloseAria: "Close preview",
+      carouselPrev: "Previous project",
+      carouselNext: "Next project",
+      carouselSlideIndicator: "Go to project"
+    },
+    projectSmn: {
+      badge: "ASTRO · TYPESCRIPT · CLOUDFLARE WORKERS & STATISTICAL ANALYSIS",
+      title: "SMN — Automated Statistical Reporting System",
+      summary: "Serverless statistical processing platform built with Astro, TypeScript, and Cloudflare Workers that produces interactive charts, dynamic sampling, and algorithmically verified conclusions strictly formatted under APA guidelines.",
+      impactPhrase: "Generates automated statistical reports with formal APA deductions and interactive charts in seconds, eliminating hours of manual transcription and calculation errors.",
+      probTitle: "Problem & Context",
+      probText: "Drafting statistical reports manually required hours of transcription, led to discrepancies between data tables and descriptive text, and frequently breached formal academic formatting standards (APA).",
+      solTitle: "Engineering Decisions",
+      solText: "Engineered the platform utilizing <strong>Astro, TypeScript, and Tailwind CSS</strong> for a fast, modular UI, backed by edge execution on <strong>Cloudflare Workers</strong>. Implemented <strong>NoSQL</strong> storage to handle variable sample schemas, a syntax engine translating statistical metrics into formal deductions formatted under <strong>APA guidelines</strong> with full evidence traceability, and automated test coverage via <strong>Vitest</strong>.",
+      impTitle: "Concrete Impact",
+      impText: "Instant end-to-end automation: from raw sample ingestion to delivery-ready final reports. Zero mathematical discrepancies and full formal standardization of the generated document.",
+      diagHeader: "System Architecture Flow (SMN)",
+      diagSub: "SERVERLESS PIPELINE · ASTRO + EDGE",
+      step1Num: "STEP 01",
+      step1Label: "Sample Ingestion",
+      step1Tech: "NoSQL Dataset",
+      step2Num: "STEP 02",
+      step2Label: "Compute & Sampling",
+      step2Tech: "Cloudflare Workers (TS)",
+      step3Num: "STEP 03",
+      step3Label: "Visual Rendering",
+      step3Tech: "Astro · Statistical Charts",
+      step4Num: "STEP 04",
+      step4Label: "APA Generator",
+      step4Tech: "Traceable Conclusions",
+      badgeGraphic: "Data Visualization",
+      badgeStats: "Applied Statistics",
+      badgeApa: "APA Guidelines",
+      badgeTests: "Vitest (Testing)"
+    },
+    projectIris: {
+      badge: "TYPESCRIPT · PYTHON · DOCKER · MULTI-VENDOR PIPELINE & PRICING",
+      title: "IrisClassifier (MegaAutopartes) — Fullstack Normalization & Quoting Platform",
+      summary: "Fullstack cross-platform system (TypeScript & Python) automating ETL extraction, cross-validation, and dynamic commercial margin calculations from unstructured PDF and Excel distributor catalogs.",
+      impactPhrase: "Normalizes chaotic vendor price lists from PDF and Excel into a unified catalog instantly, safeguarding commercial profit margins without human errors.",
+      probTitle: "Problem & Context",
+      probText: "The client (MegaAutopartes) received distributor price lists in erratic formats with frequent updates. Manually reconciling thousands of parts caused quoting errors, outdated retail pricing, and profit margin loss.",
+      solTitle: "Engineering Decisions",
+      solText: "Architected a modular fullstack solution featuring a <strong>TypeScript & React</strong> frontend and a <strong>Python</strong> backend, containerized with <strong>Docker & Docker Compose</strong>. Built an automated ETL pipeline parsing non-standard PDF and Excel tables, normalized parts references, engineered a <strong>dynamic commercial margin calculation engine</strong>, and enforced data reliability with <strong>GitHub Actions CI/CD</strong> and extensive <strong>PyTest unit testing</strong>.",
+      impTitle: "Concrete Impact",
+      impText: "100% elimination of manual cross-verification across distributors. Slashed commercial quotation turnaround time from hours to seconds, safeguarding the company's profit margins.",
+      diagHeader: "Normalization & Pricing Pipeline (IrisClassifier)",
+      diagSub: "FULLSTACK PIPELINE · DOCKER + ETL",
+      step1Num: "SOURCES",
+      step1Label: "Heterogeneous PDFs & Excel",
+      step1Tech: "Multiple Distributors",
+      step2Num: "PARSING",
+      step2Label: "Extraction & ETL",
+      step2Tech: "Python ETL Pipeline",
+      step3Num: "PRICING",
+      step3Label: "Rules & Margins",
+      step3Tech: "Quotation Engine (PyTest)",
+      step4Num: "DELIVERY",
+      step4Label: "Unified Catalog",
+      step4Tech: "TypeScript + React (Docker)",
+      badgeMobile: "Web & Mobile Development",
+      badgeParsing: "Data Parsing (PDF / Excel)",
+      badgeTests: "PyTest & Unit Testing",
+      badgeMargins: "Margin Engine"
+    },
+    projectPsico: {
+      badge: "COMMISSIONED PROJECT · HIGH SCHOOL THESIS LANDING PAGE",
+      title: "Psychology Page (Colegio Santiago de León)",
+      summary: "Adolescent mental health awareness landing page, commissioned for a high school senior thesis project by students from Colegio Santiago de León in Caracas.",
+      impactPhrase: "Transformed academic thesis research into a modern, accessible, and interactive web experience to guide adolescents on mental health.",
+      probTitle: "Problem & Context",
+      probText: "A group of students conducted their high school thesis research on adolescent mental health (statistics, official psychological support hotlines) but needed a clear and accessible digital channel to present it to fellow students.",
+      solTitle: "Engineering Decisions",
+      solText: "Designed and engineered the complete UI using <strong>React</strong> with a modular component architecture (Navbar, Hero, Helps, Bells, Testimonials, Footer), responsive styling with <strong>Tailwind CSS</strong>, and <strong>Vite</strong> as the high-speed build tool with HMR. The thematic content and statistics originate from the student research; my contribution was the UI design, information architecture, and production deployment.",
+      impTitle: "Concrete Impact",
+      impText: "Live site in production, delivered as a digital support resource for the thesis defense, centralizing in a single accessible hub information that previously only existed within the static research paper.",
+      diagHeader: "Architecture & Deployment Pipeline (Psychology CSL)",
+      diagSub: "JAMSTACK PIPELINE · REACT + VITE + TAILWIND",
+      step1Num: "RESEARCH",
+      step1Label: "Research & Content",
+      step1Tech: "Student Thesis (Docs & Metrics)",
+      step2Num: "ARCHITECTURE",
+      step2Label: "Modular Components",
+      step2Tech: "React (Navbar, Hero, Helps, Footer)",
+      step3Num: "BUILD",
+      step3Label: "Styling & Optimization",
+      step3Tech: "Tailwind CSS + Vite HMR",
+      step4Num: "PRODUCTION",
+      step4Label: "Global Deployment",
+      step4Tech: "Netlify Edge Hosting",
+      badgeModular: "Component Architecture",
+      badgeResponsive: "Responsive Design",
+      badgeDeploy: "Production Deployment"
+    },
+    projectWrapped: {
+      badge: "FREELANCE PROJECT · BESPOKE INTERACTIVE EXPERIENCE",
+      title: "Spotify Wrapped 2024 — Personalized Interactive Experience",
+      summary: "Interactive Spotify Wrapped-style web experience, developed as a custom birthday commission for a client, featuring real-time audio playback and annual listening statistics.",
+      impactPhrase: "Recreates the annual Spotify experience with dynamic animations, real-time audio playback, and personalized statistics directly in the browser.",
+      probTitle: "Problem & Context",
+      probText: "The client wanted a digital birthday gift recreating the Spotify Wrapped experience with their own personal songs, artists, and annual listening stats, presented as interactive stories navigable like social media stories.",
+      solTitle: "Engineering Decisions",
+      solText: "Engineered the experience with <strong>Astro</strong> (island architecture for maximum performance) combined with <strong>React</strong> and <strong>TypeScript</strong> to manage interactive state across slides. Utilized <strong>Framer Motion</strong> for fluid transitions and micro-interactions between stories, and official <strong>Spotify oEmbed/embedded widgets</strong> for verified track playback. Implemented responsive design with <strong>Tailwind CSS</strong> optimized for mobile (story format, 100dvh) with touch navigation, swipe gestures, and keyboard shortcuts.",
+      impTitle: "Concrete Impact",
+      impText: "Delivered and deployed end-to-end as a personalized digital gift, fully functional across mobile and desktop devices, featuring integrated music playback and a shareable final summary card.",
+      diagHeader: "Architecture & Playback Pipeline (Spotify Wrapped)",
+      diagSub: "JAMSTACK PIPELINE · ASTRO + REACT + FRAMER MOTION",
+      step1Num: "DATA",
+      step1Label: "Curated Listening Stats",
+      step1Tech: "Annual Listening Data (JSON)",
+      step2Num: "ARCHITECTURE",
+      step2Label: "Interactive Islands",
+      step2Tech: "Astro + React (Stories State)",
+      step3Num: "INTERACTION",
+      step3Label: "Gestures & Animations",
+      step3Tech: "Framer Motion + Touch 100dvh",
+      step4Num: "AUDIO",
+      step4Label: "Playback & Delivery",
+      step4Tech: "Spotify oEmbed + Vercel Edge",
+      badgeIslands: "Islands Architecture",
+      badgeGestures: "Gesture Navigation & Shortcuts",
+      badgeAudio: "Real-Time Audio Playback",
+      badgeDeploy: "Production Deployment"
+    },
+    projectTerroso: {
+      badge: "CONCEPTUAL PROJECT · ASTRO · TAILWIND V4 · WCAG 2.2 AA ACCESSIBILITY",
+      title: "Terroso Café & Restaurant — Accessible and Scalable High-Performance Landing",
+      summary: "Conceptual landing page for a fictional specialty coffee shop in Altamira (Caracas), built with Astro 5, Tailwind CSS v4, and TypeScript without client libraries. Features WhatsApp bookings, live operating hours, accessible tabbed menu catalog, and a scaling system adapting from mobile to 4K and ultrawide displays.",
+      impactPhrase: "Designed and built a coffee shop landing page that loads instantly, stays proportional on any display (from phone to 4K monitor), and is fully operable via keyboard alone.",
+      probTitle: "Problem & Context",
+      probText: "Restaurant landing pages are often bloated with excess client libraries, only look good on one screen size (cramped on mobile or vast empty voids on desktop), and overlook accessibility. Terroso is a conceptual case study with a fictional establishment designed to solve all three challenges in a single cohesive product.",
+      solTitle: "Engineering Decisions",
+      solText: "Selected <strong>Astro 5 (SSG)</strong> to generate static HTML without unnecessary JavaScript, paired with <strong>Tailwind CSS v4</strong> and design token architecture (<code>@theme</code>). All interactivity was implemented with <strong>TypeScript and Vanilla JS</strong> utilizing native Web APIs (IntersectionObserver, requestAnimationFrame, history.pushState). Engineered a <strong>proportional root scaling system with <code>clamp()</code></strong> for displays ≥1920px without distortion from <code>transform: scale()</code>, verifying layouts across viewports from compact mobile to 4K and ultrawide. Implemented <strong>WCAG 2.2 AA</strong> accessibility: focus trap with <code>inert</code> on mobile nav, WAI-ARIA arrow-navigable tabs, and focus-pausable gallery. Integrated serverless <strong>WhatsApp bookings</strong> (client-encoded URL), live opening hours in <code>America/Caracas</code> timezone, <strong>Schema.org</strong> structured data, and WebP asset optimization with <code>astro:assets</code>.",
+      impTitle: "Concrete Impact",
+      impText: "Live production showcase piece in portfolio, with full keyboard navigation, verified responsive layout across mobile, tablet, laptop, Full HD, 2K, ultrawide, and 4K, built upon a modular typed Astro component codebase.",
+      diagHeader: "Architecture & Scaling Pipeline (Terroso)",
+      diagSub: "STATIC PIPELINE · ASTRO + TAILWIND V4 + TS",
+      step1Num: "DESIGN",
+      step1Label: "Tokens & Visual Identity",
+      step1Tech: "Tailwind v4 (@theme)",
+      step2Num: "ARCHITECTURE",
+      step2Label: "Static Components",
+      step2Tech: "Astro 5 (SSG)",
+      step3Num: "INTERACTION",
+      step3Label: "Accessibility & Motion",
+      step3Tech: "TypeScript + WAI-ARIA",
+      step4Num: "PRODUCTION",
+      step4Label: "Scaling & Deployment",
+      step4Tech: "clamp() root + Netlify",
+      badgeA11y: "WCAG 2.2 AA Accessibility",
+      badgeSeo: "Technical SEO (Schema.org)",
+      badgeResponsive: "Responsive Design (Mobile to 4K)",
+      badgeWhatsapp: "WhatsApp Bookings",
+      badgeDeploy: "Production Deployment"
+    },
+    skills: {
+      tag: "// 03. Technical Competencies",
+      title: "Structured Skills by Domain",
+      subtitle: "Categorized hierarchically with real-world production context, avoiding shallow, uncontextualized keyword lists.",
+      catFrontend: "Frontend & UI",
+      catBackend: "Backend & Data",
+      catCloud: "Cloud & Operations",
+      // Frontend details
+      reactContext: "Dynamic interfaces and modular components built with hooks",
+      tsContext: "Strict typing, reliable interfaces, and data contracts",
+      jsContext: "DOM manipulation, asynchronous and modular programming",
+      htmlCssContext: "Accessible semantics (WCAG AA), Flexbox, Grid, and Design Tokens",
+      astroContext: "Islands architecture and ultra-fast static site generation",
+      // Backend details
+      pythonContext: "Data extraction, automation scripts, and server-side logic",
+      sqlContext: "Relational queries, database normalization, and transactional integrity",
+      mongoContext: "Dynamic schemas for unstructured data and document collections",
+      restContext: "Efficient API endpoint design, authentication, and error handling",
+      javaContext: "Object-Oriented Programming principles and design patterns",
+      // Cloud details
+      cfContext: "Globally distributed serverless logic running on edge infrastructure",
+      gitContext: "Disciplined version control, branching workflows, and pull requests",
+      dockerContext: "Containers ensuring reproducibility across development environments",
+      testsContext: "Guaranteed critical business rules and prevention of regressions",
+      cicdContext: "Continuous integration pipelines and automated deployments"
+    },
+    experience: {
+      tag: "// 04. Professional Journey",
+      title: "Operational Credibility and Precision",
+      subtitle: "Practical operational experience backing my attention to detail, numerical rigor, and problem-solving composure under pressure.",
+      role: "Technical Support & Operations Analyst",
+      period: "2023 · Inversiones Caracas C.A.",
+      location: "Caracas, Venezuela",
+      desc: "Direct management of IT infrastructure, physical asset auditing, and operational financial control. This role solidified my commitment to zero-error accuracy, systematic documentation, and business continuity in fast-paced operational environments.",
+      metric1Desc: "Accuracy in daily cash audits and balance reconciliations with zero discrepancies.",
+      metric2Desc: "Technical components audited, cataloged, and managed under strict inventory control.",
+      metric3Desc: "Local network workstations and hardware configured ensuring continuous availability."
+    },
+    contact: {
+      tag: "// 05. Contact",
+      title: "Looking for a Fullstack Developer? Let's Talk.",
+      subtitle: "Available for immediate onboarding on remote teams. Send me a direct email or fill out the form, and I'll reply within 24 hours.",
+      emailLabel: "DIRECT EMAIL",
+      emailHint: "Direct line for job opportunities and remote fullstack roles.",
+      copyBtn: "Copy Email",
+      clientBtn: "Open client ↗",
+      cvLink: "Curriculum Vitae (PDF)",
+      socialLabel: "NETWORKS & AVAILABILITY",
+      locationTag: "Caracas, VE (UTC-4) · Worldwide Remote",
+      formTitle: "Send a Message",
+      formSubtitle: "Send an inquiry directly to my primary inbox.",
+      nameLabel: "Name or Company",
+      namePlaceholder: "Your name or company",
+      emailInputLabel: "Email Address",
+      emailPlaceholder: "you@email.com",
+      messageLabel: "Message",
+      messagePlaceholder: "What project, product, or role would you like us to collaborate on?",
+      submitBtnText: "Send Message",
+      sendingBtnText: "Sending message...",
+      statusEmpty: "Please fill in all required fields.",
+      statusInvalidEmail: "Please enter a valid email address.",
+      statusProcessing: "Processing submission...",
+      statusSuccess: "✓ Message received! I will reply shortly.",
+      statusWarning: "Could not connect to the server.",
+      statusMailtoLink: "Click here to send your message directly via email ↗",
+      toastCopied: "✓ Email copied: "
+    },
+    footer: {
+      copyright: "© 2026 Miguel Angel Aranguren Ramirez · Remote Fullstack Developer",
+      buildStatus: "Build: Production OK",
+      backToTop: "Top ↑"
+    }
+  }
+};
+
+
+/**
+ * MÓDULO i18n (INTERNACIONALIZACIÓN REACTIVA)
+ * Gestiona el idioma actual, persistencia en localStorage,
+ * traducción de textos y atributos (placeholders, aria-labels, titles, SEO).
+ */
+
+let currentLang = (() => {
+  try {
+    const saved = localStorage.getItem('portfolio-lang');
+    if (saved && (saved === 'es' || saved === 'en')) {
+      return saved;
+    }
+  } catch (e) {
+    console.warn('localStorage not accessible for portfolio-lang:', e);
+  }
+  const navLang = navigator.language || navigator.userLanguage || '';
+  return navLang.toLowerCase().startsWith('en') ? 'en' : 'es';
+})();
+
+export function getCurrentLang() {
+  return currentLang;
+}
+
+export function getTranslation(lang, path) {
+  if (!translations[lang]) return null;
+  const keys = path.split('.');
+  let current = translations[lang];
+  for (const key of keys) {
+    if (current && current[key] !== undefined) {
+      current = current[key];
+    } else {
+      return null;
+    }
+  }
+  return current;
+}
+
+export function applyTranslations(lang) {
+  currentLang = lang;
+  document.documentElement.setAttribute('lang', lang);
+  const t = translations[lang];
+  if (!t) return;
+
+  // A. Elementos de texto plano data-i18n
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    const key = el.getAttribute('data-i18n');
+    const val = getTranslation(lang, key);
+    if (val !== null && val !== undefined) {
+      el.textContent = val;
+    }
+  });
+
+  // B. Elementos con HTML data-i18n-html
+  document.querySelectorAll('[data-i18n-html]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-html');
+    const val = getTranslation(lang, key);
+    if (val !== null && val !== undefined) {
+      el.innerHTML = val;
+    }
+  });
+
+  // C. Placeholders data-i18n-placeholder
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    const val = getTranslation(lang, key);
+    if (val !== null && val !== undefined) {
+      el.setAttribute('placeholder', val);
+    }
+  });
+
+  // D. Aria-labels data-i18n-aria-label
+  document.querySelectorAll('[data-i18n-aria-label]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-aria-label');
+    const val = getTranslation(lang, key);
+    if (val !== null && val !== undefined) {
+      el.setAttribute('aria-label', val);
+    }
+  });
+
+  // E. Titles data-i18n-title
+  document.querySelectorAll('[data-i18n-title]').forEach((el) => {
+    const key = el.getAttribute('data-i18n-title');
+    const val = getTranslation(lang, key);
+    if (val !== null && val !== undefined) {
+      el.setAttribute('title', val);
+    }
+  });
+
+  // F. SEO y Meta Tags
+  if (t.meta) {
+    document.title = t.meta.title;
+
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) metaDesc.setAttribute('content', t.meta.description);
+
+    const metaOgTitle = document.querySelector('meta[property="og:title"]');
+    if (metaOgTitle) metaOgTitle.setAttribute('content', t.meta.ogTitle);
+
+    const metaOgDesc = document.querySelector('meta[property="og:description"]');
+    if (metaOgDesc) metaOgDesc.setAttribute('content', t.meta.ogDescription);
+
+    const metaTwTitle = document.querySelector('meta[name="twitter:title"]');
+    if (metaTwTitle) metaTwTitle.setAttribute('content', t.meta.ogTitle);
+
+    const metaTwDesc = document.querySelector('meta[name="twitter:description"]');
+    if (metaTwDesc) metaTwDesc.setAttribute('content', t.meta.ogDescription);
+  }
+
+  // G. Actualizar Botones Selectores de Idioma
+  const toggleInfo = t.langToggle;
+  document.querySelectorAll('.lang-toggle-btn').forEach((btn) => {
+    btn.setAttribute('aria-label', toggleInfo.ariaLabel);
+    btn.setAttribute('title', toggleInfo.title);
+    const indicator = btn.querySelector('.lang-code') || document.getElementById('lang-code-indicator');
+    if (indicator) {
+      indicator.textContent = toggleInfo.buttonText;
+    }
+  });
+
+  // Notificar a otros módulos que el idioma cambió
+  document.dispatchEvent(new CustomEvent('portfolio:languagechange', { detail: { lang, t } }));
+}
+
+export function initI18n() {
+  document.querySelectorAll('.lang-toggle-btn').forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const newLang = currentLang === 'es' ? 'en' : 'es';
+      try {
+        localStorage.setItem('portfolio-lang', newLang);
+      } catch (err) {
+        console.warn('localStorage setItem failed:', err);
+      }
+      applyTranslations(newLang);
+    });
+  });
+
+  // Aplicar traducción inicial
+  applyTranslations(currentLang);
+}

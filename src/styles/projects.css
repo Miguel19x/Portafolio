@@ -28,18 +28,21 @@
   gap: 1.5rem;
   transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
-  align-items: flex-start;
+  align-items: stretch;
   touch-action: pan-y pinch-zoom;
 }
 
 .carousel-slide {
   flex: 0 0 calc(87% - 0.75rem);
-  min-width: 0;
+  width: calc(87% - 0.75rem);
+  min-width: calc(87% - 0.75rem);
   max-width: calc(87% - 0.75rem);
   opacity: 0.65;
   transform: scale(0.985);
   transform-origin: center left;
   transition: opacity 0.35s ease, transform 0.35s ease, border-color var(--transition-base), box-shadow var(--transition-base);
+  display: flex;
+  flex-direction: column;
 }
 
 .carousel-slide.is-active {
@@ -208,6 +211,8 @@
   transform: translateZ(0);
   -webkit-mask-image: -webkit-radial-gradient(white, black);
   mask-image: radial-gradient(white, black);
+  display: flex;
+  flex-direction: column;
 }
 
 .case-study-card:hover {
@@ -281,6 +286,10 @@
 
 .case-study-body {
   padding: clamp(1.25rem, 2.2vh, 1.85rem) clamp(1.25rem, 2vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
 }
 
 /* ==========================================================================
@@ -296,6 +305,7 @@
   /* Prevent grid children from expanding beyond the container */
   min-width: 0;
   width: 100%;
+  flex: 1;
 }
 
 @media (min-width: 820px) {
@@ -353,6 +363,7 @@
 .case-study-card.is-expanded .case-study-summary {
   max-width: 100% !important;
   -webkit-line-clamp: unset !important;
+  line-clamp: unset !important;
   display: block !important;
 }
 
@@ -730,10 +741,10 @@
 .case-study-toggle-wrap {
   display: flex;
   justify-content: center;
-  align-items: center;
   width: 100%;
-  margin-top: clamp(0.75rem, 1.4vh, 1.25rem);
-  margin-bottom: clamp(0.5rem, 1vh, 0.85rem);
+  margin-top: auto;
+  padding-top: clamp(0.75rem, 1.4vh, 1.25rem);
+  margin-bottom: clamp(0.25rem, 0.6vh, 0.5rem);
 }
 
 .case-study-toggle-btn {

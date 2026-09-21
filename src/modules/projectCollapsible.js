@@ -6,6 +6,37 @@
 
 import { getCurrentLang, getTranslation } from './i18n.js';
 
+export function collapseAllProjects() {
+  const toggleButtons = document.querySelectorAll('.case-study-toggle-btn');
+  const currentLang = getCurrentLang();
+
+  toggleButtons.forEach((btn) => {
+    if (btn.getAttribute('aria-expanded') === 'true') {
+      btn.setAttribute('aria-expanded', 'false');
+      btn.classList.remove('is-active');
+
+      const targetId = btn.getAttribute('data-toggle');
+      if (targetId) {
+        const targetCollapse = document.getElementById(targetId);
+        if (targetCollapse) {
+          targetCollapse.classList.remove('is-open', 'is-expanded');
+        }
+      }
+
+      const card = btn.closest('.case-study-card');
+      if (card) {
+        card.classList.remove('is-expanded');
+      }
+
+      const textSpan = btn.querySelector('.toggle-text');
+      if (textSpan) {
+        textSpan.setAttribute('data-i18n', 'projects.techDetailsBtn');
+        textSpan.textContent = getTranslation(currentLang, 'projects.techDetailsBtn') || 'Ver Captura y Detalles Técnicos ▾';
+      }
+    }
+  });
+}
+
 export function initProjectCollapsible() {
   const toggleButtons = document.querySelectorAll('.case-study-toggle-btn');
 

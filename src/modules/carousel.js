@@ -4,6 +4,8 @@
  * soporte de gestos táctiles (swipe) y sincronización con URLs hash (#project-xxx).
  */
 
+import { collapseAllProjects } from './projectCollapsible.js';
+
 let currentSlideIndex = 0;
 let carouselSlides = [];
 let carouselTrack = null;
@@ -28,6 +30,13 @@ export function goToSlide(index, animate = true, shouldScroll = false) {
   if (!carouselTrack || carouselSlides.length === 0) return;
 
   const clampedIndex = Math.max(0, Math.min(index, carouselSlides.length - 1));
+
+  // Si cambiamos de diapositiva, contraer cualquier acordeón abierto para que la pista
+  // recupere su altura compacta inmediatamente y no deje huecos verticales gigantescos.
+  if (clampedIndex !== currentSlideIndex) {
+    collapseAllProjects();
+  }
+
   currentSlideIndex = clampedIndex;
 
   const offset = calculateSlideOffset(currentSlideIndex);
@@ -247,7 +256,8 @@ export function initCarousel() {
     'project-smn': 0,
     'project-iris': 1,
     'project-psicologia': 2,
-    'project-wrapped': 3
+    'project-wrapped': 3,
+    'project-terroso': 4
   };
 
   function checkHashProject() {
