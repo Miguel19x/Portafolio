@@ -1,0 +1,90 @@
+---
+/**
+ * COMPONENTE REUTILIZABLE: SectionDivider
+ * Delimitador horizontal sutil inspirado en trazas de terminal / devtools.
+ * Conecta visualmente las etapas del pipeline entre secciones sin competir con los h2.
+ */
+interface Props {
+  index?: string;
+  label?: string;
+  labelKey?: string;
+  align?: 'left' | 'center';
+  class?: string;
+}
+
+const {
+  index,
+  label,
+  labelKey,
+  align = 'left',
+  class: className = '',
+} = Astro.props;
+
+const hasContent = Boolean(index || label);
+---
+
+<div class:list={["section-divider w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-0 relative z-10 select-none pointer-events-none", className]} aria-hidden="true">
+  <div class="relative flex items-center">
+    {hasContent ? (
+      <>
+        {/* Línea horizontal tenue izquierda */}
+        <div class:list={[
+          "h-px section-divider-line-left shrink-0",
+          align === 'center' ? 'flex-1' : 'w-4 sm:w-10'
+        ]}></div>
+
+        {/* Badge Técnico de Terminal: estrictamente en una sola línea */}
+        <div class="section-divider-badge px-2 sm:px-3 flex items-center gap-1 sm:gap-1.5 font-mono font-mono-code text-slate-500 uppercase opacity-85 shrink-0 whitespace-nowrap">
+          <span class="text-orange-500/60 font-bold select-none shrink-0">//</span>
+          {index && <span class="text-slate-400 font-medium shrink-0">[{index}]</span>}
+          {index && label && <span class="text-slate-600 shrink-0">//</span>}
+          {label && <span class="text-slate-400/85 shrink-0" data-i18n={labelKey}>{label}</span>}
+        </div>
+
+        {/* Línea horizontal tenue derecha */}
+        <div class="flex-1 h-px section-divider-line-right min-w-2"></div>
+      </>
+    ) : (
+      <div class="w-full h-px section-divider-line-full"></div>
+    )}
+  </div>
+</div>
+
+<style>
+  .section-divider-badge {
+    font-size: clamp(8px, 2.35vw, 10px);
+    letter-spacing: 0.04em;
+    white-space: nowrap !important;
+  }
+
+  @media (min-width: 640px) {
+    .section-divider-badge {
+      font-size: 10px;
+      letter-spacing: 0.1em;
+    }
+  }
+
+  .section-divider-line-left {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08));
+  }
+  .section-divider-line-right {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03) 40%, transparent);
+  }
+  .section-divider-line-full {
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08) 25%, rgba(255, 255, 255, 0.08) 75%, transparent);
+  }
+
+  /* Modo Claro */
+  [data-theme="light"] .section-divider-line-left {
+    background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.09));
+  }
+  [data-theme="light"] .section-divider-line-right {
+    background: linear-gradient(90deg, rgba(15, 23, 42, 0.09), rgba(15, 23, 42, 0.03) 40%, transparent);
+  }
+  [data-theme="light"] .section-divider-line-full {
+    background: linear-gradient(90deg, transparent, rgba(15, 23, 42, 0.09) 25%, rgba(15, 23, 42, 0.09) 75%, transparent);
+  }
+  [data-theme="light"] .section-divider span {
+    color: #64748b;
+  }
+</style>

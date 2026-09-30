@@ -1,0 +1,19 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   ARQUITECTURA MODULAR DE ESTILOS - PORTAFOLIO 2.0
+   ========================================================================== */
+
+/* 1. Tokens de Diseño y Variables CSS */
+@import "./tokens.css";
+
+/* 2. Reseteo Base, Utilidades de Layout, Accesibilidad y Tipografía */
+@import "./base.css";
+
+/* 3. Componentes Interactivos */
+@import "./components/accordion.css";
+@import "./components/lightbox.css";
+@import "./components/spec-card.css";
+
+/* 4. Sistema de Tema Claro (Light Mode) */
+@import "./theme-light.css";

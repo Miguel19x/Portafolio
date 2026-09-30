@@ -1,0 +1,56 @@
+---
+// Modal Lightbox para ampliación de capturas de proyectos en alta resolución
+---
+
+<div id="project-lightbox" class="lightbox-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-label="Vista previa de captura a tamaño completo">
+  <div class="lightbox-backdrop" id="lightbox-backdrop"></div>
+  <div class="lightbox-dialog" role="document">
+    <div class="lightbox-header">
+      <div class="lightbox-browser-dots">
+        <span class="preview-dot red"></span>
+        <span class="preview-dot yellow"></span>
+        <span class="preview-dot green"></span>
+        <span class="lightbox-url" id="lightbox-url"></span>
+      </div>
+      <button type="button" class="lightbox-close-btn" id="lightbox-close" aria-label="Cerrar vista previa" title="Cerrar (Esc)" data-i18n-aria-label="lightbox.closeAria" data-i18n-title="lightbox.closeTitle">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+    <div class="lightbox-media-wrap">
+      <img src="" alt="" id="lightbox-img" class="lightbox-img" />
+    </div>
+  </div>
+</div>
+
+<!-- Popup Flotante de Vista Previa Ampliada al Pasar el Mouse (Desktop) -->
+<div 
+  id="image-hover-popup" 
+  class="image-hover-popup" 
+  aria-hidden="true"
+  role="tooltip"
+>
+  <div class="hover-popup-dialog">
+    <div class="hover-popup-header">
+      <div class="hover-popup-dots">
+        <span class="preview-dot red"></span>
+        <span class="preview-dot yellow"></span>
+        <span class="preview-dot green"></span>
+      </div>
+      <span class="hover-popup-url" id="hover-popup-url"></span>
+      <span class="hover-popup-badge">PREVIEW HOVER</span>
+    </div>
+    <div class="hover-popup-body">
+      <img src="" alt="" id="hover-popup-img" class="hover-popup-img" />
+    </div>
+    <div class="hover-popup-footer">
+      <span class="hover-popup-status">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
+        <span data-i18n="lightbox.status">Vista previa en alta resolución</span>
+      </span>
+      <span class="hover-popup-hint" data-i18n="lightbox.hint">Click para pantalla completa</span>
+    </div>
+  </div>
+</div>

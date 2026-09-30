@@ -1,0 +1,15 @@
+---
+import ProjectAccordion from './ProjectAccordion.astro';
+import type { ProjectItem } from '../../types';
+
+interface Props {
+  project: ProjectItem;
+  index: number;
+  total?: number;
+  isInitiallyExpanded?: boolean;
+}
+
+const props = Astro.props;
+---
+
+<ProjectAccordion {...props} />

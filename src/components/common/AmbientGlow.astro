@@ -1,0 +1,14 @@
+---
+// Ambient dynamic glow mesh and grid background
+---
+<!-- Ambient Dynamic Glow Mesh that tracks section palette -->
+<div id="ambient-glow" class="fixed inset-0 pointer-events-none z-0 transition-opacity duration-700 ease-out opacity-60">
+  <div id="glow-circle-1" class="absolute top-1/4 -left-48 w-140 h-140 rounded-full blur-[100px] transition-[background,opacity] duration-500 ease-out" style="background: rgba(249,115,22,0.06);"></div>
+  <div id="glow-circle-2" class="absolute bottom-1/4 -right-48 w-150 h-150 rounded-full blur-[110px] transition-[background,opacity] duration-500 ease-out" style="background: rgba(14,165,233,0.04);"></div>
+</div>
+
+<!-- Background grid layer -->
+<div class="fixed inset-0 bg-grid-dev pointer-events-none opacity-40 z-0"></div>
+
+<!-- Full-page interactive floating particles canvas -->
+<canvas id="creative-canvas" class="fixed inset-0 w-full h-full pointer-events-none opacity-40 z-0"></canvas>

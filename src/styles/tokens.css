@@ -1,0 +1,32 @@
+/* ==========================================================================
+   DESIGN TOKENS & CSS VARIABLES
+   ========================================================================== */
+:root {
+  /* Layout: Cabecera adaptable y alturas de viewport */
+  --header-height: 5.25rem;
+
+  /* Base global */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Global brand constant CTA */
+  --brand-accent: #f97316; /* Naranja/cobre constante */
+  --brand-accent-hover: #ea580c;
+  --brand-accent-glow: rgba(249, 115, 22, 0.28);
+  
+  /* Active dynamic theme tokens (mutan suavemente con scroll) */
+  --bg-current: #090a0f;
+  --bg-surface: #11131c;
+  --bg-card: rgba(19, 23, 34, 0.75);
+  --border-token: rgba(255, 255, 255, 0.08);
+  --section-tint: #ff7849;
+  --section-tint-dim: rgba(255, 120, 73, 0.12);
+  --text-muted: #94a3b8;
+}
+
+@media (max-width: 640px) {
+  :root {
+    --header-height: 4.5rem;
+  }
+}
+

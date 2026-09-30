@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import AboutSection from '../components/sections/AboutSection.astro';
+import ProjectsSection from '../components/sections/ProjectsSection.astro';
+import SkillsSection from '../components/sections/SkillsSection.astro';
+import ExperienceSection from '../components/sections/ExperienceSection.astro';
+import ContactSection from '../components/sections/ContactSection.astro';
+import SectionDivider from '../components/common/SectionDivider.astro';
+---
+
+<Layout>
+  <main id="main-content">
+    <!-- Capítulo 01: Hero & Métricas -->
+    <Hero />
+
+    <SectionDivider index="SEC_01" label="TRACE: ENFOQUE_TECNICO" labelKey="dividers.sec01" />
+
+    <!-- Capítulo 02: Enfoque Técnico & Sobre Mí -->
+    <AboutSection />
+
+    <SectionDivider index="SEC_02" label="STAGE: PROYECTOS_CASE_STUDIES" labelKey="dividers.sec02" />
+
+    <!-- Capítulo 03: Proyectos & Case Studies Reales -->
+    <ProjectsSection />
+
+    <SectionDivider index="SEC_03" label="SPECS: COMPETENCIAS_TECNICAS" labelKey="dividers.sec03" />
+
+    <!-- Capítulo 04: Competencias Técnicas / Habilidades -->
+    <SkillsSection />
+
+    <SectionDivider index="SEC_04" label="AUDIT: TRAYECTORIA_PROFESIONAL" labelKey="dividers.sec04" />
+
+    <!-- Capítulo 05: Trayectoria Profesional & Credibilidad -->
+    <ExperienceSection />
+
+    <SectionDivider index="SEC_05" label="CHANNEL: CONTACTO_DIRECTO" labelKey="dividers.sec05" />
+
+    <!-- Capítulo 06: Contacto Directo -->
+    <ContactSection />
+  </main>
+</Layout>

@@ -1,0 +1,208 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import type { ProjectItem } from '../../types';
+
+import smnImg from '../../assets/projects/smn-preview.png';
+import irisImg from '../../assets/projects/iris-preview.png';
+import psicologiaImg from '../../assets/projects/psicologia-preview.png';
+import wrappedImg from '../../assets/projects/wrapped-preview.png';
+import terrosoImg from '../../assets/projects/terroso-preview.png';
+
+const projectImages: Record<string, ImageMetadata> = {
+  smn: smnImg,
+  iris: irisImg,
+  psicologia: psicologiaImg,
+  wrapped: wrappedImg,
+  terroso: terrosoImg,
+};
+
+interface Props {
+  project: ProjectItem;
+  extraBorderClass?: string;
+}
+
+const { project, extraBorderClass = '' } = Astro.props;
+const currentImage = projectImages[project.id];
+
+// Themes for URL bar and badges
+const themeStyles = {
+  amber: {
+    urlText: 'text-amber-200/80',
+    iconColor: 'text-amber-400',
+    badgeText: 'text-amber-400/90',
+    bodyBg: 'from-[#1b1513] to-[#120e0d]',
+    categoryText: 'text-amber-200/70 border-amber-900/40',
+    titleText: 'text-amber-100',
+    descText: 'text-amber-200/80',
+    footerBorder: 'border-amber-900/30',
+    tagPill: 'bg-amber-500/10 text-amber-300 border-amber-500/20'
+  },
+  cyan: {
+    urlText: 'text-cyan-300/80',
+    iconColor: 'text-cyan-400',
+    badgeText: 'text-cyan-400',
+    bodyBg: 'from-[#091726] to-[#07101a]',
+    categoryText: 'text-cyan-300/70 border-cyan-900/40',
+    titleText: 'text-cyan-100',
+    descText: 'text-cyan-200/80',
+    footerBorder: 'border-cyan-900/30',
+    tagPill: 'bg-cyan-500/10 text-cyan-300 border-cyan-500/20'
+  },
+  emerald: {
+    urlText: 'text-emerald-300/80',
+    iconColor: 'text-emerald-400',
+    badgeText: 'text-emerald-400',
+    bodyBg: 'from-[#0c2417] via-[#150f28] to-[#07150e]',
+    categoryText: 'text-emerald-300/70 border-emerald-900/40',
+    titleText: 'text-white',
+    descText: 'text-emerald-100/80',
+    footerBorder: 'border-emerald-900/40',
+    tagPill: 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20'
+  },
+  purple: {
+    urlText: 'text-purple-300/80',
+    iconColor: 'text-purple-400',
+    badgeText: 'text-purple-400',
+    bodyBg: 'from-[#160c2b] via-[#091a13] to-[#120824]',
+    categoryText: 'text-purple-300/70 border-purple-900/40',
+    titleText: 'text-white',
+    descText: 'text-purple-200/80',
+    footerBorder: 'border-purple-900/40',
+    tagPill: 'bg-purple-500/10 text-purple-300 border-purple-500/20'
+  },
+  orange: {
+    urlText: 'text-orange-300/80',
+    iconColor: 'text-orange-400',
+    badgeText: 'text-orange-400',
+    bodyBg: 'from-[#1c120c] to-[#100a07]',
+    categoryText: 'text-orange-300/70 border-orange-900/40',
+    titleText: 'text-orange-100',
+    descText: 'text-orange-200/80',
+    footerBorder: 'border-orange-900/30',
+    tagPill: 'bg-orange-500/10 text-orange-300 border-orange-500/20'
+  }
+};
+
+const currentTheme = themeStyles[project.themeColor] || themeStyles.amber;
+---
+
+<article class={`browser-frame rounded-2xl overflow-hidden flex flex-col group ${extraBorderClass}`.trim()}>
+  <!-- Window chrome -->
+  <div class="px-4 py-3 bg-white/4 border-b border-white/10 flex items-center justify-between">
+    <div class="flex items-center gap-2">
+      <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+      <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+      <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+    </div>
+
+    <!-- URL Bar -->
+    <div class={`px-3 py-1 rounded-md bg-black/40 border border-white/5 font-mono-code text-[11px] ${currentTheme.urlText} flex items-center gap-2 w-64 truncate`}>
+      <svg class={`w-3 h-3 shrink-0 ${currentTheme.iconColor}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+      </svg>
+      <span>{project.url}</span>
+    </div>
+
+    <!-- Status Badge -->
+    <span class={`font-mono-code text-[10px] font-medium tracking-wider uppercase ${currentTheme.badgeText}`}>
+      {project.statusBadge}
+    </span>
+  </div>
+
+  <!-- Interactive Mock Canvas Inside Window -->
+  <div class={`p-6 sm:p-7 bg-linear-to-b ${currentTheme.bodyBg} flex-1 flex flex-col justify-between relative overflow-hidden`}>
+    <div class="space-y-4">
+      <!-- Badge / Header Category -->
+      <div class={`text-[11px] font-mono-code pb-2 border-b uppercase tracking-wider ${currentTheme.categoryText}`}>
+        {project.badge}
+      </div>
+
+      <!-- Title -->
+      <h3 class={`text-xl sm:text-2xl font-bold tracking-tight ${currentTheme.titleText}`}>
+        {project.title}
+      </h3>
+
+      <!-- Impact Phrase Callout -->
+      <div class="p-3.5 rounded-xl bg-white/3 border border-white/10 text-xs sm:text-sm font-medium text-slate-200 leading-relaxed">
+        {project.impactPhrase}
+      </div>
+
+      <!-- Project Screenshot Preview Image -->
+      {project.image && (
+        <div class="relative rounded-xl overflow-hidden border border-white/10 group-hover:border-white/20 transition-all shadow-lg my-3">
+          {currentImage ? (
+            <Image
+              src={currentImage}
+              alt={project.title}
+              loading="lazy"
+              decoding="async"
+              widths={[400, 600, 800]}
+              sizes="(max-width: 768px) 94vw, 550px"
+              format="webp"
+              class="w-full h-48 sm:h-56 object-cover object-top filter brightness-95 group-hover:brightness-105 group-hover:scale-[1.02] transition-all duration-500"
+            />
+          ) : (
+            <Image
+              src={project.image}
+              alt={project.title}
+              width={600}
+              height={375}
+              loading="lazy"
+              decoding="async"
+              class="w-full h-48 sm:h-56 object-cover object-top filter brightness-95 group-hover:brightness-105 group-hover:scale-[1.02] transition-all duration-500"
+            />
+          )}
+          <div class="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+        </div>
+      )}
+
+      <!-- Summary -->
+      <p class={`text-xs sm:text-sm leading-relaxed ${currentTheme.descText}`}>
+        {project.summary}
+      </p>
+
+      <!-- Slot for extra visual widgets (e.g. sparklines, terminals) if present -->
+      <slot />
+    </div>
+
+    <!-- Frame Footer Tags & CTA -->
+    <div class={`pt-6 mt-6 border-t ${currentTheme.footerBorder} flex flex-wrap items-center justify-between gap-3`}>
+      <div class="flex flex-wrap gap-1.5 font-mono-code text-[11px]">
+        {project.tags.map(tag => (
+          <span class={`px-2.5 py-1 rounded border ${currentTheme.tagPill}`}>
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <div class="flex items-center gap-2">
+        {project.demoUrl && (
+          <a
+            href={project.demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="px-3 py-1.5 rounded-lg text-xs font-mono-code text-slate-300 bg-white/5 hover:bg-white/10 border border-white/10 transition-colors flex items-center gap-1"
+          >
+            <span>Demo</span>
+            <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        )}
+
+        <a
+          href={project.repoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-brand-accent px-3.5 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5"
+        >
+          <span>GitHub</span>
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</article>

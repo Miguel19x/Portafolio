@@ -1,0 +1,107 @@
+/* ==========================================================================
+   ACORDEÓN INTERACTIVO DE PROYECTOS & CASE STUDIES
+   ========================================================================== */
+.projects-accordion-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.project-accordion-item {
+  scroll-margin-top: calc(var(--header-height, 5rem) + 1.25rem);
+  transform: translateZ(0);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.project-accordion-header-row {
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+}
+
+.project-accordion-item:not(.is-expanded) .project-accordion-header-row,
+.project-accordion-item[data-expanded="false"] .project-accordion-header-row {
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+
+/* Transición fluida con CSS Grid 0fr -> 1fr (Zero JS Reflow) */
+.project-accordion-collapse,
+.accordion-collapse {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.project-accordion-item.is-expanded .project-accordion-collapse,
+.project-accordion-item[data-expanded="true"] .project-accordion-collapse,
+.project-card.is-expanded .accordion-collapse,
+.project-card[data-expanded="true"] .accordion-collapse {
+  grid-template-rows: 1fr;
+}
+
+.project-accordion-inner,
+.accordion-inner {
+  min-height: 0;
+}
+
+/* Rotación del Chevron */
+.project-accordion-item.is-expanded .accordion-chevron,
+.project-accordion-item[data-expanded="true"] .chevron-icon,
+.project-card.is-expanded .chevron-icon,
+.project-card[data-expanded="true"] .chevron-icon {
+  transform: rotate(180deg);
+}
+
+/* Utilidad para ocultar barras de scroll en pipeline horizontal */
+.scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-none::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tags de cabecera móvil estrictamente contenidos en una sola línea */
+.mobile-tags-preview {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow: hidden !important;
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+/* Mockup de Navegador y Preview de Imagen Completa dentro del contorno */
+.case-study-preview-window {
+  width: 100%;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background-color: #0b0f19;
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.case-study-preview-media {
+  width: 100%;
+  aspect-ratio: 16 / 9.2;
+  position: relative;
+  overflow: hidden;
+  background-color: #020617;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.case-study-preview-media img,
+.case-study-preview-media picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: top center;
+  display: block;
+}
+

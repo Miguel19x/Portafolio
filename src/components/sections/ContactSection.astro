@@ -1,0 +1,558 @@
+---
+import { PERSONAL_INFO } from '../../data/navigation';
+import Footer from '../layout/Footer.astro';
+---
+
+<section id="contacto" data-section="contacto" class="section-screen-fit w-full relative z-10 overflow-hidden">
+  <div class="site-container w-full flex flex-col justify-center my-auto px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+    
+    <!-- Section header: Compactado para encajar en el viewport sin desborde -->
+    <div class="text-center max-w-2xl mx-auto section-header-mb">
+      <div class="inline-flex items-center gap-1.5 font-mono-code text-xs tracking-wider text-slate-400 uppercase mb-[clamp(0.25rem,0.8svh,0.75rem)]">
+        <span class="w-1.5 h-1.5 rounded-full bg-slate-400"></span>
+        <span data-i18n="contact.tag">// 05. CONTACTO DIRECTO</span>
+      </div>
+      <h2 class="text-[clamp(1.5rem,1.1rem+1.2vw+0.4svh,2.5rem)] leading-[1.15] font-extrabold text-white tracking-tight mb-[clamp(0.25rem,0.8svh,0.75rem)] wrap-break-word" data-i18n="contact.title">
+        ¿Buscando un Desarrollador Fullstack? Hablemos.
+      </h2>
+      <p class="text-slate-400 text-[clamp(0.85rem,0.8rem+0.2vw,1rem)] leading-snug text-center text-pretty max-w-2xl mx-auto mb-[clamp(0.75rem,2svh,1.75rem)]" data-i18n="contact.subtitle">
+        Disponible para incorporarme de inmediato a equipos remotos. Escríbeme directamente o completa el formulario y te responderé a la brevedad.
+      </p>
+    </div>
+
+    <!-- Contact Bento Grid: 2 Columnas perfectamente equilibradas y centradas -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-[clamp(0.75rem,1.6svh,2rem)] items-center w-full">
+      
+      <!-- Columna Izquierda: Dossier de Canales Directos & Telemetría (5 cols) -->
+      <div class="contact-card lg:col-span-5 p-[clamp(0.85rem,1.8svh,1.5rem)] rounded-2xl bg-[#0f121d]/90 border border-white/10 shadow-xl backdrop-blur-xl hover:border-white/20 transition-all duration-300 flex flex-col justify-between">
+        
+        <!-- Nivel 1: Estado Operativo y Canal Principal -->
+        <div>
+          <div class="flex items-center justify-between gap-2 pb-[clamp(0.35rem,0.8svh,0.6rem)] mb-[clamp(0.5rem,1.2svh,1rem)] border-b border-white/8">
+            <div class="inline-flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span class="font-mono-code text-[11px] font-semibold tracking-wider text-emerald-400 uppercase" data-i18n="contact.statusBadge">DISPONIBLE // REMOTO</span>
+            </div>
+            <span class="font-mono-code text-[10px] text-slate-500 uppercase tracking-widest">// SEC_05</span>
+          </div>
+
+          <div class="space-y-[clamp(0.25rem,0.6svh,0.375rem)] mb-[clamp(0.5rem,1.2svh,1rem)]">
+            <span class="font-mono-code text-[10px] uppercase tracking-wider text-slate-400 block" data-i18n="contact.emailLabel">CANAL DIRECTO</span>
+            
+            <!-- Shell interactivo para Copiar Correo con Microinteracción Ghost -->
+            <div 
+              id="copy-email-btn"
+              class="email-shell-box group relative flex flex-col sm:flex-row sm:items-center sm:justify-between p-[clamp(0.5rem,1svh,0.75rem)] rounded-xl bg-black/40 hover:bg-black/60 border border-white/10 hover:border-orange-500/40 transition-all duration-200 cursor-pointer select-none shadow-inner gap-2 sm:gap-0"
+              title="Click para copiar al portapapeles"
+              role="button"
+              tabindex="0"
+              aria-label="Copiar correo electrónico al portapapeles"
+            >
+              <!-- Fila superior: Icono + Correo Completo + Subtítulo alineado -->
+              <div class="flex items-center gap-2.5 sm:gap-3 min-w-0 w-full sm:w-auto">
+                <div class="w-8 h-8 rounded-lg bg-orange-500/10 border border-orange-500/30 flex items-center justify-center text-orange-400 shrink-0 group-hover:scale-105 transition-transform">
+                  <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                  </svg>
+                </div>
+                <div class="min-w-0 flex-1">
+                  <span id="contact-email-val" class="font-mono-code text-xs sm:text-[13px] font-semibold text-white group-hover:text-orange-300 transition-colors block truncate">
+                    {PERSONAL_INFO.email}
+                  </span>
+                  <span class="text-[10px] text-slate-400 font-mono-code block mt-0.5 truncate" data-i18n="contact.emailHint">
+                    Click para copiar dirección
+                  </span>
+                </div>
+              </div>
+
+              <!-- Botonera de acciones: 2 botones en grid en móvil / alineados a la derecha en escritorio -->
+              <div class="grid grid-cols-2 gap-2 w-full sm:w-auto sm:flex sm:items-center sm:gap-1.5 shrink-0 pt-2 sm:pt-0 sm:pl-1.5 border-t border-white/5 sm:border-t-0">
+                <div class="flex items-center justify-center gap-1.5 px-2.5 sm:px-2 py-1.5 sm:py-0.5 rounded-lg sm:rounded text-xs sm:text-[10px] font-mono-code font-medium bg-white/5 border border-white/10 text-slate-200 group-hover:bg-orange-500/20 group-hover:border-orange-500/40 group-hover:text-orange-300 transition-all">
+                  <svg class="w-3.5 h-3.5 text-orange-400 sm:hidden shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                  </svg>
+                  <span id="copy-text" data-i18n="contact.copyBtn">Copiar Correo</span>
+                </div>
+                <a
+                  href={`mailto:${PERSONAL_INFO.email}?subject=Oportunidad%20Fullstack%20-%20Miguel%20Aranguren`}
+                  id="contact-mailto-link"
+                  class="flex items-center justify-center gap-1.5 px-2.5 sm:px-0 py-1.5 sm:py-0 sm:w-6 sm:h-6 rounded-lg border border-white/10 bg-white/5 hover:bg-white/15 hover:border-white/20 text-slate-300 hover:text-white transition-all shrink-0 text-xs sm:text-[10px] font-mono-code font-medium"
+                  title="Abrir en cliente de correo"
+                  aria-label="Abrir en cliente de correo"
+                >
+                  <span class="sm:hidden" data-i18n="contact.clientBtn">Abrir correo</span>
+                  <span class="text-xs">↗</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Nivel 2: Directorio Técnico & Metadatos (Lista sobria y moderna) -->
+        <div class="mt-auto pt-[clamp(0.35rem,0.8svh,0.6rem)] border-t border-white/8 space-y-[clamp(0.2rem,0.5svh,0.35rem)]">
+          <div class="flex items-center justify-between pb-0.5">
+            <span class="font-mono-code text-[10px] uppercase tracking-wider text-slate-400" data-i18n="contact.socialLabel">DIRECTORIO & CREDENCIALES</span>
+          </div>
+
+          <div class="space-y-[clamp(0.2rem,0.5svh,0.35rem)]">
+            <a
+              href={PERSONAL_INFO.linkedinUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-between py-[clamp(0.25rem,0.5svh,0.375rem)] px-2.5 rounded-lg bg-white/3 sm:bg-transparent border border-white/5 sm:border-transparent hover:bg-white/5 text-slate-300 hover:text-white transition-all text-xs font-mono-code group hover:border-white/10"
+            >
+              <span class="flex items-center gap-2">
+                <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-orange-400 transition-colors shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+                <span>LinkedIn</span>
+              </span>
+              <span class="text-slate-500 group-hover:text-orange-400 text-[11px] flex items-center gap-1 font-mono-code">
+                @miguela19x
+                <span class="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">↗</span>
+              </span>
+            </a>
+
+            <a
+              href={PERSONAL_INFO.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-between py-[clamp(0.25rem,0.5svh,0.375rem)] px-2.5 rounded-lg bg-white/3 sm:bg-transparent border border-white/5 sm:border-transparent hover:bg-white/5 text-slate-300 hover:text-white transition-all text-xs font-mono-code group hover:border-white/10"
+            >
+              <span class="flex items-center gap-2">
+                <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-orange-400 transition-colors shrink-0" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                <span>GitHub</span>
+              </span>
+              <span class="text-slate-500 group-hover:text-orange-400 text-[11px] flex items-center gap-1 font-mono-code">
+                @Miguel19x
+                <span class="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">↗</span>
+              </span>
+            </a>
+
+            <a
+              href={PERSONAL_INFO.cvUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="flex items-center justify-between py-[clamp(0.25rem,0.5svh,0.375rem)] px-2.5 rounded-lg bg-white/3 sm:bg-transparent border border-white/5 sm:border-transparent hover:bg-white/5 text-slate-300 hover:text-white transition-all text-xs font-mono-code group hover:border-white/10"
+            >
+              <span class="flex items-center gap-2">
+                <svg class="w-3.5 h-3.5 text-slate-400 group-hover:text-orange-400 transition-colors shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8" stroke-width="2"/>
+                  <line x1="16" y1="13" x2="8" y2="13" stroke-width="2"/>
+                  <line x1="16" y1="17" x2="8" y2="17" stroke-width="2"/>
+                  <polyline points="10 9 9 9 8 9" stroke-width="2"/>
+                </svg>
+                <span data-i18n="contact.cvLink">Curriculum Vitae</span>
+              </span>
+              <span class="text-slate-500 group-hover:text-orange-400 text-[11px] flex items-center gap-1 font-mono-code">
+                PDF [2026]
+                <span class="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform">↗</span>
+              </span>
+            </a>
+          </div>
+
+          <div class="pt-[clamp(0.25rem,0.6svh,0.4rem)] border-t border-white/8 flex items-center justify-between text-[11px] font-mono-code text-slate-400 min-w-0">
+            <span class="flex items-center gap-1.5 min-w-0">
+              <span class="w-1.5 h-1.5 rounded-full bg-slate-500 shrink-0"></span>
+              <span data-i18n="contact.locationTag" class="truncate">{PERSONAL_INFO.location}</span>
+            </span>
+            <span class="text-slate-600 text-[10px] hidden sm:inline-block shrink-0">TIMEZONE: UTC-4</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Columna Derecha: Consola de Transmisión / Formulario (7 cols) -->
+      <div class="contact-card lg:col-span-7 p-[clamp(0.85rem,1.8svh,1.5rem)] rounded-2xl bg-[#0f121d]/90 border border-white/10 shadow-xl backdrop-blur-xl hover:border-white/20 transition-all duration-300 flex flex-col justify-between">
+        <div class="flex items-center justify-between gap-2 pb-[clamp(0.35rem,0.8svh,0.6rem)] mb-[clamp(0.5rem,1.2svh,1rem)] border-b border-white/8">
+          <div>
+            <h3 class="text-sm sm:text-base font-bold text-white tracking-tight leading-none" data-i18n="contact.formTitle">Enviar Mensaje</h3>
+            <p class="text-[11px] text-slate-400 mt-1" data-i18n="contact.formSubtitle">Transmisión directa a mi bandeja de entrada profesional.</p>
+          </div>
+          <span class="font-mono-code text-[10px] text-slate-500 uppercase tracking-widest hidden sm:inline-block">// DISPATCH</span>
+        </div>
+
+        <form id="contact-form" name="contact" class="flex-1 flex flex-col min-h-0 gap-[clamp(0.5rem,1.1svh,1rem)]" action="/" method="POST" data-netlify="true" data-netlify-honeypot="bot-field">
+          <!-- Requerido por Netlify Forms -->
+          <input type="hidden" name="form-name" value="contact" />
+
+          <!-- Campo Honeypot Anti-Spam para Netlify -->
+          <p class="hidden" aria-hidden="true">
+            <label for="contact-bot-field">No llenar este campo si eres humano</label>
+            <input type="text" id="contact-bot-field" name="bot-field" tabindex="-1" autocomplete="off" />
+          </p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-[clamp(0.5rem,1.1svh,1rem)] shrink-0">
+            <div>
+              <label for="contact-name" class="block font-mono-code text-[10px] sm:text-[11px] text-slate-300 mb-[clamp(0.15rem,0.4svh,0.25rem)]" data-i18n="contact.nameLabel">[01] NOMBRE_EMPRESA //</label>
+              <input
+                id="contact-name"
+                name="name"
+                type="text"
+                required
+                placeholder="Tu nombre o empresa"
+                data-i18n-placeholder="contact.namePlaceholder"
+                autocomplete="name"
+                class="w-full px-3 py-[clamp(0.35rem,0.7svh,0.6rem)] rounded-xl bg-black/40 hover:bg-black/50 focus:bg-black/60 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-orange-500/70 focus:ring-1 focus:ring-orange-500/50 transition-all text-sm font-mono-code shadow-inner"
+              />
+            </div>
+
+            <div>
+              <label for="contact-email" class="block font-mono-code text-[10px] sm:text-[11px] text-slate-300 mb-[clamp(0.15rem,0.4svh,0.25rem)]" data-i18n="contact.emailInputLabel">[02] EMAIL_CONTACTO //</label>
+              <input
+                id="contact-email"
+                name="email"
+                type="email"
+                required
+                placeholder="tu@correo.com"
+                data-i18n-placeholder="contact.emailPlaceholder"
+                autocomplete="email"
+                class="w-full px-3 py-[clamp(0.35rem,0.7svh,0.6rem)] rounded-xl bg-black/40 hover:bg-black/50 focus:bg-black/60 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-orange-500/70 focus:ring-1 focus:ring-orange-500/50 transition-all text-sm font-mono-code shadow-inner"
+              />
+            </div>
+          </div>
+
+          <div class="flex-1 flex flex-col min-h-0">
+            <label for="contact-message" class="block font-mono-code text-[10px] sm:text-[11px] text-slate-300 mb-[clamp(0.15rem,0.4svh,0.25rem)] shrink-0" data-i18n="contact.messageLabel">[03] MENSAJE_DETALLE //</label>
+            <textarea
+              id="contact-message"
+              name="message"
+              rows="3"
+              required
+              placeholder="¿En qué proyecto, producto o rol te gustaría que colaboremos?"
+              data-i18n-placeholder="contact.messagePlaceholder"
+              class="w-full flex-1 min-h-[clamp(70px,11svh,130px)] max-h-[clamp(90px,14svh,150px)] px-3 py-2 rounded-xl bg-black/40 hover:bg-black/50 focus:bg-black/60 border border-white/10 text-white placeholder-slate-500 focus:outline-none focus:border-orange-500/70 focus:ring-1 focus:ring-orange-500/50 transition-all text-sm font-mono-code shadow-inner resize-none"
+            ></textarea>
+          </div>
+
+          <!-- Submit Button: Único CTA vibrante de alto contraste -->
+          <div class="shrink-0 pt-0.5">
+            <button
+              type="submit"
+              id="contact-submit-btn"
+              class="btn-brand-accent w-full py-[clamp(0.5rem,1svh,0.85rem)] rounded-xl font-medium text-xs sm:text-sm flex items-center justify-center gap-2 cursor-pointer transition-all shadow-lg hover:shadow-orange-500/20 active:scale-[0.99]"
+            >
+              <span id="contact-submit-text" data-i18n="contact.submitBtnText">Enviar Mensaje</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="22" y1="2" x2="11" y2="13"></line>
+                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+              </svg>
+            </button>
+
+            <div id="form-status" class="hidden p-2 rounded-xl font-mono-code text-xs transition-all duration-300 text-center mt-2" role="status" aria-live="polite"></div>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast-notification" class="toast-notification" role="status" aria-live="polite"></div>
+
+    <!-- Editorial Colophon Footer -->
+    <Footer />
+
+  </div>
+</section>
+
+<style>
+  /* Header spacing optimization for viewport locked section */
+  #contacto .section-header-mb {
+    margin-bottom: 0;
+  }
+
+  /* Toast Notification */
+  .toast-notification {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: #0f172a;
+    color: #f8fafc;
+    border: 1px solid #334155;
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+    transform: translateY(100px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    z-index: 9999;
+  }
+
+  .toast-notification.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  /* Status Banner variants */
+  .form-status.status-success {
+    display: block !important;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    color: #34d399;
+  }
+
+  .form-status.status-error {
+    display: block !important;
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    color: #f87171;
+  }
+
+  .form-status.status-warning {
+    display: block !important;
+    background: rgba(249, 115, 22, 0.1);
+    border: 1px solid rgba(249, 115, 22, 0.25);
+    color: #fb923c;
+  }
+
+  .form-status.status-info {
+    display: block !important;
+    background: rgba(56, 189, 248, 0.1);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    color: #38bdf8;
+  }
+
+  /* Modo Claro (Light Theme) */
+  :global([data-theme="light"]) .toast-notification {
+    background: #ffffff;
+    color: #0f172a;
+    border-color: #cbd5e1;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+  }
+
+  :global([data-theme="light"]) #contacto .contact-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-color: rgba(203, 213, 225, 0.8);
+    box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.07);
+  }
+
+  :global([data-theme="light"]) #contacto #contact-email-val {
+    color: #0f172a;
+  }
+
+  :global([data-theme="light"]) #contacto input,
+  :global([data-theme="light"]) #contacto textarea {
+    background: #f8fafc !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+  }
+
+  :global([data-theme="light"]) #contacto input:focus,
+  :global([data-theme="light"]) #contacto textarea:focus {
+    background: #ffffff !important;
+    border-color: var(--brand-accent) !important;
+  }
+
+  :global([data-theme="light"]) #contacto .email-shell-box {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+  }
+
+  :global([data-theme="light"]) #contacto .email-shell-box:hover {
+    background: #e2e8f0;
+    border-color: var(--brand-accent);
+  }
+
+  :global([data-theme="light"]) #contacto a:not(.btn-brand-accent) {
+    background: transparent;
+    color: #1e293b;
+  }
+
+  :global([data-theme="light"]) #contacto a:not(.btn-brand-accent):hover {
+    background: rgba(249, 115, 22, 0.08);
+    border-color: var(--brand-accent);
+    color: var(--brand-accent);
+  }
+</style>
+
+<script>
+  import { translations } from '../../i18n/translations';
+
+  const EMAIL_ADDRESS = 'miguelaranguren19x@outlook.com';
+
+  let toastTimer: ReturnType<typeof setTimeout> | null = null;
+
+  function showToast(message: string) {
+    const toast = document.getElementById('toast-notification');
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add('show');
+
+    if (toastTimer) clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 3000);
+  }
+
+  function initContact() {
+    const copyEmailBtn = document.getElementById('copy-email-btn');
+    const copyText = document.getElementById('copy-text');
+    const contactForm = document.getElementById('contact-form') as HTMLFormElement | null;
+    const formStatus = document.getElementById('form-status');
+    const submitBtn = document.getElementById('contact-submit-btn') as HTMLButtonElement | null;
+    const submitText = document.getElementById('contact-submit-text');
+    const contactEmailVal = document.getElementById('contact-email-val');
+    const contactMailtoLink = document.getElementById('contact-mailto-link');
+
+    if (contactEmailVal) {
+      contactEmailVal.textContent = EMAIL_ADDRESS;
+    }
+
+    if (contactMailtoLink) {
+      const defaultSubject = encodeURIComponent('Oportunidad Fullstack - Miguel Aranguren');
+      contactMailtoLink.setAttribute('href', `mailto:${EMAIL_ADDRESS}?subject=${defaultSubject}`);
+      contactMailtoLink.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    }
+
+    if (copyEmailBtn) {
+      const handleCopy = async () => {
+        const isEn = document.documentElement.getAttribute('lang') === 'en';
+        const t = isEn ? translations.en.contact : translations.es.contact;
+        const copyMsg = t.toastCopied + EMAIL_ADDRESS;
+
+        try {
+          await navigator.clipboard.writeText(EMAIL_ADDRESS);
+        } catch {
+          const textarea = document.createElement('textarea');
+          textarea.value = EMAIL_ADDRESS;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.appendChild(textarea);
+          textarea.select();
+          (document as any).execCommand('copy');
+          document.body.removeChild(textarea);
+        }
+
+        showToast(copyMsg);
+        if (copyText) {
+          const orig = copyText.textContent;
+          copyText.textContent = t.copiedSuccess;
+          setTimeout(() => {
+            copyText.textContent = t.copyBtn || orig;
+          }, 2500);
+        }
+      };
+
+      copyEmailBtn.addEventListener('click', handleCopy);
+      copyEmailBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleCopy();
+        }
+      });
+    }
+
+    if (contactForm && formStatus && submitBtn) {
+      contactForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const isEn = document.documentElement.getAttribute('lang') === 'en';
+        const t = isEn ? translations.en.contact : translations.es.contact;
+
+        const nameInput = document.getElementById('contact-name') as HTMLInputElement | null;
+        const emailInput = document.getElementById('contact-email') as HTMLInputElement | null;
+        const messageInput = document.getElementById('contact-message') as HTMLTextAreaElement | null;
+        const botFieldInput = document.getElementById('contact-bot-field') as HTMLInputElement | null;
+
+        // 1. Protección Honeypot Anti-Spam
+        if (botFieldInput && botFieldInput.value.trim() !== '') {
+          submitBtn.disabled = true;
+          formStatus.className = 'form-status status-info';
+          formStatus.textContent = t.statusProcessing;
+          setTimeout(() => {
+            formStatus.className = 'form-status status-success';
+            formStatus.textContent = t.statusSuccess;
+            contactForm.reset();
+            submitBtn.disabled = false;
+          }, 1200);
+          return;
+        }
+
+        const name = nameInput ? nameInput.value.trim() : '';
+        const email = emailInput ? emailInput.value.trim() : '';
+        const message = messageInput ? messageInput.value.trim() : '';
+
+        if (!name || !email || !message) {
+          formStatus.className = 'form-status status-error';
+          formStatus.textContent = t.statusEmpty;
+          return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          formStatus.className = 'form-status status-error';
+          formStatus.textContent = t.statusInvalidEmail;
+          return;
+        }
+
+        // Estado enviando
+        submitBtn.disabled = true;
+        if (submitText) submitText.textContent = t.sendingBtnText;
+        formStatus.className = 'form-status status-info';
+        formStatus.textContent = t.statusProcessing;
+
+        try {
+          const formData = new FormData(contactForm);
+          formData.set('form-name', 'contact');
+
+          const isLocalhost = Boolean(
+            window.location.hostname === 'localhost' ||
+            window.location.hostname === '127.0.0.1' ||
+            window.location.hostname.endsWith('.local')
+          );
+
+          if (isLocalhost) {
+            await new Promise((resolve) => setTimeout(resolve, 800));
+          } else {
+            const response = await fetch('/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: new URLSearchParams(formData as any).toString()
+            });
+
+            if (!response.ok) {
+              throw new Error(`Error en servidor (${response.status})`);
+            }
+          }
+
+          formStatus.className = 'form-status status-success';
+          formStatus.textContent = t.statusSuccess;
+          showToast(t.statusSuccess);
+          contactForm.reset();
+        } catch (err: any) {
+          const mailtoSubject = encodeURIComponent(`Contacto Portafolio - ${name}`);
+          const mailtoBody = encodeURIComponent(`${message}\n\nDe: ${name} (${email})`);
+          const mailtoUrl = `mailto:${EMAIL_ADDRESS}?subject=${mailtoSubject}&body=${mailtoBody}`;
+
+          formStatus.className = 'form-status status-warning';
+          formStatus.innerHTML = `
+            <span>${t.statusWarning} </span>
+            <a href="${mailtoUrl}" class="underline text-orange-400 font-bold hover:text-orange-300 ml-1">
+              ${t.statusMailtoLink}
+            </a>
+          `;
+        } finally {
+          submitBtn.disabled = false;
+          if (submitText) submitText.textContent = t.submitBtnText;
+        }
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initContact);
+  } else {
+    initContact();
+  }
+</script>

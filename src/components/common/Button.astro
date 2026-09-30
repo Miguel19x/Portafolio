@@ -1,0 +1,52 @@
+---
+interface Props {
+  href?: string;
+  variant?: 'brand' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  target?: string;
+  rel?: string;
+  disabled?: boolean;
+}
+
+const {
+  href,
+  variant = 'brand',
+  size = 'md',
+  type = 'button',
+  class: className = '',
+  target,
+  rel,
+  disabled = false
+} = Astro.props;
+
+const baseStyles = 'inline-flex items-center justify-center gap-2 font-medium transition-all duration-200 select-none cursor-pointer disabled:opacity-50 disabled:pointer-events-none disabled:cursor-not-allowed';
+
+const sizeStyles = {
+  sm: 'px-3.5 py-2 text-xs rounded-lg font-mono-code',
+  md: 'px-4 sm:px-5 py-2.5 sm:py-3 text-xs sm:text-sm rounded-xl',
+  lg: 'px-6 py-3.5 text-sm sm:text-base rounded-xl font-semibold'
+};
+
+const variants = {
+  brand: 'btn-brand-accent shadow-lg text-white font-semibold',
+  outline: 'btn-outline-custom bg-white/5 hover:bg-white/10 text-slate-300 border border-white/10 hover:border-white/20 font-mono-code',
+  ghost: 'bg-transparent hover:bg-white/5 text-slate-400 hover:text-white'
+};
+
+const combinedClasses = `${baseStyles} ${sizeStyles[size]} ${variants[variant]} ${className}`.trim();
+---
+
+{
+  href && !disabled ? (
+    <a href={href} class={combinedClasses} target={target} rel={rel}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={combinedClasses} disabled={disabled}>
+      <slot />
+    </button>
+  )
+}
+

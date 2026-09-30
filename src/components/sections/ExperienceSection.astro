@@ -1,0 +1,92 @@
+---
+import { WORK_EXPERIENCE } from '../../data/experience';
+---
+
+<section id="trayectoria" data-section="trayectoria" class="content-section w-full relative z-10 overflow-hidden">
+  <div class="site-container w-full flex flex-col px-4 sm:px-6 lg:px-8 max-w-5xl">
+    
+    <!-- Section header -->
+    <div class="section-header-mb">
+      <div class="inline-flex items-center gap-2 font-mono-code text-xs tracking-wider text-purple-400 uppercase mb-1.5">
+        <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+        <span data-i18n="experience.tag">// 04. Trayectoria Profesional</span>
+      </div>
+      <h2 class="text-fluid-headline font-extrabold text-white tracking-tight wrap-break-word" data-i18n="experience.title">
+        Credibilidad y Precisión Operativa.
+      </h2>
+    </div>
+
+    <!-- Experience Card -->
+    <div class="experience-card p-4 sm:p-6 lg:p-8 rounded-2xl sm:rounded-3xl bg-[#141024]/90 border border-purple-900/40 shadow-2xl backdrop-blur-xl">
+      <div class="space-y-3.5 sm:space-y-5">
+        <div class="flex items-start sm:items-center justify-between gap-3 pb-2.5 sm:pb-3 border-b border-purple-900/40">
+          <div class="min-w-0 flex-1">
+            <h3 class="text-base sm:text-xl lg:text-2xl font-bold text-white tracking-tight leading-snug wrap-break-word" data-i18n="experience.role">{WORK_EXPERIENCE.role}</h3>
+            <p class="text-purple-300 font-mono-code text-[11px] sm:text-xs mt-0.5" data-i18n="experience.company">{WORK_EXPERIENCE.company} · {WORK_EXPERIENCE.location}</p>
+          </div>
+          <span class="px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg bg-purple-500/10 text-purple-300 border border-purple-500/20 font-mono-code text-[11px] sm:text-xs font-semibold shrink-0 mt-0.5 sm:mt-0">
+            <span class="sm:hidden">2023</span>
+            <span class="hidden sm:inline" data-i18n="experience.period">{WORK_EXPERIENCE.period}</span>
+          </span>
+        </div>
+
+        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-3xl text-editorial-justify" data-i18n="experience.desc">
+          {WORK_EXPERIENCE.description}
+        </p>
+
+        <!-- Metrics Grid (Formato horizontal ligero y alineado en móvil, 3 columnas en desktop) -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 pt-3 sm:pt-3.5 border-t border-purple-900/40">
+          {WORK_EXPERIENCE.metrics.map((metric, mIdx) => (
+            <div class="metric-card py-2.5 px-3.5 sm:p-3.5 rounded-xl bg-purple-950/20 border border-purple-800/20 sm:bg-purple-950/40 sm:border-purple-800/30 transition-all duration-300 hover:border-purple-600/50 hover:bg-purple-900/30 flex flex-row sm:flex-col items-center sm:items-start gap-4 sm:gap-0 text-left">
+              <div 
+                class="experience-metric-number text-lg sm:text-2xl lg:text-3xl font-extrabold text-purple-300 font-mono-code tracking-tight sm:mb-1 tabular-nums shrink-0 w-14 sm:w-auto text-left"
+                data-metric-target={metric.value}
+                data-metric-target-mobile={metric.value === '+1,000' ? '+1k' : metric.value}
+              >{metric.value === '+1,000' ? (
+                <>
+                  <span class="sm:hidden">+1k</span>
+                  <span class="hidden sm:inline">+1,000</span>
+                </>
+              ) : metric.value}</div>
+              <p class="text-[11px] sm:text-xs text-purple-200/75 sm:text-purple-200/70 leading-snug sm:leading-relaxed text-editorial-justify flex-1" data-i18n={`experience.metric${mIdx + 1}Label`}>
+                {metric.label}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .experience-metric-number {
+    font-variant-numeric: tabular-nums;
+    display: inline-block;
+    transition: text-shadow 0.25s ease, transform 0.25s ease;
+  }
+
+  .experience-metric-number.is-counting {
+    text-shadow: 0 0 14px rgba(192, 132, 252, 0.45);
+  }
+
+  .experience-metric-number.is-counted {
+    animation: metricPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+    text-shadow: 0 0 16px rgba(192, 132, 252, 0.35);
+  }
+
+  @keyframes metricPop {
+    0% { transform: scale(0.96); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  :global([data-theme="light"]) .experience-metric-number.is-counting {
+    text-shadow: 0 0 12px rgba(109, 40, 217, 0.25);
+  }
+
+  :global([data-theme="light"]) .experience-metric-number.is-counted {
+    text-shadow: 0 0 14px rgba(109, 40, 217, 0.2);
+  }
+</style>

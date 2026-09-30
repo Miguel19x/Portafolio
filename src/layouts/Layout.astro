@@ -1,0 +1,98 @@
+---
+import '../styles/global.css';
+import AmbientGlow from '../components/common/AmbientGlow.astro';
+import Header from '../components/layout/Header.astro';
+import Lightbox from '../components/common/Lightbox.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Miguel Angel Aranguren Ramirez | Desarrollador Fullstack Remoto',
+  description = 'Portafolio de Miguel Angel Aranguren Ramirez, Desarrollador Fullstack especializado en Python, TypeScript, SQL, React y arquitecturas serverless. Estudiante de Ing. de Sistemas (UNEXPO) basado en Caracas, disponible para roles remotos.'
+} = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta name="author" content="Miguel Angel Aranguren Ramirez" />
+  <meta name="generator" content={Astro.generator} />
+  
+  <title>{title}</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://github.com/Miguel19x" />
+
+  <!-- Google Fonts: JetBrains Mono y Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Theme detection script (previene flash de tema incorrecto) -->
+  <script is:inline>
+    (function() {
+      try {
+        const saved = localStorage.getItem('portfolio-theme');
+        if (saved === 'light' || saved === 'dark') {
+          document.documentElement.setAttribute('data-theme', saved);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (_) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+</head>
+<body id="top" class="relative min-h-screen selection:bg-orange-500 selection:text-white">
+  <!-- Dynamic ambient lights & grid overlay -->
+  <AmbientGlow />
+
+  <!-- Persistent Floating Header -->
+  <Header />
+
+  <!-- Main Content Page -->
+  <slot />
+
+  <!-- Modal Lightbox para Ampliación de Capturas -->
+  <Lightbox />
+
+  <!-- Client-side Interactive Modules -->
+  <script>
+    import { initScrollytelling } from '../scripts/scrollytelling';
+    import { initCreativeCanvas } from '../scripts/creativeCanvas';
+    import { initProjectsAccordion } from '../scripts/projectsAccordion';
+    import { initLightbox } from '../scripts/lightbox';
+    import { initHeroSpecCard } from '../scripts/heroSpecCard';
+    import { initI18n } from '../i18n';
+    import { initTheme } from '../scripts/theme';
+    import { initHeaderNav } from '../scripts/headerNav';
+    import { initExperienceCounter } from '../scripts/experienceCounter';
+
+    // Inicializar cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', () => {
+      initTheme();
+      initI18n();
+      initHeaderNav();
+      initScrollytelling();
+      initCreativeCanvas();
+      initProjectsAccordion();
+      initLightbox();
+      initHeroSpecCard();
+      initExperienceCounter();
+    });
+  </script>
+</body>
+</html>

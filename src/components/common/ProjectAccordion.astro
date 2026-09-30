@@ -1,0 +1,623 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+// Importación de capturas de proyectos optimizadas
+import smnImg from '../../assets/projects/smn-preview.png';
+import irisImg from '../../assets/projects/iris-preview.png';
+import psicologiaImg from '../../assets/projects/psicologia-preview.png';
+import wrappedImg from '../../assets/projects/wrapped-preview.png';
+import terrosoImg from '../../assets/projects/terroso-preview.png';
+
+const projectImages: Record<string, ImageMetadata> = {
+  smn: smnImg,
+  iris: irisImg,
+  psicologia: psicologiaImg,
+  wrapped: wrappedImg,
+  terroso: terrosoImg,
+};
+
+// ============================================================================
+// 1. ESTRUCTURA DE DATOS TYPESCRIPT
+// ============================================================================
+export interface ArchitectureStep {
+  num: string;
+  label: string;
+  tech: string;
+}
+
+export interface ArchitectureDiagram {
+  header: string;
+  sub: string;
+  steps: ArchitectureStep[];
+}
+
+export type ProjectThemeColor = 'cyan' | 'amber' | 'emerald' | 'purple' | 'orange';
+
+export interface Project {
+  id: string;
+  title: string;
+  badge?: string;
+  statusBadge?: string;
+  summary: string;
+  impactPhrase: string;
+  problemText: string;
+  solutionHtml: string;
+  solutionText?: string;
+  impactText: string;
+  url: string;
+  tags: string[];
+  image: string | ImageMetadata;
+  repoUrl: string;
+  demoUrl?: string;
+  themeColor?: ProjectThemeColor;
+  diagram?: ArchitectureDiagram;
+}
+
+interface Props {
+  project: Project;
+  index: number;
+  total?: number;
+  isInitiallyExpanded?: boolean;
+}
+
+const { project, index, isInitiallyExpanded = false } = Astro.props;
+
+const currentImage = projectImages[project.id];
+const formattedIndex = String(index + 1).padStart(2, '0');
+const cleanUrl = project.url.replace(/^https?:\/\//, '').replace(/\/$/, '');
+
+const tagI18nMap: Record<string, string> = {
+  'Accesibilidad WCAG 2.2 AA': 'tags.wcag',
+  'SEO Técnico (Schema.org)': 'tags.seo',
+  'Diseño Responsivo (móvil a 4K)': 'tags.responsive',
+  'Reservas vía WhatsApp': 'tags.whatsapp',
+  'Despliegue en Producción': 'tags.deploy',
+  'Arquitectura de Componentes': 'tags.components',
+  'Diseño Responsivo': 'tags.responsiveGeneral',
+  'Desarrollo Web & Móvil': 'tags.webMobile',
+  'Data Parsing (PDF / Excel)': 'tags.dataParsing',
+  'PyTest & Pruebas Unitarias': 'tags.pytest',
+  'Motor de Márgenes': 'tags.marginEngine',
+  'Generación Gráfica': 'tags.charts',
+  'Estadística Aplicada': 'tags.stats',
+  'Normativa APA': 'tags.apa',
+  'Diseño Móvil (100dvh)': 'tags.mobile100',
+  'Interactividad por Gestos': 'tags.gestures',
+};
+
+// ============================================================================
+// 2. DICCIONARIO DE TEMAS (PURGE-SAFE CON LITERALES COMPLETOS DE TAILWIND)
+// ============================================================================
+interface ThemeStyleTokens {
+  text: string;
+  dotBg: string;
+  badgeBg: string;
+  badgeBorder: string;
+  cardHoverBorder: string;
+  cardActiveBorder: string;
+  focusRing: string;
+  btnPrimary: string;
+  chevronActive: string;
+  borderAccent: string;
+  quickActionHover: string;
+  glowShadow: string;
+}
+
+const THEME_CONFIG: Record<ProjectThemeColor, ThemeStyleTokens> = {
+  cyan: {
+    text: 'text-cyan-400',
+    dotBg: 'bg-cyan-400',
+    badgeBg: 'bg-cyan-500/10',
+    badgeBorder: 'border-cyan-500/25',
+    cardHoverBorder: 'hover:border-cyan-500/40',
+    cardActiveBorder: 'group-data-[expanded=true]:border-cyan-500/50',
+    focusRing: 'focus-visible:ring-cyan-500',
+    btnPrimary: 'bg-cyan-500 hover:bg-cyan-400 text-slate-950 shadow-cyan-500/25 hover:shadow-cyan-500/40',
+    chevronActive: 'group-data-[expanded=true]:bg-cyan-500 group-data-[expanded=true]:text-slate-950 group-data-[expanded=true]:border-cyan-500',
+    borderAccent: 'border-cyan-500',
+    quickActionHover: 'hover:bg-cyan-500 hover:border-cyan-500 hover:text-slate-950',
+    glowShadow: 'group-data-[expanded=true]:shadow-[0_12px_36px_-10px_rgba(6,182,212,0.18)]',
+  },
+  amber: {
+    text: 'text-amber-400',
+    dotBg: 'bg-amber-400',
+    badgeBg: 'bg-amber-500/10',
+    badgeBorder: 'border-amber-500/25',
+    cardHoverBorder: 'hover:border-amber-500/40',
+    cardActiveBorder: 'group-data-[expanded=true]:border-amber-500/50',
+    focusRing: 'focus-visible:ring-amber-500',
+    btnPrimary: 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-amber-500/25 hover:shadow-amber-500/40',
+    chevronActive: 'group-data-[expanded=true]:bg-amber-500 group-data-[expanded=true]:text-slate-950 group-data-[expanded=true]:border-amber-500',
+    borderAccent: 'border-amber-500',
+    quickActionHover: 'hover:bg-amber-500 hover:border-amber-500 hover:text-slate-950',
+    glowShadow: 'group-data-[expanded=true]:shadow-[0_12px_36px_-10px_rgba(245,158,11,0.18)]',
+  },
+  emerald: {
+    text: 'text-emerald-400',
+    dotBg: 'bg-emerald-400',
+    badgeBg: 'bg-emerald-500/10',
+    badgeBorder: 'border-emerald-500/25',
+    cardHoverBorder: 'hover:border-emerald-500/40',
+    cardActiveBorder: 'group-data-[expanded=true]:border-emerald-500/50',
+    focusRing: 'focus-visible:ring-emerald-500',
+    btnPrimary: 'bg-emerald-500 hover:bg-emerald-400 text-slate-950 shadow-emerald-500/25 hover:shadow-emerald-500/40',
+    chevronActive: 'group-data-[expanded=true]:bg-emerald-500 group-data-[expanded=true]:text-slate-950 group-data-[expanded=true]:border-emerald-500',
+    borderAccent: 'border-emerald-500',
+    quickActionHover: 'hover:bg-emerald-500 hover:border-emerald-500 hover:text-slate-950',
+    glowShadow: 'group-data-[expanded=true]:shadow-[0_12px_36px_-10px_rgba(16,185,129,0.18)]',
+  },
+  purple: {
+    text: 'text-purple-400',
+    dotBg: 'bg-purple-400',
+    badgeBg: 'bg-purple-500/10',
+    badgeBorder: 'border-purple-500/25',
+    cardHoverBorder: 'hover:border-purple-500/40',
+    cardActiveBorder: 'group-data-[expanded=true]:border-purple-500/50',
+    focusRing: 'focus-visible:ring-purple-500',
+    btnPrimary: 'bg-purple-500 hover:bg-purple-400 text-white shadow-purple-500/25 hover:shadow-purple-500/40',
+    chevronActive: 'group-data-[expanded=true]:bg-purple-500 group-data-[expanded=true]:text-white group-data-[expanded=true]:border-purple-500',
+    borderAccent: 'border-purple-500',
+    quickActionHover: 'hover:bg-purple-500 hover:border-purple-500 hover:text-white',
+    glowShadow: 'group-data-[expanded=true]:shadow-[0_12px_36px_-10px_rgba(168,85,247,0.18)]',
+  },
+  orange: {
+    text: 'text-orange-400',
+    dotBg: 'bg-orange-400',
+    badgeBg: 'bg-orange-500/10',
+    badgeBorder: 'border-orange-500/25',
+    cardHoverBorder: 'hover:border-orange-500/40',
+    cardActiveBorder: 'group-data-[expanded=true]:border-orange-500/50',
+    focusRing: 'focus-visible:ring-orange-500',
+    btnPrimary: 'bg-orange-500 hover:bg-orange-600 text-white shadow-orange-500/25 hover:shadow-orange-500/40',
+    chevronActive: 'group-data-[expanded=true]:bg-orange-500 group-data-[expanded=true]:text-white group-data-[expanded=true]:border-orange-500',
+    borderAccent: 'border-orange-500',
+    quickActionHover: 'hover:bg-orange-500 hover:border-orange-500 hover:text-white',
+    glowShadow: 'group-data-[expanded=true]:shadow-[0_12px_36px_-10px_rgba(249,115,22,0.18)]',
+  },
+};
+
+const theme = THEME_CONFIG[project.themeColor || 'orange'];
+const lightboxSrc = currentImage ? currentImage.src : (typeof project.image === 'string' ? project.image : project.image.src);
+---
+
+<!-- ============================================================================
+     3. COMPONENTE DE TARJETA INDEPENDIENTE (CON ANIMACIÓN CSS GRID)
+     ============================================================================ -->
+<article 
+  class={`project-accordion-item project-card group mb-4 rounded-2xl overflow-hidden border border-white/10 bg-slate-950/70 backdrop-blur-xl shadow-lg transition-all duration-300 hover:border-white/20 hover:bg-slate-900/60 ${theme.cardHoverBorder} ${theme.cardActiveBorder} ${theme.glowShadow} ${isInitiallyExpanded ? 'is-expanded' : ''}`}
+  id={`project-${project.id}`}
+  data-project-id={project.id}
+  data-expanded={isInitiallyExpanded ? 'true' : 'false'}
+>
+  <!-- HEADER DEL ACORDEÓN: RESPONSIVE, EQUILIBRADO Y CON ALTO CONTRASTE -->
+  <div class="project-accordion-header-row relative flex items-center justify-between p-3.5 sm:p-5 transition-colors duration-200 group-data-[expanded=true]:border-b group-data-[expanded=true]:border-white/10 cursor-pointer select-none rounded-t-2xl group-data-[expanded=false]:rounded-b-2xl">
+    
+    <!-- Botón Principal Toggle (Accesible: Izquierda en Desktop, Ancho Completo en Móvil) -->
+    <button
+      type="button"
+      class={`project-accordion-header accordion-trigger flex-1 min-w-0 w-full flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-left cursor-pointer select-none focus-visible:outline-none focus-visible:ring-2 ${theme.focusRing} rounded-xl pr-0 sm:pr-4`}
+      id={`header-${project.id}`}
+      aria-expanded={isInitiallyExpanded ? 'true' : 'false'}
+      aria-controls={`collapse-${project.id}`}
+    >
+      <!-- VISTA MÓVIL (< sm): Fila superior con Índice y Estado sin chocar con botones -->
+      <div class="mobile-meta-bar flex items-center gap-2 pr-24 sm:hidden">
+        <span class={`project-index-num shrink-0 font-mono text-xs font-bold ${theme.text} ${theme.badgeBg} border ${theme.badgeBorder} px-2 py-0.5 rounded-lg`}>
+          {formattedIndex}
+        </span>
+        <span class={`project-role-badge inline-flex items-center gap-1.5 font-mono text-[9.5px] font-semibold tracking-wider ${theme.text} ${theme.badgeBg} border ${theme.badgeBorder} px-2 py-0.5 rounded-full uppercase shrink-0`}>
+          <span class={`status-dot w-1.5 h-1.5 rounded-full ${theme.dotBg} animate-pulse`}></span>
+          <span>{project.statusBadge || project.badge || 'PROYECTO'}</span>
+        </span>
+      </div>
+
+      <!-- VISTA MÓVIL (< sm): Título a ancho completo, Subtítulo y Tags técnicos -->
+      <div class="mobile-content-group flex flex-col min-w-0 w-full sm:hidden">
+        <h3 class="project-accordion-title text-[15px] font-bold text-white tracking-tight leading-snug wrap-break-word group-hover:text-white transition-colors" data-i18n={`projects.${project.id}.title`}>
+          {project.title}
+        </h3>
+        <p class="project-accordion-subtitle text-xs text-slate-300 font-normal leading-relaxed line-clamp-2 mt-1 wrap-break-word" data-i18n={`projects.${project.id}.impactPhrase`}>
+          {project.impactPhrase}
+        </p>
+
+        <!-- Tags Técnicos Destacados en Móvil: contenidos 100% dentro del encabezado sin desbordar -->
+        <div class="mobile-tags-preview flex items-center gap-1.5 flex-nowrap overflow-hidden w-full max-w-full min-w-0 mt-2.5 pt-2 border-t border-white/5" aria-hidden="true">
+          {project.tags.slice(0, 2).map((tag) => (
+            <span class="header-tag-pill font-mono text-[9.5px] text-slate-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md shrink-0 truncate max-w-32.5" data-i18n={tagI18nMap[tag]}>
+              {tag}
+            </span>
+          ))}
+          {project.tags.length > 2 && (
+            <span class="header-tag-more font-mono text-[9px] text-slate-400 shrink-0 whitespace-nowrap">
+              +{project.tags.length - 2}
+            </span>
+          )}
+        </div>
+      </div>
+
+      <!-- VISTA ESCRITORIO (sm+): Fila horizontal clásica equilibrada -->
+      <div class="header-left-group hidden sm:flex items-center gap-4 min-w-0 flex-1">
+        <!-- Badge Numérico -->
+        <span class={`project-index-num shrink-0 font-mono text-xs sm:text-sm font-bold ${theme.text} ${theme.badgeBg} border ${theme.badgeBorder} px-2 py-0.5 sm:px-2.5 sm:py-1 rounded-lg`}>
+          {formattedIndex}
+        </span>
+
+        <div class="project-title-wrapper flex flex-col min-w-0 flex-1">
+          <div class="project-title-line flex items-center gap-2 sm:gap-3 flex-wrap min-w-0">
+            <h3 class="project-accordion-title text-sm sm:text-base md:text-lg font-bold text-white tracking-tight wrap-break-word group-hover:text-white transition-colors" data-i18n={`projects.${project.id}.title`}>
+              {project.title}
+            </h3>
+            
+            <!-- Badge de Contexto/Estado -->
+            <span class={`project-role-badge inline-flex items-center gap-1.5 font-mono text-[9px] sm:text-[10px] md:text-[11px] font-semibold tracking-wider ${theme.text} ${theme.badgeBg} border ${theme.badgeBorder} px-2 py-0.5 rounded-full uppercase shrink-0`}>
+              <span class={`status-dot w-1.5 h-1.5 rounded-full ${theme.dotBg} animate-pulse`}></span>
+              <span>{project.statusBadge || project.badge || 'PROYECTO'}</span>
+            </span>
+          </div>
+
+          <!-- Subtítulo de Alto Contraste (text-slate-300 / font-normal) -->
+          <p class="project-accordion-subtitle text-xs sm:text-sm text-slate-300 font-normal line-clamp-1 mt-1 max-w-2xl wrap-break-word" data-i18n={`projects.${project.id}.impactPhrase`}>
+            {project.impactPhrase}
+          </p>
+        </div>
+      </div>
+
+      <!-- Lado Derecho Escritorio: Tags Técnicos Destacados -->
+      <div class="header-right-group hidden lg:flex items-center gap-3 shrink-0">
+        <div class="header-tags-preview flex items-center gap-1.5" aria-hidden="true">
+          {project.tags.slice(0, 3).map((tag) => (
+            <span class="header-tag-pill font-mono text-[11px] text-slate-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md" data-i18n={tagI18nMap[tag]}>
+              {tag}
+            </span>
+          ))}
+          {project.tags.length > 3 && (
+            <span class="header-tag-more font-mono text-[10px] text-slate-400">
+              +{project.tags.length - 3}
+            </span>
+          )}
+        </div>
+      </div>
+    </button>
+
+    <!-- ACCIONES RÁPIDAS & CHEVRON: En móvil arriba a la derecha; en desktop a la derecha en línea -->
+    <div class="header-actions-cluster flex items-center shrink-0 absolute top-3.5 right-3.5 sm:static sm:top-auto sm:right-auto z-10">
+      <!-- Quick Action Direct Links -->
+      <div class="header-quick-actions flex items-center gap-1 sm:gap-1.5 pr-1.5 sm:pr-3 border-r border-white/10 shrink-0" aria-label={`Enlaces directos de ${project.title}`}>
+        <a
+          href={project.repoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="header-quick-btn quick-btn-repo quick-action-link w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-white/10 bg-white/5 hover:bg-white/15 hover:border-white/20 text-slate-400 hover:text-white flex items-center justify-center transition-all duration-200"
+          title={`Ver Repositorio de ${project.title} en GitHub`}
+          aria-label={`Ver repositorio de ${project.title} en GitHub`}
+        >
+          <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+          </svg>
+        </a>
+
+        {project.demoUrl && (
+          <a
+            href={project.demoUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={`header-quick-btn quick-btn-demo quick-action-link w-7 h-7 sm:w-8 sm:h-8 rounded-lg border border-white/10 bg-white/5 ${theme.quickActionHover} text-slate-400 flex items-center justify-center transition-all duration-200`}
+            title={`Abrir Demo en Vivo de ${project.title}`}
+            aria-label={`Abrir demo de ${project.title}`}
+          >
+            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="2" y1="12" x2="22" y2="12"></line>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+            </svg>
+          </a>
+        )}
+      </div>
+
+      <!-- Chevron con Contenedor Circular y Rotación Fluida -->
+      <div
+        class={`accordion-chevron-box chevron-box w-7 h-7 sm:w-8 sm:h-8 rounded-full border border-white/10 bg-white/5 flex items-center justify-center text-slate-300 transition-all duration-300 shrink-0 ml-1.5 sm:ml-3 ${theme.chevronActive}`}
+        aria-hidden="true"
+      >
+        <svg class="accordion-chevron chevron-icon w-3.5 h-3.5 sm:w-4 sm:h-4 transition-transform duration-300 ease-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <!-- CUERPO DESPLEGABLE: TRANSICIÓN CSS GRID (0fr -> 1fr) -->
+  <div
+    class="project-accordion-collapse accordion-collapse"
+    id={`collapse-${project.id}`}
+    role="region"
+    aria-labelledby={`header-${project.id}`}
+    aria-hidden={isInitiallyExpanded ? 'false' : 'true'}
+  >
+    <div class="project-accordion-inner accordion-inner">
+      <div class="p-4 sm:p-6 lg:p-7 space-y-6">
+
+        <!-- ====================================================================
+             1. ESTRUCTURA ESTRICTA DE 2 COLUMNAS EN DESKTOP
+             Columna Izquierda (lg:col-span-5): Preview Mockup + CTAs
+             Columna Derecha (lg:col-span-7): Resumen Ejecutivo + Timeline de Impacto
+             ==================================================================== -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start w-full">
+          
+          <!-- COLUMNA IZQUIERDA (lg:col-span-5): MOCKUP NAVEGADOR + CTAs DE ACCIÓN -->
+          <div class="lg:col-span-5 flex flex-col space-y-3 min-w-0">
+            
+            <!-- Ventana de Navegador Simulada -->
+            <div 
+              class="case-study-preview-window w-full rounded-xl overflow-hidden border border-white/10 bg-slate-900 shadow-2xl transition-all duration-300 group-hover:border-white/20 flex flex-col"
+              data-lightbox-src={lightboxSrc} 
+              data-lightbox-url={project.url} 
+              data-lightbox-alt={`Captura de pantalla de ${project.title}`}
+            >
+              <!-- Barra Superior de Navegador Minimalista -->
+              <div class="flex items-center justify-between px-3.5 py-2 bg-slate-950/90 border-b border-white/10 text-xs shrink-0">
+                <!-- Puntos macOS -->
+                <div class="flex items-center gap-1.5 shrink-0" aria-hidden="true">
+                  <span class="w-2.5 h-2.5 rounded-full bg-red-500/90 inline-block"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-amber-500/90 inline-block"></span>
+                  <span class="w-2.5 h-2.5 rounded-full bg-emerald-500/90 inline-block"></span>
+                </div>
+
+                <!-- URL Bar -->
+                <div class="flex-1 px-3 min-w-0">
+                  {project.demoUrl ? (
+                    <a 
+                      href={project.demoUrl} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      class="inline-flex items-center gap-1 text-[11px] font-mono text-slate-400 hover:text-white bg-white/5 border border-white/5 hover:border-white/20 px-2 py-0.5 rounded max-w-full truncate transition-colors"
+                      title={`Visitar ${cleanUrl} en nueva pestaña`}
+                      aria-label={`Visitar demo de ${project.title}`}
+                    >
+                      <span class="truncate">{cleanUrl}</span>
+                      <svg class="w-2.5 h-2.5 shrink-0 opacity-70" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true">
+                        <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                        <polyline points="15 3 21 3 21 9"></polyline>
+                        <line x1="10" y1="14" x2="21" y2="3"></line>
+                      </svg>
+                    </a>
+                  ) : (
+                    <span class="text-[11px] font-mono text-slate-500 truncate block">{cleanUrl}</span>
+                  )}
+                </div>
+
+                <!-- Botón Zoom / Lightbox -->
+                <button 
+                  type="button" 
+                  class={`text-[11px] font-mono font-medium ${theme.text} hover:opacity-80 flex items-center gap-1 cursor-pointer`}
+                  data-lightbox-src={lightboxSrc} 
+                  data-lightbox-url={project.url} 
+                  data-lightbox-alt={`Captura de pantalla de ${project.title}`}
+                  title="Ampliar captura"
+                >
+                  <svg class="w-3 h-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                  <span class="hidden sm:inline" data-i18n="projects.zoomHint">Zoom</span>
+                </button>
+              </div>
+
+              <!-- CONTENEDOR DE IMAGEN (PREVIEW COMPLETA Y DENTRO DEL CONTORNO) -->
+              <div 
+                class="case-study-preview-media w-full relative overflow-hidden bg-slate-950 cursor-zoom-in group/media"
+                role="button" 
+                tabindex="0" 
+                aria-label={`Ampliar captura de pantalla de ${project.title}`}
+                data-lightbox-src={lightboxSrc} 
+                data-lightbox-url={project.url} 
+                data-lightbox-alt={`Captura de pantalla de ${project.title}`}
+              >
+                {currentImage ? (
+                  <Image 
+                    src={currentImage} 
+                    alt={`Captura de pantalla de ${project.title}`}
+                    class="w-full h-full object-contain object-top block transition-transform duration-500 ease-out group-hover/media:scale-[1.02]" 
+                    loading="lazy" 
+                    decoding="async" 
+                    widths={[500, 800, 1200]}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 45vw, 600px"
+                    format="webp"
+                    quality={90}
+                  />
+                ) : (
+                  <img 
+                    src={typeof project.image === 'string' ? project.image : project.image.src} 
+                    alt={`Captura de pantalla de ${project.title}`}
+                    class="w-full h-full object-contain object-top block transition-transform duration-500 ease-out group-hover/media:scale-[1.02]" 
+                    loading="lazy" 
+                    decoding="async" 
+                  />
+                )}
+
+                <!-- Hover Overlay de Zoom -->
+                <div class="absolute inset-0 bg-slate-950/40 backdrop-blur-[2px] opacity-0 group-hover/media:opacity-100 flex items-center justify-center transition-opacity duration-200 pointer-events-none">
+                  <span class={`w-10 h-10 rounded-full ${theme.btnPrimary} flex items-center justify-center shadow-lg`} aria-hidden="true">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- BOTONES DE ACCIÓN DIRECTOS (INMEDIATAMENTE DEBAJO DEL MOCKUP) -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1">
+              <a 
+                href={project.repoUrl} 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                class={`project-btn-secondary inline-flex items-center justify-center gap-2 font-mono text-xs font-semibold px-4 py-2.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 hover:border-white/30 text-white transition-all duration-200 hover:-translate-y-0.5 ${!project.demoUrl ? 'sm:col-span-2' : ''}`}
+              >
+                <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
+                </svg>
+                <span data-i18n="projects.repoBtn">Ver Repositorio</span>
+              </a>
+
+              {project.demoUrl && (
+                <a 
+                  href={project.demoUrl} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class={`project-btn-primary inline-flex items-center justify-center gap-2 font-mono text-xs font-semibold px-4 py-2.5 rounded-xl ${theme.btnPrimary} transition-all duration-200 hover:-translate-y-0.5`}
+                >
+                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1 4-10z"></path>
+                  </svg>
+                  <span data-i18n="projects.demoBtn">Ver Demo en Vivo</span>
+                </a>
+              )}
+            </div>
+
+          </div>
+
+          <!-- COLUMNA DERECHA (lg:col-span-7): RESUMEN EJECUTIVO + TIMELINE DE IMPACTO -->
+          <div class="lg:col-span-7 flex flex-col space-y-4 min-w-0">
+            <!-- Resumen Ejecutivo (Contexto de alto nivel) -->
+            <p class="project-summary-text text-sm sm:text-[15px] leading-relaxed text-slate-200 font-medium text-editorial-justify" data-i18n={`projects.${project.id}.summary`}>
+              {project.summary}
+            </p>
+
+            <!-- Bloques Editoriales Escalonados (Escaneo en 5 segundos) -->
+            <div class="space-y-3.5 pt-1">
+              
+              <!-- 01. Reto de Negocio -->
+              <div class="editorial-block editorial-problem relative pl-3.5 sm:pl-4 border-l-2 border-rose-500/70 py-0.5">
+                <span class="font-mono text-[11px] font-bold text-rose-400 uppercase tracking-wider block mb-1" data-i18n="projects.probTitle">
+                  01 // RETO DE NEGOCIO
+                </span>
+                <p class="editorial-text text-xs sm:text-[13.5px] text-slate-300 leading-relaxed font-normal text-editorial-justify" data-i18n={`projects.${project.id}.problem`}>
+                  {project.problemText}
+                </p>
+              </div>
+
+              <!-- 02. Solución Implementada -->
+              <div class={`editorial-block editorial-solution relative pl-3.5 sm:pl-4 border-l-2 ${theme.borderAccent} py-0.5`}>
+                <span class={`font-mono text-[11px] font-bold ${theme.text} uppercase tracking-wider block mb-1`} data-i18n="projects.solTitle">
+                  02 // SOLUCIÓN IMPLEMENTADA
+                </span>
+                <div 
+                  class="editorial-text text-xs sm:text-[13.5px] text-slate-300 leading-relaxed text-editorial-justify [&>strong]:text-white [&>strong]:font-semibold" 
+                  data-i18n-html={`projects.${project.id}.solution`} 
+                  set:html={project.solutionHtml} 
+                />
+              </div>
+
+              <!-- 03. Impacto Medible -->
+              <div class="editorial-block editorial-impact relative pl-3.5 sm:pl-4 border-l-2 border-emerald-500/80 py-0.5">
+                <span class="font-mono text-[11px] font-bold text-emerald-400 uppercase tracking-wider block mb-1" data-i18n="projects.impTitle">
+                  03 // IMPACTO MEDIBLE
+                </span>
+                <p 
+                  class="editorial-text text-xs sm:text-[13.5px] text-slate-200 leading-relaxed font-normal text-editorial-justify [&>strong]:text-white [&>strong]:font-semibold" 
+                  data-i18n-html={`projects.${project.id}.impact`}
+                  set:html={project.impactText}
+                />
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ====================================================================
+             3. PIPELINE DE ARQUITECTURA: 4 PASOS COMPLETOS Y CONECTADOS (SIN CORTES)
+             ==================================================================== -->
+        {project.diagram && (
+          <div class="pipeline-section pt-4 border-t border-white/10 flex flex-col gap-2.5 text-xs">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class={`w-1.5 h-1.5 rounded-full ${theme.dotBg}`}></span>
+                <span class={`font-mono text-[10px] font-bold ${theme.text} uppercase tracking-wider`} data-i18n="projects.pipelineTitle">
+                  PIPELINE DE ARQUITECTURA:
+                </span>
+                <span class="pipeline-header-desc text-slate-400 text-xs font-medium hidden sm:inline" data-i18n={`projects.${project.id}.diagramHeader`}>
+                  {project.diagram.header}
+                </span>
+              </div>
+              <span class="pipeline-sub font-mono text-[10px] text-slate-500 uppercase hidden md:inline" data-i18n={`projects.${project.id}.diagramSub`}>
+                {project.diagram.sub}
+              </span>
+            </div>
+
+            <!-- Grid de 4 Pasos: En computadora 4 columnas horizontales con flechas conectoras -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3 w-full items-stretch">
+              {project.diagram.steps.map((step, sIdx) => (
+                <div class="pipeline-step relative flex flex-col justify-between p-2.5 sm:p-3 rounded-xl bg-white/3 border border-white/10 hover:border-white/20 hover:bg-white/6 transition-all min-w-0">
+                  <div class="flex flex-col gap-0.5 mb-1.5 min-w-0 w-full">
+                    <!-- Número y Categoría de la Fase en su propia línea superior -->
+                    <div class="flex items-center gap-1.5 min-w-0">
+                      <span class="font-mono text-[9px] sm:text-[10px] text-slate-500 font-bold shrink-0">0{sIdx + 1}</span>
+                      <span class="text-slate-600 text-[9px] shrink-0">/</span>
+                      <span class={`font-mono text-[9px] sm:text-[10px] font-bold ${theme.text} uppercase tracking-wider`} data-i18n={`projects.${project.id}.step${sIdx + 1}Num`}>
+                        {step.num}
+                      </span>
+                    </div>
+                    <!-- Título descriptivo a ancho completo del paso -->
+                    <h4 class="pipeline-step-label text-[11px] sm:text-xs font-semibold text-slate-200 wrap-break-word leading-snug mt-0.5" title={step.label} data-i18n={`projects.${project.id}.step${sIdx + 1}Label`}>
+                      {step.label}
+                    </h4>
+                  </div>
+                  <!-- Detalle de tecnología alineado al fondo -->
+                  <span class="pipeline-step-tech font-mono text-[9px] sm:text-[10px] text-slate-400 wrap-break-word block pt-1.5 mt-auto border-t border-white/5" title={step.tech} data-i18n={`projects.${project.id}.step${sIdx + 1}Tech`}>
+                    {step.tech}
+                  </span>
+
+                  <!-- Flecha conectora entre pasos (Solo en pasos 1, 2 y 3; NUNCA en el paso final 4) -->
+                  {sIdx < project.diagram!.steps.length - 1 && (
+                    <span 
+                      class="pipeline-arrow hidden md:flex absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 items-center justify-center rounded-full bg-slate-900 border border-white/10 text-slate-400 font-mono text-[10px] z-10 select-none shadow-sm pointer-events-none" 
+                      aria-hidden="true"
+                    >
+                      →
+                    </span>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- ====================================================================
+             STACK TECNOLÓGICO COMPACTO
+             ==================================================================== -->
+        <div class="tech-stack-section pt-3 border-t border-white/10 flex flex-col sm:flex-row sm:items-center gap-2.5 text-xs">
+          <span class="tags-label font-mono text-[10px] font-semibold text-slate-400 uppercase tracking-wider shrink-0 mb-0" data-i18n="projects.stackTitle">
+            STACK & HERRAMIENTAS:
+          </span>
+          <div class="tech-badges-list flex flex-wrap gap-1.5">
+            {project.tags.map((tag) => (
+              <span class="tech-badge font-mono text-[11px] text-slate-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded-md hover:border-white/20 hover:text-white transition-colors" data-i18n={tagI18nMap[tag]}>
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <!-- Botón para plegar el acordeón al final del contenido -->
+        <div class="close-btn-section pt-3 border-t border-white/5 flex justify-end">
+          <button
+            type="button"
+            class="project-accordion-close-btn inline-flex items-center gap-1.5 font-mono text-[11px] text-slate-400 hover:text-white px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition-all cursor-pointer group/close"
+            aria-label={`Ocultar detalles de ${project.title}`}
+          >
+            <span data-i18n="projects.detailsClose">Ocultar Detalles Técnicos ▴</span>
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</article>

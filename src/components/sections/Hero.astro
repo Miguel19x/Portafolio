@@ -1,0 +1,251 @@
+---
+import { HERO_METRICS } from '../../data/metrics';
+import { PERSONAL_INFO } from '../../data/navigation';
+import Button from '../common/Button.astro';
+---
+
+<section id="hero" data-section="hero" class="hero-screen-fit w-full relative z-10 overflow-hidden">
+  <div class="site-container w-full flex flex-col justify-center py-2 sm:py-4 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    
+    <div class="hero-grid grid grid-cols-1 lg:grid-cols-12 gap-[clamp(1.25rem,2.5vw,2.5rem)] items-center w-full pt-2 sm:pt-4">
+
+      <!-- Columna Izquierda: Pitch, Status, Títulos, CTAs y Métricas (7 cols) -->
+      <div class="hero-main lg:col-span-7 flex flex-col justify-center">
+        <!-- Status & Terminal prompt header tag -->
+        <div class="flex flex-wrap items-center gap-2 mb-[clamp(0.4rem,1svh,0.75rem)]">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/20 font-mono-code text-xs text-emerald-300 backdrop-blur-sm">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 pulse-dot"></span>
+            <span data-i18n="hero.availability">{PERSONAL_INFO.availability}</span>
+          </div>
+
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-white/5 border border-white/10 font-mono-code text-xs text-slate-300 backdrop-blur-sm max-w-full min-w-0">
+            <span class="text-orange-400 font-bold shrink-0">$</span>
+            <span class="text-slate-400 shrink-0">git checkout</span>
+            <span class="text-white font-medium truncate sm:whitespace-normal">engineering-craftmanship</span>
+          </div>
+        </div>
+
+        <!-- Main headline con tipografía fluida escalable -->
+        <h1 class="text-fluid-hero font-extrabold tracking-tight text-white mb-[clamp(0.2rem,0.6svh,0.45rem)] text-balance wrap-break-word" data-i18n="hero.title">
+          {PERSONAL_INFO.name}
+        </h1>
+
+        <!-- Subtítulo de propuesta de valor con Typewriter Rotator dinámico (Altura bloqueada anti-CLS / Zero Layout Shift) -->
+        <div class="hero-tagline-container flex flex-col sm:flex-row sm:items-center sm:gap-x-2 min-h-13 sm:min-h-7 mb-[clamp(0.35rem,0.8svh,0.65rem)]">
+          <span data-i18n="hero.taglineSolid" class="text-xs sm:text-sm md:text-base lg:text-[1.05rem] font-medium tracking-tight text-white leading-snug shrink-0">
+            Desarrollo software robusto.
+          </span>
+          <span class="inline-flex items-center font-mono-code text-xs sm:text-sm md:text-base lg:text-[1.05rem] font-semibold text-transparent bg-clip-text bg-linear-to-r from-orange-400 via-amber-300 to-emerald-400 min-h-6 leading-snug">
+            <span id="hero-typewriter-text" class="wrap-break-word">Fullstack Developer (Python & TS)</span>
+            <span class="typewriter-cursor inline-block w-0.5 h-3.5 sm:h-4 bg-orange-400 ml-1 shrink-0"></span>
+          </span>
+        </div>
+
+        <!-- Subtitle description con justificación editorial -->
+        <p class="text-xs sm:text-sm text-slate-400 max-w-2xl leading-relaxed mb-[clamp(0.6rem,1.4svh,1.15rem)] text-editorial-justify" data-i18n-html="hero.bio">
+          Desarrollador Fullstack enfocado en la <span class="text-slate-200 font-medium">consistencia transaccional de datos</span>, la automatización determinista y arquitecturas de alto rendimiento. Transformo requerimientos complejos en herramientas confiables, auditables y sin fricción operativa.
+        </p>
+
+        <!-- CTA Buttons: Jerarquía clara con única acción primaria destacada -->
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 mb-[clamp(0.6rem,1.2svh,1rem)]">
+          <Button href="#proyectos" variant="brand" size="md" class="w-full sm:w-auto">
+            <span data-i18n="hero.ctaProjects">Ver Case Studies</span>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </Button>
+
+          <div class="flex items-center gap-2.5 w-full sm:w-auto">
+            <Button href={PERSONAL_INFO.cvUrl} variant="outline" size="md" target="_blank" rel="noopener noreferrer" class="flex-1 sm:flex-initial">
+              <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+              <span data-i18n="hero.ctaCv">Ver CV (PDF) ↗</span>
+            </Button>
+
+            <Button href="#contacto" variant="outline" size="md" class="flex-1 sm:flex-initial">
+              <span data-i18n="hero.ctaContact">Hablemos</span>
+              <span class="text-orange-400 font-mono-code text-xs">→</span>
+            </Button>
+          </div>
+        </div>
+
+        <!-- Quick Metrics Ribbon: 2x2 aireado en móvil -->
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-2 pt-3 border-t border-white/10 font-mono-code text-xs">
+          {HERO_METRICS.map((metric, idx) => (
+            <div class="p-1 sm:p-0">
+              <p class="text-slate-500 mb-0.5 text-[11px]" data-i18n={`hero.metric${idx + 1}Index`}>{metric.index}</p>
+              <p class={`text-base sm:text-lg font-semibold tracking-tight ${metric.valueColorClass || 'text-white'}`} data-i18n={`hero.metric${idx + 1}Value`}>{metric.value}</p>
+              <p class="text-[10px] sm:text-[11px] text-slate-400 leading-tight" data-i18n={`hero.metric${idx + 1}Sub`}>{metric.sublabel}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Columna Derecha: Engineering Spec Card (Ventana Arrastrable con Tabs & Terminal) (5 cols) -->
+      <aside class="hero-spec lg:col-span-5 w-full flex justify-center lg:justify-end" aria-label="Ficha técnica del desarrollador">
+        <div class="spec-card w-full max-w-md" id="spec-card">
+          <!-- Window Header (Arrastrable) -->
+          <div class="spec-header" id="spec-header" title="Arrastra para mover la ventana / Drag to move">
+            <div class="spec-dots">
+              <span class="spec-dot" id="spec-dot-reset" style="background:#ef4444;" title="Restablecer posición / Reset"></span>
+              <span class="spec-dot" style="background:#f59e0b;"></span>
+              <span class="spec-dot" style="background:#10b981;"></span>
+            </div>
+            <div class="spec-header-meta">
+              <span class="spec-title" data-i18n="spec.title">SYS_PROFILE // M_ARANGUREN</span>
+              <span class="spec-drag-grip" aria-hidden="true">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="8" cy="6" r="1.5"></circle>
+                  <circle cx="8" cy="12" r="1.5"></circle>
+                  <circle cx="8" cy="18" r="1.5"></circle>
+                  <circle cx="16" cy="6" r="1.5"></circle>
+                  <circle cx="16" cy="12" r="1.5"></circle>
+                  <circle cx="16" cy="18" r="1.5"></circle>
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Pestañas Interactivas: Ficha Técnica vs Terminal CLI -->
+          <div class="spec-tabs flex items-center border-b border-white/10 px-3 py-1.5 gap-2">
+            <button
+              type="button"
+              id="spec-tab-profile"
+              class="spec-tab-btn active px-3 py-1 rounded-md transition-all duration-200 flex items-center gap-1.5 text-slate-300 hover:text-white"
+              data-spec-tab="profile"
+            >
+              <svg class="w-3.5 h-3.5 text-orange-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              <span>profile.spec</span>
+            </button>
+
+            <button
+              type="button"
+              id="spec-tab-terminal"
+              class="spec-tab-btn px-3 py-1 rounded-md transition-all duration-200 flex items-center gap-1.5 text-slate-400 hover:text-white"
+              data-spec-tab="terminal"
+            >
+              <svg class="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="4 17 10 11 4 5"></polyline>
+                <line x1="12" y1="19" x2="20" y2="19"></line>
+              </svg>
+              <span>terminal.sh</span>
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            </button>
+          </div>
+
+          <!-- Wrapper de Paneles con altura unificada y estable (Zero Layout Shift) -->
+          <div class="spec-panels-wrapper relative w-full overflow-hidden">
+            <!-- Panel 1: Window Content (Ficha Técnica) -->
+            <div id="spec-panel-profile" class="spec-content spec-panel-stacked is-active">
+              <div class="spec-line">
+                <span class="spec-label" data-i18n="spec.roleLabel">&gt; ROL PRINCIPAL</span>
+                <span class="spec-value spec-role-value" data-i18n="spec.roleValue">Desarrollador Fullstack (Python / TS / React / SQL)</span>
+              </div>
+
+              <div class="spec-line">
+                <span class="spec-label" data-i18n="spec.stackLabel">&gt; CORE STACK TÉCNICO</span>
+                <div class="spec-tags">
+                  <span class="spec-tag-item">Python</span>
+                  <span class="spec-tag-item">TypeScript</span>
+                  <span class="spec-tag-item">JavaScript (ES6+)</span>
+                  <span class="spec-tag-item">React</span>
+                  <span class="spec-tag-item">SQL</span>
+                  <span class="spec-tag-item">Cloudflare Workers</span>
+                </div>
+              </div>
+
+              <div class="spec-line">
+                <span class="spec-label" data-i18n="spec.focusLabel">&gt; ENFOQUE DE INGENIERÍA</span>
+                <p class="spec-focus-desc text-editorial-justify" data-i18n="spec.focusText">
+                  Procesamiento de datos heterogéneos, automatización de informes con rigor estadístico y APIs serverless de baja latencia.
+                </p>
+              </div>
+
+              <div class="spec-meta-grid">
+                <div>
+                  <span class="spec-label" data-i18n="spec.locationLabel">&gt; UBICACIÓN & ZONA</span>
+                  <span class="spec-value spec-meta-value" data-i18n="spec.locationValue">Caracas, VE (UTC-4)</span>
+                </div>
+                <div>
+                  <span class="spec-label" data-i18n="spec.educationLabel">&gt; FORMACIÓN</span>
+                  <span class="spec-value spec-meta-value" data-i18n="spec.educationValue">Ing. Sistemas (UNEXPO)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Panel 2: Interactive Terminal View Panel -->
+            <div id="spec-panel-terminal" class="spec-terminal-panel spec-panel-stacked is-hidden p-3 font-mono-code text-xs text-slate-300 flex flex-col justify-between overflow-hidden">
+              <!-- Terminal Output Scrollable Area -->
+              <div id="terminal-output" class="terminal-output flex-1 min-h-0 overflow-y-auto pr-1 space-y-1.5 text-[11px] leading-relaxed select-text">
+                <div class="text-slate-400" data-i18n-html="spec.terminalInit">
+                  <span class="text-emerald-400 font-semibold">sys_v2.0</span> inicializado. Escribe <span class="text-orange-400 font-bold">help</span> o pulsa un comando rápido:
+                </div>
+              </div>
+
+              <!-- Terminal Quick Commands Chips (Grid de 5 columnas ajustado al 100% del ancho sin desbordamiento) -->
+              <div class="terminal-chips grid grid-cols-5 gap-1 pt-2 pb-0.5 border-t border-white/10 my-1.5 shrink-0 w-full overflow-hidden">
+                <button type="button" class="term-chip w-full flex items-center justify-center px-0.5 py-1.5 rounded-md bg-white/5 hover:bg-orange-500/20 hover:text-orange-300 border border-white/10 text-slate-400 transition-colors cursor-pointer" data-cmd="cat stack.json" title="cat stack.json">
+                  <span class="truncate pointer-events-none">stack.json</span>
+                </button>
+                <button type="button" class="term-chip w-full flex items-center justify-center px-0.5 py-1.5 rounded-md bg-white/5 hover:bg-emerald-500/20 hover:text-emerald-300 border border-white/10 text-slate-400 transition-colors cursor-pointer" data-cmd="git status" title="git status">
+                  <span class="truncate pointer-events-none">git status</span>
+                </button>
+                <button type="button" class="term-chip w-full flex items-center justify-center px-0.5 py-1.5 rounded-md bg-white/5 hover:bg-cyan-500/20 hover:text-cyan-300 border border-white/10 text-slate-400 transition-colors cursor-pointer" data-cmd="run benchmark" title="run benchmark">
+                  <span class="truncate pointer-events-none">benchmark</span>
+                </button>
+                <button type="button" class="term-chip w-full flex items-center justify-center px-0.5 py-1.5 rounded-md bg-white/5 hover:bg-purple-500/20 hover:text-purple-300 border border-white/10 text-slate-400 transition-colors cursor-pointer" data-cmd="contact" title="contact">
+                  <span class="truncate pointer-events-none">contact</span>
+                </button>
+                <button type="button" class="term-chip w-full flex items-center justify-center px-0.5 py-1.5 rounded-md bg-white/5 hover:bg-slate-700 border border-white/10 text-slate-400 transition-colors cursor-pointer" data-cmd="clear" title="clear">
+                  <span class="truncate pointer-events-none">clear</span>
+                </button>
+              </div>
+
+              <!-- Terminal Prompt Input Line -->
+              <form id="terminal-form" class="flex items-center gap-1.5 pt-1 border-t border-white/10 shrink-0">
+                <span class="text-emerald-400 font-bold shrink-0">$</span>
+                <input
+                  id="terminal-input"
+                  type="text"
+                  class="flex-1 min-w-0 bg-transparent border-none outline-none text-xs text-white placeholder-slate-600 font-mono-code focus:outline-none focus:ring-0 focus:border-none p-0"
+                  placeholder="Escribe 'help' o un comando..."
+                  data-i18n-placeholder="spec.terminalPlaceholder"
+                  autocomplete="off"
+                  spellcheck="false"
+                />
+                <button type="submit" class="text-[10px] text-slate-500 hover:text-orange-400 px-1.5 py-0.5 rounded hover:bg-white/5 transition-colors cursor-pointer shrink-0">↵</button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </aside>
+
+    </div>
+
+    <!-- Technical Navigation Control (Next Section Pill) -->
+    <div class="w-full flex justify-center mt-8 pb-4 shrink-0">
+      <a 
+        href="#enfoque"
+        id="hero-scroll-cue"
+        class="hero-next-pill group inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/50 hover:bg-slate-900/80 backdrop-blur-md border border-white/10 hover:border-orange-500/40 text-slate-400 hover:text-white font-mono font-mono-code text-[11px] font-medium tracking-wider transition-all duration-200 select-none cursor-pointer"
+        aria-label="Ir a la sección 01: Enfoque"
+        data-i18n-aria-label="hero.nextAria"
+      >
+        <span class="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse shrink-0" aria-hidden="true"></span>
+        <span class="inline-flex items-center gap-1.5">
+          <span class="text-slate-500 font-semibold" data-i18n="hero.nextLabel">SIGUIENTE: //</span>
+          <span class="text-slate-300 group-hover:text-white transition-colors" data-i18n="hero.nextTarget">01. ENFOQUE</span>
+        </span>
+        <span class="text-orange-400 group-hover:translate-y-0.5 transition-transform duration-200 font-mono text-xs leading-none shrink-0" aria-hidden="true">↓</span>
+      </a>
+    </div>
+
+  </div>
+</section>
