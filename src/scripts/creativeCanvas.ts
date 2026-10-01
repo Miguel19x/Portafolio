@@ -128,28 +128,33 @@ export function initCreativeCanvas(): (() => void) | undefined {
     }
 
     // 2. Dibujar conexiones de constelación en un único lote (Single Batch Stroke)
-    ctx.beginPath();
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-    ctx.lineWidth = 0.6;
+    // Se omite en móvil: es la parte O(n²) del frame (todos los pares de
+    // partículas) y la más cara de la animación; los puntos flotantes solos
+    // ya conservan la decoración sin ese costo extra en el hardware más débil.
+    if (!isMobile) {
+      ctx.beginPath();
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+      ctx.lineWidth = 0.6;
 
-    for (let i = 0; i < particles.length; i++) {
-      const p1 = particles[i];
-      for (let j = i + 1; j < particles.length; j++) {
-        const p2 = particles[j];
-        const dx = p1.x - p2.x;
-        const dy = p1.y - p2.y;
+      for (let i = 0; i < particles.length; i++) {
+        const p1 = particles[i];
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p1.x - p2.x;
+          const dy = p1.y - p2.y;
 
-        // Rechazo rápido por caja delimitadora (AABB)
-        if (Math.abs(dx) > maxDist || Math.abs(dy) > maxDist) continue;
+          // Rechazo rápido por caja delimitadora (AABB)
+          if (Math.abs(dx) > maxDist || Math.abs(dy) > maxDist) continue;
 
-        const distSq = dx * dx + dy * dy;
-        if (distSq < maxDistSq) {
-          ctx.moveTo(p1.x, p1.y);
-          ctx.lineTo(p2.x, p2.y);
+          const distSq = dx * dx + dy * dy;
+          if (distSq < maxDistSq) {
+            ctx.moveTo(p1.x, p1.y);
+            ctx.lineTo(p2.x, p2.y);
+          }
         }
       }
+      ctx.stroke();
     }
-    ctx.stroke();
   }
 
   // Control de FPS: 30 FPS en móviles o laptops de gama modesta (<= 4 núcleos) para liberar la GPU

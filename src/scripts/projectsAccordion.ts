@@ -20,6 +20,34 @@ export function initProjectsAccordion(): (() => void) | undefined {
 
   if (items.length === 0) return;
 
+  // Espera a que termine la transición visual (grid-template-rows) del
+  // acordeón antes de forzar cualquier lectura de layout. Antes se usaba un
+  // setTimeout(220ms) que caía a mitad de la animación de 400ms, forzando un
+  // reflow justo cuando el acordeón se está expandiendo — la causa del lag
+  // visible al abrir un proyecto.
+  function afterCollapseTransition(collapseEl: HTMLElement | null, cb: () => void): void {
+    if (!collapseEl) {
+      cb();
+      return;
+    }
+    let done = false;
+    const onEnd = (e: TransitionEvent) => {
+      if (e.target !== collapseEl || e.propertyName !== 'grid-template-rows') return;
+      if (done) return;
+      done = true;
+      collapseEl.removeEventListener('transitionend', onEnd);
+      cb();
+    };
+    collapseEl.addEventListener('transitionend', onEnd);
+    // Red de seguridad por si la transición no dispara (reduced-motion, etc.)
+    setTimeout(() => {
+      if (done) return;
+      done = true;
+      collapseEl.removeEventListener('transitionend', onEnd);
+      cb();
+    }, 500);
+  }
+
   function toggleItem(targetItem: HTMLElement, forceOpen?: boolean): void {
     const isCurrentlyExpanded = targetItem.classList.contains('is-expanded') || targetItem.getAttribute('data-expanded') === 'true';
     const shouldOpen = forceOpen !== undefined ? forceOpen : !isCurrentlyExpanded;
@@ -28,6 +56,7 @@ export function initProjectsAccordion(): (() => void) | undefined {
       const header = item.querySelector<HTMLButtonElement>('.project-accordion-header');
       const collapse = item.querySelector<HTMLElement>('.project-accordion-collapse');
       const flowDiagram = item.querySelector<HTMLElement>('.diagram-flow');
+      const wasExpanded = item.classList.contains('is-expanded');
 
       if (item === targetItem && shouldOpen) {
         item.classList.add('is-expanded');
@@ -44,23 +73,32 @@ export function initProjectsAccordion(): (() => void) | undefined {
         }
 
         // Si el encabezado del elemento quedó oculto debajo de la navbar fija, alinear suavemente
-        setTimeout(() => {
-          const rect = item.getBoundingClientRect();
-          if (rect.top < 80) {
-            item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }
-          document.dispatchEvent(new CustomEvent('portfolio:layoutchange'));
-        }, 220);
+        // — recién cuando la animación de apertura terminó, no a mitad de camino.
+        if (!wasExpanded) {
+          afterCollapseTransition(collapse, () => {
+            const rect = item.getBoundingClientRect();
+            if (rect.top < 80) {
+              item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+            document.dispatchEvent(new CustomEvent('portfolio:layoutchange'));
+          });
+        }
       } else {
         item.classList.remove('is-expanded');
         item.setAttribute('data-expanded', 'false');
         header?.setAttribute('aria-expanded', 'false');
         collapse?.setAttribute('aria-hidden', 'true');
         collapse?.setAttribute('inert', '');
+
+        // Solo el/los ítems que de verdad estaban abiertos disparan una
+        // transición real — evita despachos redundantes del resto.
+        if (wasExpanded) {
+          afterCollapseTransition(collapse, () => {
+            document.dispatchEvent(new CustomEvent('portfolio:layoutchange'));
+          });
+        }
       }
     });
-
-    document.dispatchEvent(new CustomEvent('portfolio:layoutchange'));
   }
 
   // 1. Configuración de clics y teclado en cada acordeón

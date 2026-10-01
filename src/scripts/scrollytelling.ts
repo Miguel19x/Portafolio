@@ -7,9 +7,9 @@ export function initScrollytelling(): () => void {
   const glow2 = document.getElementById('glow-circle-2');
   const navPills = Array.from(document.querySelectorAll<HTMLElement>('.nav-scroller-pill'));
   const sectionElements = Array.from(document.querySelectorAll<HTMLElement>('section[data-section]'));
+  const sectionOrder = sectionElements.map((el) => (el.getAttribute('data-section') as SectionId) || 'hero');
 
   let activeSectionId: SectionId = 'hero';
-  let rafId: number | null = null;
 
   let cachedDocHeight = 0;
   function updateDocHeight() {
@@ -17,47 +17,20 @@ export function initScrollytelling(): () => void {
   }
   updateDocHeight();
 
-  function determineActiveSection(): SectionId {
-    const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-    const winHeight = window.innerHeight;
-    const docHeight = cachedDocHeight || (document.documentElement.scrollHeight || 0);
+  // ==========================================================================
+  // DETECCIÓN DE SECCIÓN ACTIVA (SIN getBoundingClientRect POR FRAME)
+  // Un IntersectionObserver sobre una franja delgada en el centro del viewport
+  // reemplaza el escaneo de las 6 secciones en cada evento de scroll. El
+  // callback del observer solo se ejecuta cuando una sección realmente entra
+  // o sale de esa franja, no en cada frame de scroll (nativo o por rAF).
+  // ==========================================================================
+  const visibleInBand = new Set<SectionId>();
 
-    // 1. Extremo superior absoluto: Hero garantizado
-    if (scrollY < 80) {
-      return 'hero';
+  function pickActiveFromVisible(): SectionId {
+    for (let i = sectionOrder.length - 1; i >= 0; i--) {
+      if (visibleInBand.has(sectionOrder[i])) return sectionOrder[i];
     }
-
-    // 2. Extremo inferior absoluto: Contacto garantizado
-    if (scrollY + winHeight >= docHeight - 45) {
-      return 'contacto';
-    }
-
-    // 3. Selección basada en presencia visual ponderada en el centro del viewport
-    // Funciona con secciones dinámicas de cualquier altura (como acordeones expandidos de 1500px+)
-    const midScreen = winHeight * 0.48;
-    let bestSection: SectionId = 'hero';
-    let maxScore = -1;
-
-    for (let i = 0; i < sectionElements.length; i++) {
-      const sec = sectionElements[i];
-      const rect = sec.getBoundingClientRect();
-      const visibleTop = Math.max(0, rect.top);
-      const visibleBottom = Math.min(winHeight, rect.bottom);
-      const visibleHeight = Math.max(0, visibleBottom - visibleTop);
-
-      if (visibleHeight <= 0) continue;
-
-      // Bono si la sección abarca el centro de lectura del viewport
-      const coversCenter = rect.top <= midScreen && rect.bottom >= midScreen;
-      const score = visibleHeight + (coversCenter ? winHeight * 0.45 : 0);
-
-      if (score > maxScore) {
-        maxScore = score;
-        bestSection = (sec.getAttribute('data-section') as SectionId) || 'hero';
-      }
-    }
-
-    return bestSection;
+    return activeSectionId;
   }
 
   function applyPalette(sectionId: SectionId) {
@@ -89,52 +62,78 @@ export function initScrollytelling(): () => void {
     }
   }
 
-  function syncThemeAndNav(force = false) {
-    if (force) {
-      if (rafId !== null) {
-        cancelAnimationFrame(rafId);
-        rafId = null;
-      }
-      updateDocHeight();
-      const nextSectionId = determineActiveSection();
-      activeSectionId = nextSectionId;
-      applyPalette(activeSectionId);
-      updatePills(activeSectionId);
-      return;
-    }
-
-    if (rafId !== null) return;
-
-    rafId = window.requestAnimationFrame(() => {
-      rafId = null;
-      const nextSectionId = determineActiveSection();
-      if (nextSectionId === activeSectionId) return;
-      activeSectionId = nextSectionId;
-      applyPalette(activeSectionId);
-      updatePills(activeSectionId);
-    });
+  function setActiveSection(nextSectionId: SectionId) {
+    if (nextSectionId === activeSectionId) return;
+    activeSectionId = nextSectionId;
+    applyPalette(activeSectionId);
+    updatePills(activeSectionId);
   }
 
-  // Sincronización continua en scroll, redimensionamiento y cambios de layout (acordeones)
-  const onScroll = () => syncThemeAndNav(false);
+  // Observer de la franja central: decide qué sección domina el centro del
+  // viewport. Solo se ejecuta cuando una sección cruza el umbral, no en cada
+  // frame de scroll — es el reemplazo barato de recorrer getBoundingClientRect
+  // sobre las 6 secciones todo el tiempo que dura cualquier scroll (nativo,
+  // por rAF, o el scroll suave largo al navegar entre secciones con los botones).
+  const centerBandObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const id = (entry.target.getAttribute('data-section') as SectionId) || 'hero';
+        if (entry.isIntersecting) {
+          visibleInBand.add(id);
+        } else {
+          visibleInBand.delete(id);
+        }
+      });
+
+      const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+      if (scrollY >= 80) {
+        setActiveSection(pickActiveFromVisible());
+      }
+    },
+    { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
+  );
+  sectionElements.forEach((sec) => centerBandObserver.observe(sec));
+
+  // Casos extremos (tope y fondo absolutos de la página): comparaciones
+  // numéricas baratas (scrollY/innerHeight), sin leer geometría de elementos.
+  let edgeRafId: number | null = null;
+  function checkEdges() {
+    edgeRafId = null;
+    const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+    const winHeight = window.innerHeight;
+    const docHeight = cachedDocHeight || document.documentElement.scrollHeight || 0;
+
+    if (scrollY < 80) {
+      setActiveSection('hero');
+    } else if (scrollY + winHeight >= docHeight - 45) {
+      setActiveSection('contacto');
+    }
+  }
+
+  const onScroll = () => {
+    if (edgeRafId !== null) return;
+    edgeRafId = window.requestAnimationFrame(checkEdges);
+  };
+
   const onResize = () => {
     updateDocHeight();
-    syncThemeAndNav(true);
+    checkEdges();
+    setActiveSection(pickActiveFromVisible());
   };
+
   const onThemeChange = () => {
-    // Sincronización INMEDIATA y SÍNCRONA de la paleta para la sección activa actual.
-    // No requiere ejecutar determineActiveSection() ni consultar geometrías del DOM
-    // porque el tema no altera la posición de scroll ni la sección activa.
-    if (rafId !== null) {
-      cancelAnimationFrame(rafId);
-      rafId = null;
-    }
+    // Sincronización inmediata de la paleta para la sección activa actual.
+    // No requiere recalcular qué sección está activa: el tema no altera
+    // la posición de scroll.
     applyPalette(activeSectionId);
     updatePills(activeSectionId);
   };
+
   const onLayoutChange = () => {
+    // Un acordeón se expandió/colapsó: solo necesitamos refrescar la altura
+    // cacheada del documento para los casos extremos. El IntersectionObserver
+    // ya se reajusta solo cuando cambia la geometría de las secciones.
     updateDocHeight();
-    syncThemeAndNav(true);
   };
 
   window.addEventListener('scroll', onScroll, { passive: true });
@@ -142,8 +141,10 @@ export function initScrollytelling(): () => void {
   document.addEventListener('portfolio:themechange', onThemeChange);
   document.addEventListener('portfolio:layoutchange', onLayoutChange);
 
-  // Ejecución inicial inmediata
-  syncThemeAndNav(true);
+  // Estado inicial (el IntersectionObserver entregará su primera lectura
+  // real en el próximo microtask; mientras tanto mostramos la paleta de Hero).
+  applyPalette(activeSectionId);
+  updatePills(activeSectionId);
 
   // ==========================================================================
   // ENTRADA & SCROLL REVEAL (Hero Entrance + Cascading Scroll Reveal)
@@ -268,11 +269,12 @@ export function initScrollytelling(): () => void {
 
   // Cleanup
   return () => {
-    if (rafId !== null) cancelAnimationFrame(rafId);
+    if (edgeRafId !== null) cancelAnimationFrame(edgeRafId);
     window.removeEventListener('scroll', onScroll);
     window.removeEventListener('resize', onResize);
     document.removeEventListener('portfolio:themechange', onThemeChange);
     document.removeEventListener('portfolio:layoutchange', onLayoutChange);
+    centerBandObserver.disconnect();
     revealObserver?.disconnect();
   };
 }
