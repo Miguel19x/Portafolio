@@ -18,9 +18,9 @@ const {
   canonical
 } = Astro.props;
 
-const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://miguel19x.github.io/Portafolio';
-const canonicalURL = canonical || new URL(Astro.url.pathname, siteUrl).href;
-const socialImageURL = new URL(image, siteUrl).href;
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://miguelarangurenportafolio.netlify.app';
+const canonicalURL = canonical || `${siteUrl}${Astro.url.pathname === '/' ? '/' : Astro.url.pathname.replace(/\/$/, '')}`;
+const socialImageURL = image.startsWith('http') ? image : `${siteUrl}${image.startsWith('/') ? '' : '/'}${image}`;
 
 // Structured Data Schema.org (Google ProfilePage & Person & WebSite - estrictamente sin FAQ)
 const schemaGraph = {

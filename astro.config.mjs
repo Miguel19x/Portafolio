@@ -3,7 +3,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.SITE_URL || 'https://miguel19x.github.io/Portafolio',
+  site: process.env.URL || process.env.SITE_URL || 'https://miguelarangurenportafolio.netlify.app',
   devToolbar: {
     enabled: false,
   },

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://miguel19x.github.io/Portafolio/sitemap.xml
+Sitemap: https://miguelarangurenportafolio.netlify.app/sitemap.xml
