@@ -74,7 +74,7 @@ import Button from '../common/Button.astro';
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-2 pt-3 border-t border-white/10 font-mono-code text-xs">
           {HERO_METRICS.map((metric, idx) => (
             <div class="p-1 sm:p-0">
-              <p class="text-slate-500 mb-0.5 text-[11px]" data-i18n={`hero.metric${idx + 1}Index`}>{metric.index}</p>
+              <p class="text-slate-400 mb-0.5 text-[11px]" data-i18n={`hero.metric${idx + 1}Index`}>{metric.index}</p>
               <p class={`text-base sm:text-lg font-semibold tracking-tight ${metric.valueColorClass || 'text-white'}`} data-i18n={`hero.metric${idx + 1}Value`}>{metric.value}</p>
               <p class="text-[10px] sm:text-[11px] text-slate-400 leading-tight" data-i18n={`hero.metric${idx + 1}Sub`}>{metric.sublabel}</p>
             </div>
@@ -112,7 +112,7 @@ import Button from '../common/Button.astro';
             <button
               type="button"
               id="spec-tab-profile"
-              class="spec-tab-btn active px-3 py-1 rounded-md transition-all duration-200 flex items-center gap-1.5 text-slate-300 hover:text-white"
+              class="spec-tab-btn active px-3 py-1 rounded-md transition-colors duration-200 flex items-center gap-1.5 text-slate-300 hover:text-white"
               data-spec-tab="profile"
             >
               <svg class="w-3.5 h-3.5 text-orange-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -127,7 +127,7 @@ import Button from '../common/Button.astro';
             <button
               type="button"
               id="spec-tab-terminal"
-              class="spec-tab-btn px-3 py-1 rounded-md transition-all duration-200 flex items-center gap-1.5 text-slate-400 hover:text-white"
+              class="spec-tab-btn px-3 py-1 rounded-md transition-colors duration-200 flex items-center gap-1.5 text-slate-400 hover:text-white"
               data-spec-tab="terminal"
             >
               <svg class="w-3.5 h-3.5 text-emerald-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -234,13 +234,13 @@ import Button from '../common/Button.astro';
       <a 
         href="#enfoque"
         id="hero-scroll-cue"
-        class="hero-next-pill group inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/50 hover:bg-slate-900/80 backdrop-blur-md border border-white/10 hover:border-orange-500/40 text-slate-400 hover:text-white font-mono font-mono-code text-[11px] font-medium tracking-wider transition-all duration-200 select-none cursor-pointer"
-        aria-label="Ir a la sección 01: Enfoque"
+        class="hero-next-pill group inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-slate-900/50 hover:bg-slate-900/80 backdrop-blur-md border border-white/10 hover:border-orange-500/40 text-slate-400 hover:text-white font-mono font-mono-code text-[11px] font-medium tracking-wider transition-[background-color,color,border-color,opacity,transform] duration-200 select-none cursor-pointer"
+        aria-label="SIGUIENTE: // 01. ENFOQUE - Ir a la sección"
         data-i18n-aria-label="hero.nextAria"
       >
         <span class="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse shrink-0" aria-hidden="true"></span>
         <span class="inline-flex items-center gap-1.5">
-          <span class="text-slate-500 font-semibold" data-i18n="hero.nextLabel">SIGUIENTE: //</span>
+          <span class="text-slate-400 font-semibold" data-i18n="hero.nextLabel">SIGUIENTE: //</span>
           <span class="text-slate-300 group-hover:text-white transition-colors" data-i18n="hero.nextTarget">01. ENFOQUE</span>
         </span>
         <span class="text-orange-400 group-hover:translate-y-0.5 transition-transform duration-200 font-mono text-xs leading-none shrink-0" aria-hidden="true">↓</span>

@@ -44,12 +44,12 @@
   color: #0f172a;
 }
 
-/* Garantía de contraste: los botones con fondo de acento de marca siempre conservan texto blanco */
+/* Garantía de contraste WCAG 1.4.3 AA (7.5:1): texto oscuro de alto contraste sobre fondo naranja brillante */
 [data-theme="light"] .btn-brand-accent,
 [data-theme="light"] .btn-brand-accent *,
 [data-theme="light"] .project-btn-primary,
 [data-theme="light"] .project-btn-primary * {
-  color: #ffffff !important;
+  color: #090a0f !important;
 }
 
 [data-theme="light"] .text-slate-200 {

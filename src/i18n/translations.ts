@@ -55,7 +55,7 @@ export const translations = {
       scrollHint: "Scroll para explorar decisiones de ingeniería",
       nextLabel: "SIGUIENTE: //",
       nextTarget: "01. ENFOQUE",
-      nextAria: "Ir a la sección 01: Enfoque"
+      nextAria: "SIGUIENTE: // 01. ENFOQUE - Ir a la sección"
     },
     spec: {
       title: "SYS_PROFILE // M_ARANGUREN",
@@ -325,7 +325,7 @@ export const translations = {
     },
     footer: {
       copyright: "© 2026 Miguel Angel Aranguren Ramirez · Desarrollador Fullstack Remoto · Construido con rigor en Astro + TypeScript + Tailwind CSS",
-      returnAria: "Volver al inicio de la página",
+      returnAria: "RETORNAR // 00. ROOT - Volver al inicio",
       returnLabel: "RETORNAR //",
       returnTarget: "00. ROOT"
     }
@@ -381,7 +381,7 @@ export const translations = {
       scrollHint: "Scroll to explore engineering decisions",
       nextLabel: "NEXT: //",
       nextTarget: "01. TECHNICAL FOCUS",
-      nextAria: "Go to section 01: Technical Focus"
+      nextAria: "NEXT: // 01. TECHNICAL FOCUS - Go to section"
     },
     spec: {
       title: "SYS_PROFILE // M_ARANGUREN",
@@ -651,7 +651,7 @@ export const translations = {
     },
     footer: {
       copyright: "© 2026 Miguel Angel Aranguren Ramirez · Remote Fullstack Developer · Built with precision in Astro + TypeScript + Tailwind CSS",
-      returnAria: "Back to top of page",
+      returnAria: "RETURN // 00. ROOT - Back to top",
       returnLabel: "RETURN //",
       returnTarget: "00. ROOT"
     }

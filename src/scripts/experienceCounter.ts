@@ -198,22 +198,34 @@ export function initExperienceCounter(): (() => void) | undefined {
     observer.observe(targetCard);
   }
 
-  // 2. Listener de scroll pasivo como respaldo garantizado
+  // 2. Listener de scroll pasivo como respaldo únicamente si no existe IntersectionObserver
+  let scrollRafId: number | null = null;
   const handleScroll = () => {
-    checkVisibilityAndTrigger();
+    if (scrollRafId !== null) return;
+    scrollRafId = requestAnimationFrame(() => {
+      scrollRafId = null;
+      checkVisibilityAndTrigger();
+    });
   };
-  window.addEventListener('scroll', handleScroll, { passive: true });
 
-  // 3. Activación garantizada al recargar la página (inmediata y diferida por scroll restoration)
-  checkVisibilityAndTrigger();
-  const t1 = setTimeout(checkVisibilityAndTrigger, 100);
-  const t2 = setTimeout(checkVisibilityAndTrigger, 300);
+  if (!observer) {
+    window.addEventListener('scroll', handleScroll, { passive: true });
+  }
+
+  // 3. Activación garantizada: Si existe IntersectionObserver, este se encarga sin forzar reflows.
+  // Solo medimos rect si no hay soporte de IntersectionObserver.
+  if (!observer) {
+    requestAnimationFrame(() => {
+      checkVisibilityAndTrigger();
+    });
+  }
 
   // Cleanup
   return () => {
-    clearTimeout(t1);
-    clearTimeout(t2);
-    window.removeEventListener('scroll', handleScroll);
+    if (scrollRafId !== null) cancelAnimationFrame(scrollRafId);
+    if (!observer) {
+      window.removeEventListener('scroll', handleScroll);
+    }
     stopAllAnimations();
     if (observer) {
       observer.disconnect();

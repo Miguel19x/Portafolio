@@ -390,6 +390,7 @@ export function initHeroSpecCard(): (() => void) | undefined {
   // 4. Rotador de roles con efecto typewriter
   const typewriterTarget = document.getElementById('hero-typewriter-text');
   let typewriterTimeout: number | undefined;
+  let typewriterObserver: IntersectionObserver | null = null;
 
   if (typewriterTarget) {
     const rolesByLang: Record<string, string[]> = {
@@ -410,6 +411,7 @@ export function initHeroSpecCard(): (() => void) | undefined {
     let roleIdx = 0;
     let charIdx = 0;
     let isDeleting = false;
+    let isTypewriterActive = true;
 
     const getCurrentRoles = (): string[] => {
       const lang = document.documentElement.getAttribute('lang') || 'es';
@@ -417,6 +419,7 @@ export function initHeroSpecCard(): (() => void) | undefined {
     };
 
     const typeRole = () => {
+      if (!isTypewriterActive) return;
       const roles = getCurrentRoles();
       const currentRole = roles[roleIdx % roles.length];
 
@@ -444,6 +447,24 @@ export function initHeroSpecCard(): (() => void) | undefined {
 
     typeRole();
 
+    // Pausar rotación en segundo plano cuando no está en pantalla para ahorrar CPU/batería en móvil
+    if ('IntersectionObserver' in window) {
+      typewriterObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!isTypewriterActive) {
+              isTypewriterActive = true;
+              typeRole();
+            }
+          } else {
+            isTypewriterActive = false;
+            if (typewriterTimeout) clearTimeout(typewriterTimeout);
+          }
+        });
+      }, { threshold: 0.05 });
+      typewriterObserver.observe(typewriterTarget);
+    }
+
     const onLangChange = () => {
       charIdx = 0;
       isDeleting = false;
@@ -456,6 +477,7 @@ export function initHeroSpecCard(): (() => void) | undefined {
 
   return () => {
     specObserver?.disconnect();
+    typewriterObserver?.disconnect();
     if (specHeader) {
       specHeader.removeEventListener('pointerdown', onPointerDown);
       specHeader.removeEventListener('pointermove', onPointerMove);

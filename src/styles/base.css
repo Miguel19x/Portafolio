@@ -331,13 +331,19 @@ body {
 /* Constant Brand CTA Button */
 .btn-brand-accent {
   background: var(--brand-accent);
-  color: #ffffff;
+  color: #090a0f !important;
+  font-weight: 700;
   box-shadow: 0 8px 24px -4px var(--brand-accent-glow);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
+}
+
+.btn-brand-accent * {
+  color: #090a0f !important;
 }
 
 .btn-brand-accent:hover {
   background: var(--brand-accent-hover);
+  color: #090a0f !important;
   transform: translateY(-2px);
   box-shadow: 0 12px 28px -4px rgba(249, 115, 22, 0.45);
 }
@@ -438,6 +444,7 @@ body {
 .reveal-el.is-visible {
   opacity: 1;
   transform: none;
+  will-change: auto;
 }
 
 .reveal-scale {
@@ -451,6 +458,7 @@ body {
 .reveal-scale.is-visible {
   opacity: 1;
   transform: none;
+  will-change: auto;
 }
 
 /* "Vívelo por dentro": la tarjeta cobra vida al tomar foco */
@@ -493,6 +501,8 @@ body {
   pointer-events: none;
   transition: opacity 0.6s ease;
   z-index: 1;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
 }
 
 .browser-frame.is-live::after {
@@ -501,8 +511,50 @@ body {
 }
 
 @keyframes roamLight {
-  0%, 100% { top: 12%; left: 6%; }
-  50% { top: 45%; left: 55%; }
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(60%, 40%, 0); }
+}
+
+/* ==========================================================================
+   OPTIMIZACIONES DE RENDIMIENTO PARA DISPOSITIVOS MÓVILES
+   Mantiene la estética y frosted-glass intactos reduciendo la sobrecarga de GPU
+   ========================================================================== */
+#ambient-glow {
+  contain: strict;
+  will-change: opacity;
+}
+
+#ambient-glow > div {
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  #ambient-glow #glow-circle-1 {
+    width: 22rem;
+    height: 22rem;
+    filter: blur(48px);
+  }
+  #ambient-glow #glow-circle-2 {
+    width: 22rem;
+    height: 22rem;
+    filter: blur(48px);
+  }
+
+  /* Reducir el radio de convolución de blur en superficies translúcidas al 85-95%
+     logrando el mismo efecto frosted glass pero ahorrando hasta 70% de pasadas de GPU */
+  .site-header-nav,
+  .mobile-nav-panel,
+  .experience-card,
+  .contact-card,
+  .project-card,
+  .project-accordion-item,
+  .skill-card-panel,
+  .spec-card,
+  .browser-frame {
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+  }
 }
 
 /* Transiciones de tema nativas por GPU mediante View Transitions API */

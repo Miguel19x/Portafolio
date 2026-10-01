@@ -185,7 +185,7 @@ const lightboxSrc = currentImage ? currentImage.src : (typeof project.image === 
      3. COMPONENTE DE TARJETA INDEPENDIENTE (CON ANIMACIÓN CSS GRID)
      ============================================================================ -->
 <article 
-  class={`project-accordion-item project-card group mb-4 rounded-2xl overflow-hidden border border-white/10 bg-slate-950/70 backdrop-blur-xl shadow-lg transition-all duration-300 hover:border-white/20 hover:bg-slate-900/60 ${theme.cardHoverBorder} ${theme.cardActiveBorder} ${theme.glowShadow} ${isInitiallyExpanded ? 'is-expanded' : ''}`}
+  class={`project-accordion-item project-card group mb-4 rounded-2xl overflow-hidden border border-white/10 bg-slate-950/70 backdrop-blur-xl shadow-lg transition-all duration-300 hover:bg-slate-900/60 ${theme.cardHoverBorder} ${theme.cardActiveBorder} ${theme.glowShadow} ${isInitiallyExpanded ? 'is-expanded' : ''}`}
   id={`project-${project.id}`}
   data-project-id={project.id}
   data-expanded={isInitiallyExpanded ? 'true' : 'false'}
@@ -327,13 +327,13 @@ const lightboxSrc = currentImage ? currentImage.src : (typeof project.image === 
     </div>
   </div>
 
-  <!-- CUERPO DESPLEGABLE: TRANSICIÓN CSS GRID (0fr -> 1fr) -->
   <div
     class="project-accordion-collapse accordion-collapse"
     id={`collapse-${project.id}`}
     role="region"
     aria-labelledby={`header-${project.id}`}
     aria-hidden={isInitiallyExpanded ? 'false' : 'true'}
+    inert={!isInitiallyExpanded ? '' : undefined}
   >
     <div class="project-accordion-inner accordion-inner">
       <div class="p-4 sm:p-6 lg:p-7 space-y-6">
@@ -383,7 +383,7 @@ const lightboxSrc = currentImage ? currentImage.src : (typeof project.image === 
                       </svg>
                     </a>
                   ) : (
-                    <span class="text-[11px] font-mono text-slate-500 truncate block">{cleanUrl}</span>
+                    <span class="text-[11px] font-mono text-slate-400 truncate block">{cleanUrl}</span>
                   )}
                 </div>
 
@@ -547,7 +547,7 @@ const lightboxSrc = currentImage ? currentImage.src : (typeof project.image === 
                   {project.diagram.header}
                 </span>
               </div>
-              <span class="pipeline-sub font-mono text-[10px] text-slate-500 uppercase hidden md:inline" data-i18n={`projects.${project.id}.diagramSub`}>
+              <span class="pipeline-sub font-mono text-[10px] text-slate-400 uppercase hidden md:inline" data-i18n={`projects.${project.id}.diagramSub`}>
                 {project.diagram.sub}
               </span>
             </div>
@@ -559,7 +559,7 @@ const lightboxSrc = currentImage ? currentImage.src : (typeof project.image === 
                   <div class="flex flex-col gap-0.5 mb-1.5 min-w-0 w-full">
                     <!-- Número y Categoría de la Fase en su propia línea superior -->
                     <div class="flex items-center gap-1.5 min-w-0">
-                      <span class="font-mono text-[9px] sm:text-[10px] text-slate-500 font-bold shrink-0">0{sIdx + 1}</span>
+                      <span class="font-mono text-[9px] sm:text-[10px] text-slate-400 font-bold shrink-0">0{sIdx + 1}</span>
                       <span class="text-slate-600 text-[9px] shrink-0">/</span>
                       <span class={`font-mono text-[9px] sm:text-[10px] font-bold ${theme.text} uppercase tracking-wider`} data-i18n={`projects.${project.id}.step${sIdx + 1}Num`}>
                         {step.num}

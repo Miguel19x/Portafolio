@@ -9,13 +9,18 @@ export function initScrollytelling(): () => void {
   const sectionElements = Array.from(document.querySelectorAll<HTMLElement>('section[data-section]'));
 
   let activeSectionId: SectionId = 'hero';
-  let targetSectionId: SectionId = 'hero';
   let rafId: number | null = null;
+
+  let cachedDocHeight = 0;
+  function updateDocHeight() {
+    cachedDocHeight = document.documentElement.scrollHeight || document.body.scrollHeight || 0;
+  }
+  updateDocHeight();
 
   function determineActiveSection(): SectionId {
     const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
-    const docHeight = document.documentElement.scrollHeight || document.body.scrollHeight || 0;
     const winHeight = window.innerHeight;
+    const docHeight = cachedDocHeight || (document.documentElement.scrollHeight || 0);
 
     // 1. Extremo superior absoluto: Hero garantizado
     if (scrollY < 80) {
@@ -85,16 +90,26 @@ export function initScrollytelling(): () => void {
   }
 
   function syncThemeAndNav(force = false) {
-    const nextSectionId = determineActiveSection();
-    if (nextSectionId === activeSectionId && !force) return;
-    targetSectionId = nextSectionId;
+    if (force) {
+      if (rafId !== null) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+      updateDocHeight();
+      const nextSectionId = determineActiveSection();
+      activeSectionId = nextSectionId;
+      applyPalette(activeSectionId);
+      updatePills(activeSectionId);
+      return;
+    }
 
     if (rafId !== null) return;
 
     rafId = window.requestAnimationFrame(() => {
       rafId = null;
-      if (activeSectionId === targetSectionId && !force) return;
-      activeSectionId = targetSectionId;
+      const nextSectionId = determineActiveSection();
+      if (nextSectionId === activeSectionId) return;
+      activeSectionId = nextSectionId;
       applyPalette(activeSectionId);
       updatePills(activeSectionId);
     });
@@ -102,7 +117,10 @@ export function initScrollytelling(): () => void {
 
   // Sincronización continua en scroll, redimensionamiento y cambios de layout (acordeones)
   const onScroll = () => syncThemeAndNav(false);
-  const onResize = () => syncThemeAndNav(true);
+  const onResize = () => {
+    updateDocHeight();
+    syncThemeAndNav(true);
+  };
   const onThemeChange = () => {
     // Sincronización INMEDIATA y SÍNCRONA de la paleta para la sección activa actual.
     // No requiere ejecutar determineActiveSection() ni consultar geometrías del DOM
@@ -114,7 +132,10 @@ export function initScrollytelling(): () => void {
     applyPalette(activeSectionId);
     updatePills(activeSectionId);
   };
-  const onLayoutChange = () => syncThemeAndNav(true);
+  const onLayoutChange = () => {
+    updateDocHeight();
+    syncThemeAndNav(true);
+  };
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize, { passive: true });

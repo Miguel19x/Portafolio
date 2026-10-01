@@ -34,11 +34,11 @@ const hasContent = Boolean(index || label);
         ]}></div>
 
         {/* Badge Técnico de Terminal: estrictamente en una sola línea */}
-        <div class="section-divider-badge px-2 sm:px-3 flex items-center gap-1 sm:gap-1.5 font-mono font-mono-code text-slate-500 uppercase opacity-85 shrink-0 whitespace-nowrap">
+        <div class="section-divider-badge px-2 sm:px-3 flex items-center gap-1 sm:gap-1.5 font-mono font-mono-code text-slate-400 uppercase opacity-90 shrink-0 whitespace-nowrap">
           <span class="text-orange-500/60 font-bold select-none shrink-0">//</span>
-          {index && <span class="text-slate-400 font-medium shrink-0">[{index}]</span>}
-          {index && label && <span class="text-slate-600 shrink-0">//</span>}
-          {label && <span class="text-slate-400/85 shrink-0" data-i18n={labelKey}>{label}</span>}
+          {index && <span class="text-slate-300 font-medium shrink-0">[{index}]</span>}
+          {index && label && <span class="text-slate-500 shrink-0">//</span>}
+          {label && <span class="text-slate-300 shrink-0" data-i18n={labelKey}>{label}</span>}
         </div>
 
         {/* Línea horizontal tenue derecha */}

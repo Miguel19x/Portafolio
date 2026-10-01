@@ -42,7 +42,8 @@ export function initCreativeCanvas(): (() => void) | undefined {
 
   function resize() {
     if (!canvas) return;
-    const dpr = Math.min(window.devicePixelRatio || 1, 1.5); // Limitar a 1.5 DPR para prevenir sobrecarga de píxeles en pantallas 4K/Retina
+    const isMobile = window.innerWidth < 768;
+    const dpr = isMobile ? 1 : Math.min(window.devicePixelRatio || 1, 1.5);
     width = window.innerWidth;
     height = window.innerHeight;
     canvas.width = Math.floor(width * dpr);
@@ -52,8 +53,14 @@ export function initCreativeCanvas(): (() => void) | undefined {
 
   resize();
 
-  // Cantidad de partículas balanceada para máxima fluidez y belleza visual
-  const particleCount = window.innerWidth < 768 ? 16 : 32;
+  // Respetar preferencia de reducción de movimiento
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    return;
+  }
+
+  // Cantidad de partículas balanceada para máxima fluidez y belleza visual según el área
+  const isMobile = window.innerWidth < 768;
+  const particleCount = isMobile ? 14 : 32;
   const particles: Particle[] = [];
 
   for (let i = 0; i < particleCount; i++) {
@@ -89,7 +96,7 @@ export function initCreativeCanvas(): (() => void) | undefined {
   };
   document.addEventListener('visibilitychange', onVisibilityChange);
 
-  const maxDist = 95;
+  const maxDist = isMobile ? 80 : 95;
   const maxDistSq = maxDist * maxDist;
 
   function renderFrame() {
@@ -138,14 +145,22 @@ export function initCreativeCanvas(): (() => void) | undefined {
     ctx.stroke();
   }
 
-  function animate() {
-    if (isPageActive && !isScrolling) {
-      renderFrame();
-    }
+  // Control de FPS: 30 FPS en móvil para liberar la GPU y batería, 60 FPS en desktop
+  let lastTime = 0;
+  const frameInterval = isMobile ? 1000 / 30 : 1000 / 60;
+
+  function animate(currentTime: number) {
     animationFrameId = requestAnimationFrame(animate);
+    if (!isPageActive || isScrolling) return;
+
+    const elapsed = currentTime - lastTime;
+    if (elapsed < frameInterval) return;
+
+    lastTime = currentTime - (elapsed % frameInterval);
+    renderFrame();
   }
 
-  animate();
+  animationFrameId = requestAnimationFrame(animate);
 
   return () => {
     window.removeEventListener('scroll', onScroll);

@@ -12,13 +12,18 @@ export function initHeaderNav(): () => void {
 
   // 1. Barra de progreso de scroll (Reading progress)
   let ticking = false;
+  let cachedScrollHeight = 0;
+
+  function recalculateScrollHeight() {
+    const docElem = document.documentElement;
+    const docBody = document.body;
+    cachedScrollHeight = (docElem.scrollHeight || docBody.scrollHeight || 0) - window.innerHeight;
+  }
 
   function updateScrollProgress() {
     if (!progressBar) return;
-    const docElem = document.documentElement;
-    const docBody = document.body;
-    const scrollTop = window.scrollY || docElem.scrollTop || docBody.scrollTop || 0;
-    const scrollHeight = (docElem.scrollHeight || docBody.scrollHeight || 0) - window.innerHeight;
+    const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    const scrollHeight = cachedScrollHeight || ((document.documentElement.scrollHeight || 0) - window.innerHeight);
 
     const progress = scrollHeight > 0 ? Math.min(1, Math.max(0, scrollTop / scrollHeight)) : 0;
     progressBar.style.transform = `scaleX(${progress})`;
@@ -32,9 +37,20 @@ export function initHeaderNav(): () => void {
     }
   };
 
+  const onLayoutChange = () => {
+    recalculateScrollHeight();
+    onScroll();
+  };
+
   window.addEventListener('scroll', onScroll, { passive: true });
-  document.addEventListener('portfolio:layoutchange', onScroll);
-  updateScrollProgress();
+  window.addEventListener('resize', onLayoutChange, { passive: true });
+  document.addEventListener('portfolio:layoutchange', onLayoutChange);
+
+  // Defer initial layout measurements to rAF to eliminate forced reflow on page load
+  window.requestAnimationFrame(() => {
+    recalculateScrollHeight();
+    updateScrollProgress();
+  });
 
   // 2. Control interactivo del menú móvil
   let closeTimeout: number | undefined;
@@ -44,12 +60,12 @@ export function initHeaderNav(): () => void {
     if (closeTimeout) clearTimeout(closeTimeout);
 
     mobileDrawer.classList.remove('hidden');
-    // Forzar reflow para que la animación CSS transicione correctamente
-    void mobileDrawer.offsetHeight;
-    mobileDrawer.classList.add('is-open');
-    menuToggle.classList.add('is-open');
-    menuToggle.setAttribute('aria-expanded', 'true');
-    mobileDrawer.setAttribute('aria-hidden', 'false');
+    requestAnimationFrame(() => {
+      mobileDrawer.classList.add('is-open');
+      menuToggle.classList.add('is-open');
+      menuToggle.setAttribute('aria-expanded', 'true');
+      mobileDrawer.setAttribute('aria-hidden', 'false');
+    });
   }
 
   function closeMenu() {

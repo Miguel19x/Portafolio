@@ -7,12 +7,85 @@ import Lightbox from '../components/common/Lightbox.astro';
 interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  canonical?: string;
 }
 
 const {
   title = 'Miguel Angel Aranguren Ramirez | Desarrollador Fullstack Remoto',
-  description = 'Portafolio de Miguel Angel Aranguren Ramirez, Desarrollador Fullstack especializado en Python, TypeScript, SQL, React y arquitecturas serverless. Estudiante de Ing. de Sistemas (UNEXPO) basado en Caracas, disponible para roles remotos.'
+  description = 'Portafolio de Miguel Angel Aranguren Ramirez, Desarrollador Fullstack especializado en Python, TypeScript, SQL, React y arquitecturas serverless. Estudiante de Ing. de Sistemas (UNEXPO) basado en Caracas, disponible para roles remotos.',
+  image = '/og-image.png',
+  canonical
 } = Astro.props;
+
+const siteUrl = Astro.site ? Astro.site.toString().replace(/\/$/, '') : 'https://miguel19x.github.io/Portafolio';
+const canonicalURL = canonical || new URL(Astro.url.pathname, siteUrl).href;
+const socialImageURL = new URL(image, siteUrl).href;
+
+// Structured Data Schema.org (Google ProfilePage & Person & WebSite - estrictamente sin FAQ)
+const schemaGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": `${canonicalURL}#profilepage`,
+      "url": canonicalURL,
+      "name": title,
+      "description": description,
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": `${siteUrl}/#website`,
+        "url": `${siteUrl}/`,
+        "name": "Miguel Angel Aranguren Ramirez | Portafolio Profesional",
+        "description": description,
+        "inLanguage": ["es", "en"]
+      },
+      "about": {
+        "@id": `${siteUrl}/#person`
+      },
+      "mainEntity": {
+        "@id": `${siteUrl}/#person`
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": `${siteUrl}/#person`,
+      "name": "Miguel Angel Aranguren Ramirez",
+      "alternateName": "Miguel Aranguren",
+      "url": `${siteUrl}/`,
+      "image": socialImageURL,
+      "jobTitle": "Desarrollador Fullstack",
+      "description": "Desarrollador Fullstack enfocado en sistemas donde la consistencia de datos, la automatización determinista y el rendimiento importan. Especialista en Python, TypeScript, React, SQL y Cloudflare Workers.",
+      "sameAs": [
+        "https://github.com/Miguel19x",
+        "https://linkedin.com/in/miguela19x"
+      ],
+      "knowsAbout": [
+        "Desarrollo Fullstack",
+        "Python",
+        "TypeScript",
+        "React",
+        "PostgreSQL",
+        "SQL",
+        "Pipelines ETL",
+        "Cloudflare Workers",
+        "Arquitecturas Serverless",
+        "Astro",
+        "Tailwind CSS",
+        "Docker"
+      ],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "Universidad Nacional Experimental Politécnica Antonio José de Sucre (UNEXPO)"
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Caracas",
+        "addressCountry": "VE"
+      }
+    }
+  ]
+};
 ---
 
 <!DOCTYPE html>
@@ -20,23 +93,76 @@ const {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>{title}</title>
+  <meta name="title" content={title} />
   <meta name="description" content={description} />
   <meta name="author" content="Miguel Angel Aranguren Ramirez" />
   <meta name="generator" content={Astro.generator} />
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   
-  <title>{title}</title>
+  <!-- Canonical & Language Alternates -->
+  <link rel="canonical" href={canonicalURL} />
+  <link rel="alternate" hreflang="es" href={canonicalURL} />
+  <link rel="alternate" hreflang="en" href={canonicalURL} />
+  <link rel="alternate" hreflang="x-default" href={canonicalURL} />
+  
+  <!-- Theme Color para Navegadores Móviles -->
+  <meta name="theme-color" content="#090a0f" media="(prefers-color-scheme: dark)" />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
-  <!-- Open Graph / Meta -->
+  <!-- Open Graph / Facebook / LinkedIn / WhatsApp -->
+  <meta property="og:type" content="profile" />
+  <meta property="og:site_name" content="Miguel Angel Aranguren Ramirez | Portafolio" />
+  <meta property="og:url" content={canonicalURL} />
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://github.com/Miguel19x" />
+  <meta property="og:image" content={socialImageURL} />
+  <meta property="og:image:secure_url" content={socialImageURL} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:alt" content="Miguel Angel Aranguren Ramirez - Desarrollador Fullstack (Python & TypeScript)" />
+  <meta property="og:locale" content="es_VE" />
+  <meta property="og:locale:alternate" content="en_US" />
+  <meta property="profile:first_name" content="Miguel Angel" />
+  <meta property="profile:last_name" content="Aranguren Ramirez" />
+  <meta property="profile:username" content="Miguel19x" />
 
-  <!-- Google Fonts: JetBrains Mono y Plus Jakarta Sans -->
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content={canonicalURL} />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={socialImageURL} />
+  <meta name="twitter:image:alt" content="Miguel Angel Aranguren Ramirez - Desarrollador Fullstack (Python & TypeScript)" />
+
+  <!-- Google Fonts: Preconnect & Asynchronous Non-Render-Blocking Loading -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link
+    rel="preload"
+    as="style"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+  />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    media="print"
+    onload="this.onload=null;this.removeAttribute('media')"
+  />
+  <noscript>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+    />
+  </noscript>
+
+  <!-- Google Structured Data (JSON-LD Schema.org) -->
+  <script type="application/ld+json" set:html={JSON.stringify(schemaGraph)} />
 
   <!-- Theme detection script (previene flash de tema incorrecto) -->
   <script is:inline>
@@ -81,17 +207,27 @@ const {
     import { initHeaderNav } from '../scripts/headerNav';
     import { initExperienceCounter } from '../scripts/experienceCounter';
 
-    // Inicializar cuando el DOM esté listo
+    // Inicializar de forma ordenada separando fases críticas y no críticas
     document.addEventListener('DOMContentLoaded', () => {
+      // Fase 1: Módulos fundamentales inmediatos (cero reflows síncronos)
       initTheme();
       initI18n();
       initHeaderNav();
-      initScrollytelling();
-      initCreativeCanvas();
-      initProjectsAccordion();
-      initLightbox();
-      initHeroSpecCard();
-      initExperienceCounter();
+
+      // Fase 2: Coordinación visual diferida al siguiente frame para erradicar layout thrashing
+      requestAnimationFrame(() => {
+        initScrollytelling();
+        initHeroSpecCard();
+        initProjectsAccordion();
+        initExperienceCounter();
+
+        // Fase 3: Módulos interactivos secundarios e idle
+        const scheduleIdle = window.requestIdleCallback || ((cb: () => void) => setTimeout(cb, 60));
+        scheduleIdle(() => {
+          initCreativeCanvas();
+          initLightbox();
+        });
+      });
     });
   </script>
 </body>

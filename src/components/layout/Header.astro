@@ -13,11 +13,11 @@ const navI18nMap: Record<string, string> = {
 <header class="fixed top-2.5 sm:top-4 left-1/2 -translate-x-1/2 z-50 w-[92vw] sm:w-[88vw] lg:w-fit lg:max-w-[95vw] box-border">
   <nav class="site-header-nav box-border relative flex items-center justify-between gap-2.5 sm:gap-3.5 lg:gap-5 px-3.5 sm:px-5 lg:px-6 py-2 sm:py-2.5 rounded-2xl bg-[#090b10]/90 backdrop-blur-xl border border-white/10 shadow-2xl transition-all duration-300 min-h-13 w-full">
     <!-- Dev identity badge (Left) -->
-    <a href="#hero" class="flex items-center gap-2 sm:gap-2.5 group shrink-0 min-w-0" aria-label="Ir al inicio">
+    <a href="#hero" class="flex items-center gap-2 sm:gap-2.5 group shrink-0 min-w-0" aria-label="miguel.aranguren - Ir al inicio">
       <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 pulse-dot shrink-0"></span>
       <div class="flex items-baseline gap-1.5 xl:gap-2 truncate">
         <span class="font-mono-code text-xs font-semibold tracking-wider text-slate-200 brand-username whitespace-nowrap">{PERSONAL_INFO.username}</span>
-        <span class="hidden xl:inline font-mono-code text-[11px] text-slate-500 brand-tagline whitespace-nowrap" data-i18n="nav.brandSub">{PERSONAL_INFO.tagline}</span>
+        <span class="hidden xl:inline font-mono-code text-[11px] text-slate-400 brand-tagline whitespace-nowrap" data-i18n="nav.brandSub">{PERSONAL_INFO.tagline}</span>
       </div>
     </a>
 
@@ -120,7 +120,7 @@ const navI18nMap: Record<string, string> = {
           class="mobile-nav-link nav-scroller-pill flex items-center justify-between px-3.5 py-2.5 rounded-xl border border-transparent text-slate-300 hover:text-white hover:bg-white/5 transition-all duration-200"
         >
           <span class="mobile-nav-label font-medium" data-i18n={navI18nMap[link.dataNav]}>{link.label}</span>
-          <span class="mobile-nav-arrow text-slate-500 font-bold transition-transform duration-200">→</span>
+          <span class="mobile-nav-arrow text-slate-400 font-bold transition-transform duration-200">→</span>
         </a>
       ))}
 

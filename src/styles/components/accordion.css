@@ -31,8 +31,9 @@
 .accordion-collapse {
   display: grid;
   grid-template-rows: 0fr;
-  transition: grid-template-rows 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition: grid-template-rows 400ms cubic-bezier(0.16, 1, 0.3, 1), visibility 400ms cubic-bezier(0.16, 1, 0.3, 1);
   overflow: hidden;
+  visibility: hidden;
 }
 
 .project-accordion-item.is-expanded .project-accordion-collapse,
@@ -40,6 +41,7 @@
 .project-card.is-expanded .accordion-collapse,
 .project-card[data-expanded="true"] .accordion-collapse {
   grid-template-rows: 1fr;
+  visibility: visible;
 }
 
 .project-accordion-inner,

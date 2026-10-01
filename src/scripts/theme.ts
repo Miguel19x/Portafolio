@@ -61,9 +61,6 @@ function applyThemeDom(theme: Theme): void {
   // Disparamos evento de sincronización inmediata y síncrona
   document.dispatchEvent(new CustomEvent('portfolio:themechange', { detail: { theme } }));
 
-  // Forzamos un reflow limpio mientras las transiciones siguen desactivadas
-  void document.documentElement.offsetHeight;
-
   // Restaurar transiciones en el frame subsiguiente para que las interacciones de scroll/hover sigan fluidas
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {

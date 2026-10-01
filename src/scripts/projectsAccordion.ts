@@ -34,6 +34,7 @@ export function initProjectsAccordion(): (() => void) | undefined {
         item.setAttribute('data-expanded', 'true');
         header?.setAttribute('aria-expanded', 'true');
         collapse?.setAttribute('aria-hidden', 'false');
+        collapse?.removeAttribute('inert');
 
         // Revelar diagrama de flujo escalonado si existe
         if (flowDiagram && !flowDiagram.classList.contains('is-revealed')) {
@@ -55,6 +56,7 @@ export function initProjectsAccordion(): (() => void) | undefined {
         item.setAttribute('data-expanded', 'false');
         header?.setAttribute('aria-expanded', 'false');
         collapse?.setAttribute('aria-hidden', 'true');
+        collapse?.setAttribute('inert', '');
       }
     });
 
@@ -149,7 +151,17 @@ export function initProjectsAccordion(): (() => void) | undefined {
     }
   }
 
-  window.addEventListener('scroll', handleAutoCloseOnScroll, { passive: true });
+  let scrollRafId: number | null = null;
+
+  function onScroll() {
+    if (isCompensatingScroll || scrollRafId !== null) return;
+    scrollRafId = window.requestAnimationFrame(() => {
+      scrollRafId = null;
+      handleAutoCloseOnScroll();
+    });
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
 
   // 3. Revelar diagrama del primer item si ya está abierto
   const firstExpanded = items.find((item) => item.classList.contains('is-expanded'));
@@ -183,7 +195,8 @@ export function initProjectsAccordion(): (() => void) | undefined {
   }
 
   return () => {
-    window.removeEventListener('scroll', handleAutoCloseOnScroll);
+    if (scrollRafId !== null) window.cancelAnimationFrame(scrollRafId);
+    window.removeEventListener('scroll', onScroll);
     window.removeEventListener('hashchange', handleHashChange);
   };
 }

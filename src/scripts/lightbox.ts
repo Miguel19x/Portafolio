@@ -20,7 +20,7 @@ function isDesktopHover(): boolean {
 }
 
 export function hideHoverPopup(): void {
-  if (!hoverPopup) return;
+  if (!hoverPopup || !hoverPopup.classList.contains('is-visible')) return;
   hoverPopup.classList.remove('is-visible');
   hoverPopup.setAttribute('aria-hidden', 'true');
 }
