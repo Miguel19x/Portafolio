@@ -23,6 +23,7 @@ export function hideHoverPopup(): void {
   if (!hoverPopup || !hoverPopup.classList.contains('is-visible')) return;
   hoverPopup.classList.remove('is-visible');
   hoverPopup.setAttribute('aria-hidden', 'true');
+  hoverPopup.setAttribute('inert', '');
 }
 
 export function showHoverPopup(previewEl: HTMLElement, src: string, url?: string | null, alt?: string | null): void {
@@ -64,6 +65,7 @@ export function showHoverPopup(previewEl: HTMLElement, src: string, url?: string
   hoverPopup.style.width = `${Math.round(popupWidth)}px`;
   hoverPopup.style.height = `${Math.round(popupHeight)}px`;
 
+  hoverPopup.removeAttribute('inert');
   hoverPopup.classList.add('is-visible');
   hoverPopup.setAttribute('aria-hidden', 'false');
 }
@@ -78,26 +80,42 @@ export function openLightbox(src: string, url?: string | null, alt?: string | nu
     lightboxUrl.textContent = url || '';
   }
 
+  lightboxModal.removeAttribute('inert');
   lightboxModal.classList.add('is-open');
   lightboxModal.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';
 
   if (lightboxCloseBtn) {
-    setTimeout(() => lightboxCloseBtn?.focus(), 100);
+    requestAnimationFrame(() => {
+      lightboxCloseBtn?.focus();
+    });
   }
 }
 
 export function closeLightbox(): void {
   if (!lightboxModal) return;
 
+  // 1. Desenfocar de inmediato cualquier elemento dentro del modal ANTES de ocultarlo
+  const returnTarget = lastFocusedPreview;
+  lastFocusedPreview = null;
+
+  if (document.activeElement && lightboxModal.contains(document.activeElement)) {
+    (document.activeElement as HTMLElement).blur();
+  }
+
+  // 2. Restaurar el foco al elemento que abrió la vista previa si existe y es enfocable
+  if (returnTarget && typeof returnTarget.focus === 'function') {
+    if (!returnTarget.hasAttribute('tabindex') && returnTarget.tagName === 'DIV') {
+      returnTarget.setAttribute('tabindex', '-1');
+    }
+    returnTarget.focus();
+  }
+
+  // 3. Una vez garantizado que ningún descendiente retiene foco, ocultar y aislar
   lightboxModal.classList.remove('is-open');
   lightboxModal.setAttribute('aria-hidden', 'true');
+  lightboxModal.setAttribute('inert', '');
   document.body.style.overflow = '';
-
-  if (lastFocusedPreview) {
-    lastFocusedPreview.focus();
-    lastFocusedPreview = null;
-  }
 }
 
 export function initLightbox(): void {
@@ -118,7 +136,7 @@ export function initLightbox(): void {
       const url = previewWin.getAttribute('data-lightbox-url');
       const alt = previewWin.getAttribute('data-lightbox-alt');
       if (src) {
-        lastFocusedPreview = previewWin;
+        lastFocusedPreview = (e.target as HTMLElement).closest<HTMLElement>('button, [role="button"], [tabindex="0"]') || previewWin;
         openLightbox(src, url, alt);
       }
     }
