@@ -58,9 +58,16 @@ export function initCreativeCanvas(): (() => void) | undefined {
     return;
   }
 
-  // Cantidad de partículas balanceada para máxima fluidez y belleza visual según el área
+  // Detección de dispositivos de bajos recursos (low-end laptops / tablets / móviles)
+  const isLowEndDevice =
+    (typeof navigator !== 'undefined' && (
+      (navigator.hardwareConcurrency && navigator.hardwareConcurrency <= 4) ||
+      ((navigator as any).deviceMemory && (navigator as any).deviceMemory <= 4)
+    )) || false;
+
+  // Cantidad de partículas balanceada para máxima fluidez sin saturar GPU
   const isMobile = window.innerWidth < 768;
-  const particleCount = isMobile ? 14 : 32;
+  const particleCount = isLowEndDevice ? 10 : (isMobile ? 14 : 26);
   const particles: Particle[] = [];
 
   for (let i = 0; i < particleCount; i++) {
@@ -145,9 +152,9 @@ export function initCreativeCanvas(): (() => void) | undefined {
     ctx.stroke();
   }
 
-  // Control de FPS: 30 FPS en móvil para liberar la GPU y batería, 60 FPS en desktop
+  // Control de FPS: 30 FPS en móviles o laptops de gama modesta (<= 4 núcleos) para liberar la GPU
   let lastTime = 0;
-  const frameInterval = isMobile ? 1000 / 30 : 1000 / 60;
+  const frameInterval = (isMobile || isLowEndDevice) ? 1000 / 30 : 1000 / 60;
 
   function animate(currentTime: number) {
     animationFrameId = requestAnimationFrame(animate);

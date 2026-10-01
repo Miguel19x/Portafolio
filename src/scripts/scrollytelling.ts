@@ -237,30 +237,34 @@ export function initScrollytelling(): () => void {
       });
     });
 
-    revealObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const target = entry.target as HTMLElement;
-            target.classList.add('is-visible');
-            target.addEventListener(
-              'transitionend',
-              (e) => {
-                if (e.target === target) {
-                  target.style.willChange = 'auto';
-                  target.style.transitionDelay = '';
-                }
-              },
-              { once: true }
-            );
-            revealObserver?.unobserve(target);
-          }
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -6% 0px' }
-    );
+    if ('IntersectionObserver' in window) {
+      revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const target = entry.target as HTMLElement;
+              target.classList.add('is-visible');
+              target.addEventListener(
+                'transitionend',
+                (e) => {
+                  if (e.target === target) {
+                    target.style.willChange = 'auto';
+                    target.style.transitionDelay = '';
+                  }
+                },
+                { once: true }
+              );
+              revealObserver?.unobserve(target);
+            }
+          });
+        },
+        { threshold: 0.05, rootMargin: '0px 0px 50px 0px' }
+      );
 
-    scrollRevealTargets.forEach((el) => revealObserver?.observe(el));
+      scrollRevealTargets.forEach((el) => revealObserver?.observe(el));
+    } else {
+      scrollRevealTargets.forEach((el) => el.classList.add('is-visible'));
+    }
 
   // Cleanup
   return () => {

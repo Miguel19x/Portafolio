@@ -435,16 +435,25 @@ body {
 /* Scroll Reveal & Entrance Animations: headers, cards, grids y métricas */
 .reveal-el {
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(18px);
+  transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: opacity, transform;
 }
 
 .reveal-el.is-visible {
-  opacity: 1;
-  transform: none;
+  opacity: 1 !important;
+  transform: none !important;
   will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-el,
+  .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
 }
 
 .reveal-scale {
@@ -529,20 +538,32 @@ body {
   will-change: transform;
 }
 
+/* Convolución de blur balanceada para alto rendimiento en laptops y tarjetas integradas (Intel HD / Iris / AMD Vega) */
+.site-header-nav,
+.mobile-nav-panel,
+.experience-card,
+.contact-card,
+.project-card,
+.project-accordion-item,
+.skill-card-panel,
+.spec-card,
+.browser-frame {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
 @media (max-width: 768px) {
   #ambient-glow #glow-circle-1 {
-    width: 22rem;
-    height: 22rem;
-    filter: blur(48px);
+    width: 20rem;
+    height: 20rem;
+    filter: blur(40px);
   }
   #ambient-glow #glow-circle-2 {
-    width: 22rem;
-    height: 22rem;
-    filter: blur(48px);
+    width: 20rem;
+    height: 20rem;
+    filter: blur(40px);
   }
 
-  /* Reducir el radio de convolución de blur en superficies translúcidas al 85-95%
-     logrando el mismo efecto frosted glass pero ahorrando hasta 70% de pasadas de GPU */
   .site-header-nav,
   .mobile-nav-panel,
   .experience-card,
@@ -552,8 +573,8 @@ body {
   .skill-card-panel,
   .spec-card,
   .browser-frame {
-    backdrop-filter: blur(8px) !important;
-    -webkit-backdrop-filter: blur(8px) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
   }
 }
 

@@ -583,6 +583,12 @@
 }
 
 /* Habilidades (Skills Section) */
+[data-theme="light"] #habilidades .flex.md\:hidden[role="tablist"] {
+  background: rgba(241, 245, 249, 0.95) !important;
+  border-color: rgba(203, 213, 225, 0.8) !important;
+  box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.05) !important;
+}
+
 [data-theme="light"] .skill-tab-btn {
   color: #475569 !important;
 }
@@ -592,26 +598,30 @@
   color: #0f172a !important;
 }
 
-[data-theme="light"] .skill-tab-btn.active {
-  background: rgba(16, 185, 129, 0.12) !important;
+[data-theme="light"] .skill-tab-btn.active,
+[data-theme="light"] .skill-tab-btn[aria-selected="true"] {
+  background: #ffffff !important;
   color: #059669 !important;
-  border-color: rgba(16, 185, 129, 0.35) !important;
+  border-color: rgba(16, 185, 129, 0.4) !important;
+  box-shadow: 0 2px 8px -1px rgba(0, 0, 0, 0.08) !important;
 }
 
+[data-theme="light"] .skill-card-panel,
 [data-theme="light"] #habilidades .grid > div {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border-color: rgba(16, 185, 129, 0.22) !important;
-  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.05);
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(16, 185, 129, 0.25) !important;
+  box-shadow: 0 8px 24px -6px rgba(0, 0, 0, 0.06) !important;
 }
 
-[data-theme="light"] #habilidades .group\/item {
+[data-theme="light"] #habilidades .group\/item,
+[data-theme="light"] #habilidades .bg-emerald-950\/20 {
   background: #f8fafc !important;
   border-color: #e2e8f0 !important;
 }
 
 [data-theme="light"] #habilidades .group\/item:hover {
   background: #ffffff !important;
-  border-color: rgba(16, 185, 129, 0.4) !important;
+  border-color: rgba(16, 185, 129, 0.45) !important;
 }
 
 [data-theme="light"] #habilidades h3 {
@@ -622,25 +632,42 @@
   color: #0f172a !important;
 }
 
-[data-theme="light"] #habilidades p {
+[data-theme="light"] #habilidades p,
+[data-theme="light"] #habilidades .text-emerald-200\/70 {
   color: #475569 !important;
 }
 
 [data-theme="light"] #habilidades .border-emerald-900\/40,
+[data-theme="light"] #habilidades .border-emerald-900\/50,
 [data-theme="light"] #habilidades .border-emerald-900\/30 {
-  border-color: rgba(16, 185, 129, 0.18) !important;
+  border-color: rgba(16, 185, 129, 0.2) !important;
+}
+
+[data-theme="light"] #habilidades .text-emerald-400 {
+  color: #059669 !important;
 }
 
 [data-theme="light"] #habilidades .text-emerald-400\/80 {
+  color: #047857 !important;
+}
+
+[data-theme="light"] #habilidades .bg-emerald-500\/10 {
+  background: rgba(16, 185, 129, 0.12) !important;
+  border-color: rgba(16, 185, 129, 0.3) !important;
   color: #059669 !important;
+}
+
+[data-theme="light"] #habilidades .text-emerald-500\/40 {
+  color: #059669 !important;
+  opacity: 0.75;
 }
 
 /* Trayectoria Profesional */
 [data-theme="light"] .experience-card,
 [data-theme="light"] #trayectoria > div > div:last-child {
-  background: rgba(255, 255, 255, 0.95) !important;
-  border-color: rgba(139, 92, 246, 0.25) !important;
-  box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.96) !important;
+  border-color: rgba(139, 92, 246, 0.28) !important;
+  box-shadow: 0 12px 32px -10px rgba(0, 0, 0, 0.08) !important;
 }
 
 [data-theme="light"] #trayectoria h3 {
@@ -651,19 +678,47 @@
   color: #6d28d9 !important;
 }
 
+[data-theme="light"] #trayectoria .text-purple-400 {
+  color: #7c3aed !important;
+}
+
+[data-theme="light"] #trayectoria .bg-purple-400 {
+  background-color: #7c3aed !important;
+}
+
 [data-theme="light"] #trayectoria .text-slate-300 {
   color: #334155 !important;
 }
 
-[data-theme="light"] #trayectoria .border-purple-900\/40 {
-  border-color: rgba(139, 92, 246, 0.18) !important;
-}
-
-[data-theme="light"] #trayectoria .bg-purple-950\/40 {
-  background: rgba(250, 245, 255, 0.88) !important;
+[data-theme="light"] #trayectoria .border-purple-900\/40,
+[data-theme="light"] #trayectoria .border-purple-800\/20,
+[data-theme="light"] #trayectoria .border-purple-800\/30 {
   border-color: rgba(139, 92, 246, 0.2) !important;
 }
 
+[data-theme="light"] #trayectoria .bg-purple-500\/10 {
+  background: rgba(139, 92, 246, 0.1) !important;
+  border-color: rgba(139, 92, 246, 0.25) !important;
+  color: #6d28d9 !important;
+}
+
+[data-theme="light"] #trayectoria .metric-card,
+[data-theme="light"] #trayectoria .bg-purple-950\/20,
+[data-theme="light"] #trayectoria .bg-purple-950\/40 {
+  background: #faf8ff !important;
+  border-color: rgba(139, 92, 246, 0.22) !important;
+}
+
+[data-theme="light"] #trayectoria .metric-card:hover {
+  background: #f5f0ff !important;
+  border-color: rgba(124, 58, 237, 0.45) !important;
+}
+
+[data-theme="light"] #trayectoria .experience-metric-number {
+  color: #6d28d9 !important;
+}
+
+[data-theme="light"] #trayectoria .text-purple-200\/75,
 [data-theme="light"] #trayectoria .text-purple-200\/70 {
   color: #475569 !important;
 }
