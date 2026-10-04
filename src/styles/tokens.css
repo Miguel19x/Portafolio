@@ -18,10 +18,11 @@
   --bg-current: #090a0f;
   --bg-surface: #11131c;
   --bg-card: rgba(19, 23, 34, 0.75);
-  --border-token: rgba(255, 255, 255, 0.08);
+  --border-token: rgba(241, 245, 249, 0.08);
   --section-tint: #ff7849;
   --section-tint-dim: rgba(255, 120, 73, 0.12);
   --text-muted: #94a3b8;
+  --text-primary: #f1f5f9; /* Blanco roto mate que previene halación */
 }
 
 @media (max-width: 640px) {

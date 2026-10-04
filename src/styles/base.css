@@ -629,3 +629,28 @@ body {
   }
 }
 
+/* ==========================================================================
+   CONFORT VISUAL: SUAVIZADO DE CONTRASTES & ANTI-ENCANDILAMIENTO (WCAG / OFF-WHITE)
+   Reemplaza el blanco puro #ffffff plano por un blanco roto suave (#f1f5f9 / slate-100)
+   para eliminar la halación y el encandilamiento sobre fondos oscuros.
+   ========================================================================== */
+.text-white {
+  color: #f1f5f9 !important;
+}
+
+h1, h2, h3, h4 {
+  color: #f1f5f9;
+}
+
+[data-theme="light"] .text-white {
+  color: #0f172a !important;
+}
+
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3,
+[data-theme="light"] h4 {
+  color: #0f172a !important;
+}
+
+

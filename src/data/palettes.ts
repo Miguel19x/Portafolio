@@ -64,62 +64,62 @@ export const THEMED_SECTION_PALETTES: Record<'dark' | 'light', Record<SectionId,
   },
   light: {
     'hero': {
-      bg: '#f8fafc',
-      surface: '#ffffff',
+      bg: '#eef1f5',
+      surface: '#f6f8fa',
       tint: '#ea580c',
       tintDim: 'rgba(234, 88, 12, 0.12)',
-      glow1: 'rgba(249, 115, 22, 0.07)',
-      glow2: 'rgba(14, 165, 233, 0.05)',
-      border: 'rgba(226, 232, 240, 0.9)'
+      glow1: 'rgba(249, 115, 22, 0.05)',
+      glow2: 'rgba(14, 165, 233, 0.04)',
+      border: 'rgba(203, 213, 225, 0.8)'
     },
     'sobre-mi': {
-      // Ámbar suave y cálido
-      bg: '#fffdfa',
-      surface: '#ffffff',
+      // Ámbar / arena suave y cálido (blanco roto cálido, cero blanco puro)
+      bg: '#f6f2ec',
+      surface: '#fbf8f3',
       tint: '#d97706',
       tintDim: 'rgba(217, 119, 6, 0.12)',
-      glow1: 'rgba(245, 158, 11, 0.09)',
-      glow2: 'rgba(234, 88, 12, 0.06)',
-      border: 'rgba(253, 230, 138, 0.7)'
+      glow1: 'rgba(245, 158, 11, 0.07)',
+      glow2: 'rgba(234, 88, 12, 0.05)',
+      border: 'rgba(234, 218, 196, 0.8)'
     },
     'proyectos': {
-      // Cian técnico luminoso
-      bg: '#f7faff',
-      surface: '#ffffff',
+      // Azul frío suave / gris tenue
+      bg: '#edf2f7',
+      surface: '#f5f8fc',
       tint: '#0284c7',
       tintDim: 'rgba(2, 132, 199, 0.12)',
-      glow1: 'rgba(6, 182, 212, 0.08)',
-      glow2: 'rgba(59, 130, 246, 0.06)',
-      border: 'rgba(186, 230, 253, 0.7)'
+      glow1: 'rgba(6, 182, 212, 0.06)',
+      glow2: 'rgba(59, 130, 246, 0.05)',
+      border: 'rgba(203, 219, 235, 0.8)'
     },
     'habilidades': {
-      // Menta y esmeralda fresco
-      bg: '#f7fdf9',
-      surface: '#ffffff',
+      // Salvia y menta apagada suave
+      bg: '#edf4ef',
+      surface: '#f4f9f6',
       tint: '#059669',
       tintDim: 'rgba(5, 150, 105, 0.12)',
-      glow1: 'rgba(16, 185, 129, 0.08)',
-      glow2: 'rgba(5, 150, 105, 0.05)',
-      border: 'rgba(167, 243, 208, 0.7)'
+      glow1: 'rgba(16, 185, 129, 0.06)',
+      glow2: 'rgba(5, 150, 105, 0.04)',
+      border: 'rgba(200, 230, 213, 0.8)'
     },
     'trayectoria': {
-      // Lavanda suave
-      bg: '#faf8ff',
-      surface: '#ffffff',
+      // Lavanda grisácea suave
+      bg: '#f1edf7',
+      surface: '#f8f5fc',
       tint: '#7c3aed',
       tintDim: 'rgba(124, 58, 237, 0.12)',
-      glow1: 'rgba(139, 92, 246, 0.08)',
-      glow2: 'rgba(124, 58, 237, 0.05)',
-      border: 'rgba(221, 214, 254, 0.7)'
+      glow1: 'rgba(139, 92, 246, 0.06)',
+      glow2: 'rgba(124, 58, 237, 0.04)',
+      border: 'rgba(221, 214, 245, 0.8)'
     },
     'contacto': {
-      bg: '#f8fafc',
-      surface: '#ffffff',
+      bg: '#eef1f5',
+      surface: '#f6f8fa',
       tint: '#ea580c',
       tintDim: 'rgba(234, 88, 12, 0.12)',
-      glow1: 'rgba(249, 115, 22, 0.07)',
-      glow2: 'rgba(148, 163, 184, 0.05)',
-      border: 'rgba(226, 232, 240, 0.9)'
+      glow1: 'rgba(249, 115, 22, 0.05)',
+      glow2: 'rgba(148, 163, 184, 0.04)',
+      border: 'rgba(203, 213, 225, 0.8)'
     }
   }
 };
